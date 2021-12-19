@@ -1,0 +1,34 @@
+@import "styles/utils";
+@import "styles/mixin/theme";
+
+$themes: (
+    light: (
+        example-description: var(--color-primary),
+    ),
+    dark: (
+        example-description: var(--color-white),
+    ),
+);
+
+.example {
+    max-width: 400px;
+    color: #fff;
+
+    &__title {
+        margin-bottom: 10px;
+        font-size: 46px;
+        @extend .font-size;
+
+        @include themify() {
+            color: themed("example-description");
+        }
+    }
+
+    &__description {
+        font-size: 22px;
+
+        @include themify() {
+            color: themed("example-description");
+        }
+    }
+}

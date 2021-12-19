@@ -1,0 +1,46 @@
+@import "styles/mixin/theme";
+
+$themes: (
+    light: (
+        wallet-options-bg-color: var(--color-gray-2),
+    ),
+    dark: (
+        wallet-options-bg-color: var(--color-white),
+    ),
+);
+
+.wallet-options {
+    display: flex;
+    flex-direction: column;
+
+    &-list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    button {
+        background: var(--color-gray-3);
+        padding: 10px 15px;
+        margin-top: 10px;
+        border-radius: 8px;
+        text-align: left;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 35px;
+
+        img {
+            width: 32px;
+            height: 32px;
+        }
+    }
+
+    &-errors {
+        margin-top: 1rem;
+        color: red;
+    }
+
+    @include themify() {
+        // background-color: themed("wallet-options-bg-color");
+    }
+}

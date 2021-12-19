@@ -1,0 +1,45 @@
+@import "styles/mixin/theme";
+
+$themes: (
+    light: (
+        sidebar-bg-color: var(--color-white),
+    ),
+    dark: (
+        sidebar-bg-color: var(--color-black),
+    ),
+);
+
+.sidebar {
+    @media (min-width: 0) and (max-width: 1200px) {
+        display: none;
+    }
+
+    position: fixed;
+    height: 100%;
+
+    @media (min-width: 0) and (max-width: 1200px) {
+        width: 127px;
+    }
+
+    @media (min-width: 1200px) {
+        width: 70px;
+    }
+
+    li {
+        width: 59px;
+        height: 59px;
+        margin-bottom: 10px;
+        margin-left: 29px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        background-color: #222222;
+    }
+
+    .active {
+        img {
+            filter: invert(0%) sepia(20%) saturate(3000%) hue-rotate(352deg) brightness(95%) contrast(80%);
+        }
+    }
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1920px" height="1080px" viewBox="0 0 1920 1080" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Bg</title>
+    <defs>
+        <radialGradient cx="89.7408295%" cy="7.80216923%" fx="89.7408295%" fy="7.80216923%" r="74.4412664%" gradientTransform="translate(0.897408,0.078022),scale(0.562500,1.000000),rotate(88.298820),translate(-0.897408,-0.078022)" id="radialGradient-1">
+            <stop stop-color="#8618F3" offset="0%"></stop>
+            <stop stop-color="#000000" offset="100%"></stop>
+        </radialGradient>
+        <radialGradient cx="50%" cy="98.915767%" fx="50%" fy="98.915767%" r="31.7524046%" gradientTransform="translate(0.500000,0.989158),scale(0.562500,1.000000),rotate(84.183238),translate(-0.500000,-0.989158)" id="radialGradient-2">
+            <stop stop-color="#13C2A1" offset="0%"></stop>
+            <stop stop-color="#000000" offset="100%"></stop>
+        </radialGradient>
+        <radialGradient cx="7.34322866%" cy="11.6050777%" fx="7.34322866%" fy="11.6050777%" r="46.5039397%" gradientTransform="translate(0.073432,0.116051),scale(0.562500,1.000000),rotate(85.521397),translate(-0.073432,-0.116051)" id="radialGradient-3">
+            <stop stop-color="#E13461" offset="0%"></stop>
+            <stop stop-color="#000000" offset="100%"></stop>
+        </radialGradient>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Bg">
+            <rect id="Rectangle" fill="#1D1D1D" x="0" y="0" width="1920" height="1080"></rect>
+            <rect id="Rectangle" fill="#161616" opacity="0.1540709" x="0" y="0" width="1920" height="1080"></rect>
+            <rect id="Rectangle" fill="url(#radialGradient-1)" opacity="0.096543085" x="0" y="0" width="1920" height="1080"></rect>
+            <rect id="Rectangle" fill="url(#radialGradient-2)" style="mix-blend-mode: lighten;" opacity="0.0788530622" x="0" y="0" width="1920" height="1080"></rect>
+            <rect id="Rectangle" fill="url(#radialGradient-3)" style="mix-blend-mode: lighten;" opacity="0.104112898" x="0" y="0" width="1920" height="1080"></rect>
+        </g>
+    </g>
+</svg>

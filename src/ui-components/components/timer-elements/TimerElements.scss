@@ -1,0 +1,9 @@
+.ui-timer-elements {
+    display: inline-block;
+    font-weight: 600;
+    text-align: center;
+
+    &-circular-colon {
+        position: absolute;
+    }
+}

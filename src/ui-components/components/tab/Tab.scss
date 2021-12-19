@@ -1,0 +1,46 @@
+.ui-tabs-tab-button {
+    margin: 0.5em;
+    color: white;
+    opacity: 0.4;
+    font-size: 0.9375em;
+    transition: all 600ms ease;
+    -webkit-transition: all 500ms ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.ui-tabs-tab-container {
+    .ui-tabs-border-bottom {
+        height: 0px;
+
+        div {
+            opacity: 0;
+        }
+    }
+
+    .ui-tabs-button-active {
+        opacity: 1;
+    }
+
+    .ui-tabs-border-bottom-active {
+        border-bottom: 5px solid #707e84;
+        border-radius: 5px;
+    }
+
+    .ui-tabs-border-bottom-inactive {
+        border-bottom: 5px solid transparent;
+        border-radius: 5px;
+    }
+
+    .ui-tabs-with-background-color {
+        background-color: #232831;
+        border-radius: 0.625em;
+    }
+}
+
+.ui-tabs-tab-children {
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
+}

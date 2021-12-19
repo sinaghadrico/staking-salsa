@@ -1,0 +1,18 @@
+// desktop
+$device-desktop: "(min-width: 1281px)";
+// laptop, desktop (low resolution)
+$device-laptop: "(min-width: 1025px) and (max-width: 1280px)";
+// tablet (portrait)
+$device-tablet_portrait: "(min-width: 768px) and (max-width: 1024px)";
+// tablet (landscape)
+$device-tablet_landscape: "(min-width: 768px) and (max-width: 1024px) and (orientation: landscape)";
+// tablet
+$device-tablet: $device-tablet_portrait, $device-tablet_landscape;
+// mobile (landscape), tablet (low resolution)
+$device-mobile_landscape: "(min-width: 481px) and (max-width: 767px)";
+// mobile (portrait)
+$device-mobile_portrait: "(min-width: 320px) and (max-width: 480px)";
+// mobile
+$device-mobile: $device-mobile_landscape, $device-mobile_portrait;
+
+$screens: (("xxs", 0), ("xs", 544px), ("sm", 768px), ("md", 992px), ("lg", 1300px), ("xl", 1600px), ("xxl", 1900px));

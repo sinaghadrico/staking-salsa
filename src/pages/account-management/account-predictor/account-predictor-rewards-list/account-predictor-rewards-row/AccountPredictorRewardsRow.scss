@@ -1,0 +1,129 @@
+@import "styles/mixin/theme";
+
+$themes: (
+    light: (),
+    dark: (),
+);
+
+.account-predictor-rewards-row {
+    @media (max-width: 750px) {
+        .ui-collapse {
+            width: 20px;
+        }
+    }
+
+    height: 90px;
+
+    &.ui-table-row {
+        border-bottom: 0;
+    }
+
+    &.border-bottom-row {
+        border-bottom: 1px solid rgba(182, 182, 180, 0.1) !important;
+    }
+
+    .ui-table-cell {
+        &:first-child {
+            > div {
+                margin-left: 20px;
+            }
+        }
+    }
+
+    &-title {
+        display: flex;
+        align-items: center;
+        color: var(--box-title-color);
+        padding: 25px 0;
+
+        .pair-coin {
+            display: flex;
+        }
+
+        // h1 {
+        //     padding: 0 10px;
+        // }
+    }
+
+    &-action {
+        display: flex;
+        // justify-content: center;
+
+        &-claim {
+            display: flex;
+            justify-content: center;
+
+            button {
+                width: 130px !important;
+                border-radius: 1.6em;
+                -webkit-border-radius: 1.6em;
+                -moz-border-radius: 1.6em;
+                -ms-border-radius: 1.6em;
+                -o-border-radius: 1.6em;
+            }
+        }
+
+        &-status {
+            display: flex;
+            justify-content: center;
+            margin: auto;
+            width: 130px !important;
+            border-radius: 1.6em;
+            -webkit-border-radius: 1.6em;
+            -moz-border-radius: 1.6em;
+            -ms-border-radius: 1.6em;
+            -o-border-radius: 1.6em;
+
+            &.ui-label {
+                width: 130px !important;
+                padding: 8px !important;
+                font-size: 15px;
+                margin: 0;
+            }
+        }
+    }
+
+    .ui-currency {
+        span {
+            .ui-currency-after-unit {
+                font-size: 12px;
+                display: block;
+            }
+        }
+    }
+
+    .ui-timer {
+        * {
+            font-size: 16px;
+        }
+    }
+
+    .ui-collapse {
+        cursor: pointer;
+
+        &-expand {
+            .ui-icon {
+                img {
+                    background-color: #363a3f;
+                    border-radius: 50%;
+
+                    transition: transform 0.5s linear;
+                    -webkit-transform: rotate(180deg);
+                    transform: rotate(180deg);
+                    transition: -webkit-transform 0.5s linear;
+                    transition: transform 0.5s linear, -webkit-transform 0.5s linear;
+                }
+            }
+        }
+
+        &-close {
+            .ui-icon {
+                img {
+                    transform: rotate(0deg);
+                    transition: transform 0.5s linear;
+                    transition: transform 0.5s linear, -webkit-transform 0.5s linear;
+                }
+            }
+        }
+    }
+}

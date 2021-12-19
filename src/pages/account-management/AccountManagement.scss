@@ -1,0 +1,31 @@
+@import "styles/mixin/theme";
+
+$themes: (
+    light: (
+        account-management-bg-color: var(--color-gray-2),
+    ),
+    dark: (
+        account-management-bg-color: var(--color-white),
+    ),
+);
+
+.account-management {
+    margin: auto;
+    max-width: 1400px;
+    .ui-tabs {
+        margin-left: 26px;
+    }
+    .ui-tabs-tab-button {
+        font-size: 16px;
+    }
+
+    @include themify() {
+        // background-color: themed("account-management-bg-color");
+    }
+    @media (max-width: 500px) {
+        .ui-tabs {
+            flex-direction: row;
+            margin-left: 0;
+        }
+    }
+}

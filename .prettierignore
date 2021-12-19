@@ -1,0 +1,7 @@
+/node_modules
+/build
+/public
+/dist
+.vscode
+package.json
+# .prettierrc

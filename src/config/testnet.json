@@ -1,0 +1,38 @@
+{
+    "_comment": {
+        "1": "mainnet_testnet",
+        "5": "goerli_testnet",
+        "3": "ropsten_testnet",
+        "4": "rinkeby_testnet",
+        "97": "bsc_testnet"
+    },
+    "_comment_rpcUrls": {
+        "1": "https://mainnet.infura.io/v3/84842078b09946638c03157f83405213",
+        "4": "https://rinkeby.infura.io/v3/84842078b09946638c03157f83405213"
+    },
+    "networks": {
+        "97": "bsc_testnet"
+    },
+    "rpcUrls": {
+        "97": "https://data-seed-prebsc-1-s1.binance.org:8545/"
+    },
+    "offchain": {
+        "predictor": "https://dev-new-offchain.totemfi.com/api/v1/"
+    },
+    "stats": {
+        "predictor": "https://dev-totem-stats.totemfi.com/api/v1/"
+    },
+    "subgraph": {
+        "97": {
+            "predictor": "https://graph-dev.totemfi.com/subgraphs/name/totemfi/predictor/v2"
+        }
+    },
+    "contractAddress": {
+        "97": {
+            "TotemToken": "0xf2cf56fBE1Ae8E40f0e0D8672305c3bB115625A2",
+            "USDCToken": "0x78867bbeef44f2326bf8ddd1941a4439382ef2a7",
+            "StakingPoolFactory": "0xeFb3275EbfbBEFfd25F06e7B73D963578f03dCff"
+        }
+    },
+    "transactionEndpoint": "https://testnet.bscscan.com/tx"
+}

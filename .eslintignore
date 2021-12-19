@@ -1,0 +1,12 @@
+/node_modules
+/build
+/public
+/dist
+.vscode
+package.json
+# .eslintrc
+
+# every{directory|file} include pattern 
+# src/**/*.ts
+# src/**/*.tsx
+src/serviceWorkerRegistration.ts

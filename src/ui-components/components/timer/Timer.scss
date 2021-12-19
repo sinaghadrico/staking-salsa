@@ -1,0 +1,20 @@
+.ui-timer {
+    display: inline-block;
+    position: relative;
+    color: white;
+
+    &-description {
+        font-size: 16px;
+        opacity: 0.4;
+        text-align: center;
+    }
+
+    &-circular {
+        transform: rotate(-90deg);
+
+        &-circle {
+            -webkit-filter: drop-shadow(0 0 3px #ef8913);
+            filter: drop-shadow(0 0 3px #ef8913);
+        }
+    }
+}

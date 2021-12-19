@@ -1,0 +1,27 @@
+@import "styles/mixin/theme";
+
+$themes: (
+    light: (
+        transaction-address-bg-color: var(--color-gray-2),
+    ),
+    dark: (
+        transaction-address-bg-color: var(--color-white),
+    ),
+);
+
+.ui-transaction-address {
+    display: inline-block;
+    width: max-content;
+
+    &-value {
+        &-half {
+            max-width: 57px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            display: inline-block;
+        }
+        &-full {
+            max-width: 57px;
+        }
+    }
+}

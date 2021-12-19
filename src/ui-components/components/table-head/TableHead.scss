@@ -1,0 +1,15 @@
+.ui-table-head {
+    @media (max-width: 750px) {
+        display: none;
+    }
+
+    color: #b6b6b4;
+    font-size: 0.875em;
+    border-bottom: 1px solid rgba(182, 182, 180, 0.1);
+    -webkit-background-clip: padding-box; /* for Safari */
+    background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+    height: 42px;
+    th {
+        padding: 0 0.5em;
+    }
+}

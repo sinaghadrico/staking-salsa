@@ -1,0 +1,67 @@
+@import "styles/mixin/theme";
+
+$themes: (
+    light: (
+        claim-modal-bg-color: var(--color-gray-2),
+    ),
+    dark: (
+        claim-modal-bg-color: var(--color-white),
+    ),
+);
+
+.predictor-claim-modal {
+    &-details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        &-item {
+            width: 100%;
+            height: 45px;
+            max-width: 345px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            align-self: center;
+            background-color: #30353e;
+            padding: 15px;
+
+            &-label {
+                color: var(--color-white);
+            }
+
+            &-value {
+                color: var(--color-white) !important;
+
+                .ui-currency-after-unit {
+                    color: #6d7075;
+                }
+            }
+
+            &-special-value {
+                color: var(--color-primary) !important;
+            }
+
+            border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            -ms-border-radius: 5px;
+            -o-border-radius: 5px;
+
+            &.has-border {
+                border: 1px solid #4a4a4a;
+            }
+        }
+
+        &-tx {
+            color: #6d7075;
+            margin: auto;
+            padding-top: 20px;
+        }
+    }
+
+    .ui-confirm-modal-description {
+        padding: 15px ​0px 30px ​0;
+        line-height: 22px;
+    }
+}

@@ -1,0 +1,48 @@
+html {
+    --box-title-color: #ffffff;
+
+    --box-key-label-color: #7b7f84;
+    --box-key-label-size: 16px;
+    --box-key-value-color: #fff;
+    --box-key-value-size: 16px;
+
+    --box-description-color: #fff;
+    --box-description-size: 15px;
+
+    --box-background-color: linear-gradient(90deg, #272e38 0%, #232831 100%);
+    --box-border-color: rgba(255, 255, 255, 0.07);
+}
+
+.box {
+    // svg {
+    //     width: 100%;
+    // }
+
+    background-image: var(--box-background-color);
+    // box-shadow: 0px 2px 6px 1px var(--box-border-color);
+    border-radius: 22px;
+
+    min-height: 200px;
+    min-width: 100px;
+
+    &-title {
+        color: var(--box-title-color);
+    }
+
+    &-key {
+        &-label {
+            color: var(--box-key-label-color);
+            font-size: var(--box-key-label-size);
+        }
+
+        &-value {
+            color: var(--box-key-value-color);
+            font-size: var(--box-key-value-size);
+        }
+
+        &-description {
+            color: var(--box-description-color);
+            font-size: var(--box-description-size);
+        }
+    }
+}

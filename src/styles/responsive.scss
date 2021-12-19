@@ -1,0 +1,181 @@
+html,
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+div.inline {
+    display: inline-block;
+}
+.row,
+.col {
+    display: flex;
+    box-sizing: border-box;
+    &.inline {
+        display: inline-flex;
+    }
+}
+.row {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    &.reverse {
+        flex-direction: row-reverse;
+    }
+    &.inline {
+        width: auto;
+    }
+}
+.col {
+    min-height: 100%;
+    flex-direction: column;
+    &.inline {
+        height: auto;
+    }
+}
+
+[class^="col-"],
+[class*=" col-"] {
+    width: 100%;
+    box-sizing: border-box;
+}
+@each $screen in $screens {
+    $name: nth($screen, 1);
+    $size: nth($screen, 2);
+    @media (min-width: $size) {
+        $i: 1;
+        @while $i <= 12 {
+            .col-#{$name}-#{$i} {
+                width: #{$i * 100/12 + 0%};
+            }
+            $i: $i + 1;
+        }
+    }
+}
+@each $screen in $screens {
+    $name: nth($screen, 1);
+    $size: nth($screen, 2);
+    @media (min-width: $size) {
+        .hidden-#{$name}-up {
+            display: none !important;
+        }
+        .text-center-#{$name}-up {
+            text-align: center !important;
+            &.row {
+                justify-content: center;
+            }
+            &.col {
+                align-items: center;
+            }
+        }
+        .absolute-#{$name}-up {
+            position: absolute;
+        }
+    }
+    @media (max-width: $size) {
+        .hidden-#{$name}-down {
+            display: none !important;
+        }
+        .text-center-#{$name}-down {
+            text-align: center !important;
+            &.row {
+                justify-content: center;
+            }
+            &.col {
+                align-items: center;
+            }
+        }
+        .absolute-#{$name}-down {
+            position: absolute;
+        }
+    }
+}
+
+.row.halign-center {
+    justify-content: center;
+}
+.row.valign-center {
+    align-items: center;
+}
+
+.col.halign-center {
+    align-items: center;
+}
+.col.valign-center {
+    justify-content: center;
+}
+
+[class^="container"] {
+    min-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}
+@media (min-width: 544px) {
+    .container {
+        width: 544px;
+    }
+}
+@media (min-width: 768px) {
+    .container {
+        width: 768px;
+    }
+}
+@media (min-width: 992px) {
+    .container {
+        width: 992px;
+    }
+}
+@media (min-width: 1300px) {
+    .container {
+        width: 1300px;
+    }
+}
+
+@media (min-width: 300px) {
+    .container-sm {
+        width: 300px;
+    }
+}
+@media (min-width: 768px) {
+    .container-sm {
+        width: 544px;
+    }
+}
+@media (min-width: 992px) {
+    .container-sm {
+        width: 768px;
+    }
+}
+@media (min-width: 1300px) {
+    .container-sm {
+        width: 992px;
+    }
+}
+
+@media (min-width: 300px) {
+    .container-xs {
+        width: 300px;
+    }
+}
+@media (min-width: 992px) {
+    .container-xs {
+        width: 544px;
+    }
+}
+@media (min-width: 1300px) {
+    .container-xs {
+        width: 768px;
+    }
+}
+
+@media (min-width: 300px) {
+    .container-xxs {
+        width: 300px;
+    }
+}
+@media (min-width: 1300px) {
+    .container-xxs {
+        width: 544px;
+    }
+}

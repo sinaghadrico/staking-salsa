@@ -1,0 +1,53 @@
+html {
+    // font-family: "Samim", sans-serif;
+    scroll-behavior: smooth;
+
+    --color-white: #ffffff;
+    --color-gray-1: #404348;
+    --color-gray-2: #343a48;
+    --color-gray-3: #2f353e;
+    --color-primary: #ffa005;
+    --color-white: #ffffff;
+    --color-red: #ee5034;
+    --color-blue: #0da7e2;
+    --color-green: #408e21;
+    --color-orange: #ef6f38;
+    --color-black: #000000;
+
+    --status-active-border-color: #ff8103;
+    --status-open-border-color: #008d0c;
+    --status-open-feature-color: #979797;
+
+    --modal-input-label-color: #fff;
+    --modal-input-label-size: 18px;
+    --modal-input-value-color: #fff;
+    --modal-input-value-size: 24px;
+
+    --modal-header-title-color: #fff;
+    --modal-header-title-size: 18px;
+
+    --modal-description-color: #fff;
+    --modal-description-size: 18px;
+    --modal-btn-color: #fff;
+    --modal-btn-size: 16px;
+    --modal-background: linear-gradient(180deg, #404a4f 99.91%, #707e84 0%);
+    --modal-confirm-btn-background: linear-gradient(180deg, #ff7b03 99.91%, #ffa005 0%);
+
+    --color-sub-dark: #9f9f9f;
+    --color-sub-light: #a7a9ad;
+
+    --color-primary-main: #272d37;
+    --color-primary-light: #20262f;
+    --color-primary-dark: #1e232b;
+    --color-primary-content: var(--color-white);
+
+    --color-secondary-main: #121212;
+    --color-secondary-light: #222222;
+    --color-secondary-dark: var(--color-black);
+    --color-secondary-content: #8f8f8f;
+
+    --color-accent-main: #ee8213;
+    --color-accent-light: #ff8103;
+    --color-accent-dark: #df7009;
+    --color-accent-content: #bd600c;
+}

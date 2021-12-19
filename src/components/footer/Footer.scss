@@ -1,0 +1,18 @@
+@import "styles/mixin/theme";
+
+$themes: (
+    light: (
+        footer-bg-color: var(--color-white),
+    ),
+    dark: (
+        footer-bg-color: var(--color-black),
+    ),
+);
+
+.footer {
+    display: flex;
+    justify-content: center;
+    height: 40px;
+    padding: 10px 0;
+    width: 100%;
+}

@@ -1,0 +1,30 @@
+@import "styles/mixin/theme";
+
+$themes: (
+    light: (
+        header-bg-color: var(--color-white),
+    ),
+    dark: (
+        header-bg-color: var(--color-black),
+    ),
+);
+
+.header {
+    display: flex;
+    justify-content: flex-end;
+    height: 45px;
+    color: #979797;
+    padding: 20px 30px;
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 100;
+    top: 0;
+
+    background-image: url("../../assets/images/Bg.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    > div {
+        margin: 0 5px;
+    }
+}

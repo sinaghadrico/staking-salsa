@@ -1,0 +1,90 @@
+.ui-tooltip {
+    $dangle-color: white;
+    $box-color: white;
+
+    vertical-align: middle !important;
+    display: inline-block;
+
+    &-box {
+        display: block;
+        visibility: hidden;
+        position: absolute;
+        padding: 5px 15px;
+        background-color: $box-color;
+        border-radius: 7px;
+        text-align: center;
+        width: max-content;
+        max-width: 150px;
+        min-width: 100px;
+        // max-height: 140px;
+        left: -5px;
+
+        &-title {
+            display: block;
+            font-size: 18px;
+            line-height: 36px;
+            color: black;
+            font-weight: 600;
+        }
+
+        &-description {
+            font-size: 12px;
+            line-height: 24px;
+            font-weight: 600;
+            color: black;
+        }
+
+        &::after {
+            content: " ";
+            position: absolute;
+            margin-left: -12px;
+            border-width: 12px;
+            border-style: solid;
+        }
+
+        &-top {
+            &::after {
+                top: 98%;
+                left: 50%;
+                border-color: $dangle-color transparent transparent transparent;
+            }
+        }
+
+        &-bottom {
+            &::after {
+                bottom: 98%;
+                left: 50%;
+                border-color: transparent transparent $dangle-color transparent;
+            }
+        }
+
+        &-left {
+            &::after {
+                top: calc(50% - 10px);
+                right: -20px;
+                border-color: transparent transparent transparent $dangle-color;
+            }
+        }
+
+        &-right {
+            &::after {
+                top: calc(50% - 10px);
+                left: -10px;
+                border-color: transparent $dangle-color transparent transparent;
+            }
+        }
+    }
+
+    &-children {
+        cursor: pointer;
+        position: relative;
+        z-index: 23;
+        vertical-align: middle;
+
+        &:hover {
+            .ui-tooltip-box {
+                visibility: visible;
+            }
+        }
+    }
+}

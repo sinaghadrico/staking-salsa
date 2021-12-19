@@ -1,0 +1,12 @@
+@charset 'UTF-8';
+@import "./variables.scss";
+@import "./resets/normalize.scss";
+@import "./resets/reset.scss";
+@import "./icon/icon";
+@import "./responsive.scss";
+@import "./helper.scss";
+@import "./box.scss";
+
+* {
+    font-family: "Lato";
+}

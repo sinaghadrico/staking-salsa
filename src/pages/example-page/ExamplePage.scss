@@ -1,0 +1,9 @@
+.example-page {
+    > div {
+        display: flex;
+        justify-content: center;
+        h2 {
+            margin: 30px;
+        }
+    }
+}

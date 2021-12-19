@@ -1,0 +1,113 @@
+.ui-radio {
+    display: flex;
+    padding: 1em;
+
+    *,
+    *:before,
+    *:after {
+        box-sizing: border-box;
+    }
+
+    .ui-radio-label {
+        display: flex;
+        cursor: pointer;
+        grid-template-columns: min-content auto;
+        grid-gap: 0.5em;
+
+        // &:focus-within {
+        //   .ui-radio-label {
+        //     transform: scale(1.05);
+        //     opacity: 1;
+        //   }
+        // }
+    }
+
+    .ui-el {
+        line-height: 1;
+        transition: 180ms all ease-in-out;
+        opacity: 0.8;
+    }
+
+    .ui-radio-input {
+        display: flex;
+
+        input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+
+            //   &:focus + .ui-radio-control {
+            //      box-shadow: 0 0 0 0.05em #fff, 0 0 0.15em 0.1em currentColor;
+            //   }
+        }
+    }
+
+    .radio-gradient input:checked + .ui-radio-control {
+        background: radial-gradient(currentcolor 50%, rgba(50, 223, 16, 0) 51%);
+    }
+
+    .ui-radio-before {
+        .ui-radio-control {
+            display: grid;
+            place-items: center;
+        }
+
+        input + .ui-radio-control::before {
+            content: "";
+            width: 0.5em;
+            height: 0.5em;
+            box-shadow: inset 0.5em 0.5em currentColor;
+            border-radius: 50%;
+            transition: 180ms transform ease-in-out;
+            transform: scale(0);
+        }
+
+        input:checked + .ui-radio-control::before {
+            transform: scale(1);
+        }
+    }
+
+    .ui-radio-control {
+        display: block;
+        width: 1em;
+        height: 1em;
+        border-radius: 50%;
+        border: 0.1em solid #a8aaae;
+        transform: translateY(-0.05em);
+    }
+
+    input:checked + .ui-radio-control {
+    }
+
+    body {
+        min-height: 100vh;
+        display: grid;
+        place-content: center;
+        grid-gap: 2rem;
+        padding: 1rem;
+    }
+
+    &.orange-theme {
+        .ui-radio-before {
+            input + .ui-radio-control::before {
+                color: var(--totem-ui-component-color-orange);
+            }
+        }
+
+        input:checked + .ui-radio-control {
+            border: 0.1em solid var(--totem-ui-component-color-orange);
+        }
+    }
+
+    &.purple-theme {
+        .ui-radio-before {
+            input + .ui-radio-control::before {
+                color: var(--totem-ui-component-color-purple);
+            }
+        }
+
+        input:checked + .ui-radio-control {
+            border: 0.1em solid var(--totem-ui-component-color-purple);
+        }
+    }
+}

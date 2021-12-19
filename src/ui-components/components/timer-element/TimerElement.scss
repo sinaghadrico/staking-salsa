@@ -1,0 +1,64 @@
+.ui-timer-element {
+    display: inline-block;
+
+    &-circular-colon {
+        span.ui-timer-after-symbol {
+            &::after {
+                content: ":";
+            }
+        }
+
+        b {
+            display: none;
+        }
+    }
+
+    &-colon {
+        span.ui-timer-after-symbol {
+            &::after {
+                content: ":";
+            }
+        }
+
+        b {
+            display: none;
+        }
+    }
+
+    &-comma {
+        b.ui-timer-after-symbol {
+            &::after {
+                content: ",\00a0";
+            }
+        }
+    }
+
+    &-box {
+        text-align: center;
+        padding: 0 5px;
+        border-radius: 6px;
+        background-color: #181c23;
+        margin: 2.6px;
+        min-width: 52.6px;
+        min-height: 55px;
+        line-height: 18px;
+
+        span {
+            font-size: 24px;
+            display: block;
+            margin-top: 10px;
+        }
+
+        b {
+            font-size: 12px;
+            display: block;
+            font-weight: 400;
+            color: #6d7075;
+            margin-top: 5px;
+        }
+
+        &:last-child {
+            margin: 0;
+        }
+    }
+}

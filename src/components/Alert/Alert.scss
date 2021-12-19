@@ -1,0 +1,75 @@
+@import "styles/mixin/theme";
+
+$themes: (
+    light: (
+        alert-color: var(--color-white),
+        alert-close-icon-color: var(--color-black),
+        alert-error-bg-color: var(--color-red),
+        alert-warning-bg-color: var(--color-orange),
+        alert-success-bg-color: var(--color-green),
+    ),
+    dark: (
+        alert-color: var(--color-white),
+        alert-close-icon-color: var(--color-black),
+        alert-error-bg-color: var(--color-red),
+        alert-warning-bg-color: var(--color-orange),
+        alert-success-bg-color: var(--color-green),
+    ),
+);
+
+.ui-alert {
+    position: relative;
+    line-height: 1.5715;
+    padding: 8px 16px;
+    word-wrap: break-word;
+    min-width: 200px;
+    box-shadow: 0 5px 12.5px 0 rgba(0, 0, 0, 0.1);
+    text-align: center;
+
+    &-error {
+        background-color: var(--color-red);
+    }
+
+    &-warning {
+        background-color: var(--color-orange);
+    }
+
+    &-success {
+        background-color: var(--color-green);
+    }
+
+    color: var(--color-white);
+
+    &-close-icon {
+        position: absolute;
+        top: 10px;
+        left: 15px;
+        padding: 5px;
+        font-size: 17px;
+        height: 20px;
+        width: 20px;
+        text-align: center;
+        line-height: 20px;
+        cursor: pointer;
+        color: var(--color-black);
+    }
+
+    &-title {
+        padding: 0px 15px;
+        font-weight: bold;
+    }
+
+    &-description {
+        font-size: 14px;
+        padding: 0px 15px;
+    }
+
+    &-icon {
+        position: absolute;
+        top: 10px;
+        left: 5px;
+        height: 15px;
+        line-height: 20px;
+        font-size: 18px;
+    }
+}

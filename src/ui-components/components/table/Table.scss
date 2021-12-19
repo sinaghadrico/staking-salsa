@@ -1,0 +1,13 @@
+.ui-table {
+    padding: 0.5em;
+    border: 0.125em solid #000;
+    text-align: center;
+    background-color: #232831;
+    border-radius: 1em;
+    color: white;
+    overflow-x: auto;
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+}

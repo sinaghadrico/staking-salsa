@@ -1,0 +1,26 @@
+th.ui-table-cell {
+    @media (max-width: 750px) {
+        display: none;
+    }
+}
+
+.ui-table-cell {
+    padding: 0 0.5em;
+
+    @media (max-width: 750px) {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &:before {
+            content: attr(data-th) " ";
+            display: flex;
+            font-weight: bold;
+            align-items: center;
+            color: #b6b6b4;
+            font-size: 0.875em;
+            height: 42px;
+            // width: 6.5em; // magic number :( adjust according to your own content
+        }
+        margin: 0.5em 1em;
+    }
+}

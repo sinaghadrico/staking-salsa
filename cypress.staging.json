@@ -1,0 +1,7 @@
+{
+    "viewportWidth": 1500,
+    "viewportHeight": 950,
+    "baseUrl": "https://staging.totemfi.com/",
+    "experimentalStudio": true,
+    "env": {}
+}

@@ -1,0 +1,77 @@
+@import "styles/mixin/theme";
+
+$themes: (
+    light: (
+        account-predictor-rewards-list-bg-color: var(--color-gray-2),
+    ),
+    dark: (
+        account-predictor-rewards-list-bg-color: var(--color-white),
+    ),
+);
+
+.account-predictor-rewards-list {
+    margin: 8.5px 0;
+
+    .ui-table {
+        min-height: 580px;
+    }
+
+    &-title {
+        display: flex;
+        align-items: center;
+        color: var(--box-title-color);
+
+        h1 {
+            padding: 0 15px;
+        }
+    }
+
+    &-status {
+        display: flex;
+        justify-content: center;
+        margin: auto;
+        max-width: 150px;
+    }
+
+    &-action {
+        display: flex;
+        justify-content: center;
+
+        button {
+            width: 100% !important;
+            max-width: 150px;
+        }
+    }
+
+    .ui-table-head {
+        .ui-table-cell {
+            text-align: left;
+
+            > span {
+                display: flex;
+                // padding-left: 15px;
+                color: #8e9092;
+            }
+
+            &:first-child {
+                span {
+                    margin-left: 26px;
+                }
+            }
+        }
+    }
+
+    .ui-table-body {
+        .ui-table-cell {
+            text-align: left;
+        }
+    }
+
+    @media (max-width: 1400px) {
+        .ui-table-head {
+            .ui-table-cell {
+                min-width: 120px;
+            }
+        }
+    }
+}

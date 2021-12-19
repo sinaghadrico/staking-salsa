@@ -1,0 +1,35 @@
+.ui-loading {
+    position: relative;
+    display: inline-block;
+
+    &-circle-animate {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        fill: none;
+        stroke-linecap: round;
+        stroke-dasharray: 242.6;
+        animation: spinner-animation 1s cubic-bezier(1, 1, 1, 1) 0s infinite;
+    }
+
+    &-children {
+        position: absolute;
+        text-align: center;
+    }
+
+    &.orange-theme {
+        .ui-loading-circle-animate {
+            -webkit-filter: drop-shadow(0 0 3px #ff7903);
+            filter: drop-shadow(0 0 3px #ff7903);
+        }
+    }
+
+    &.purple-theme {
+        .ui-loading-circle-animate {
+            -webkit-filter: drop-shadow(0 0 3px #811fcc);
+            filter: drop-shadow(0 0 3px #811fcc);
+        }
+    }
+}

@@ -1,0 +1,16 @@
+.ui-tabs {
+    color: white;
+    font-size: 18px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+$breakpoint-mobile: 500px;
+
+@media (max-width: $breakpoint-mobile) {
+    .ui-tabs {
+        flex-direction: column;
+    }
+}

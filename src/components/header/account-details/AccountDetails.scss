@@ -1,0 +1,47 @@
+@import "styles/mixin/theme";
+
+$themes: (
+    light: (
+        account-details-bg-color: #222222,
+        account-details-address-bg-color: rgba(0, 0, 0, 0.1),
+    ),
+    dark: (
+        account-details-bg-color: #222222,
+        account-details-address-bg-color: rgba(35, 27, 43, 1),
+    ),
+);
+.account-details-wrapper {
+    display: flex;
+
+    .account-details {
+        // min-width: 138px;
+        height: 31px;
+        border-radius: 8px 0 0 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 3px 5px;
+
+        @include themify() {
+            background-color: themed("account-details-bg-color");
+        }
+
+        &-address {
+            // max-width: 200px;
+            display: flex;
+            justify-content: center;
+            padding: 6px 20px;
+            height: 21px;
+            border: 2px solid #222222;
+            margin: 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        &-balance {
+            // max-width: 100px;
+            padding: 7px 5px;
+            display: flex;
+            align-items: center;
+        }
+    }
+}

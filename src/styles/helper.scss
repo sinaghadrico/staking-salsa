@@ -1,0 +1,449 @@
+.rtl,
+.rtl * {
+    direction: rtl;
+    text-align: justify;
+}
+
+.ltr,
+.ltr * {
+    direction: ltr;
+    text-align: justify;
+}
+
+.pos-relative {
+    position: relative;
+}
+
+.pos-absolute {
+    position: absolute;
+}
+
+.pos-fixed {
+    position: fixed;
+}
+
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flex-align-center {
+    display: flex;
+    align-items: center;
+}
+.flex-justify-center {
+    display: flex;
+    justify-content: center;
+}
+.justify-center {
+    justify-content: center;
+}
+.flex-align-center-justify-end {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.flex-align-center {
+    display: flex;
+    align-items: center;
+}
+
+.flex-align-center-justify-end {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.flex-justify-center {
+    display: flex;
+    justify-content: center;
+}
+.flex-column-align-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flex-middle {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+}
+
+//=========================================================
+
+$upto: 100;
+$step: 5;
+$i: 0;
+
+@while $i <=$upto {
+    .m--#{$i} {
+        margin: -#{$i}px;
+    }
+
+    $i: $i + $step;
+}
+
+$i: 0;
+
+@while $i <=$upto {
+    .mx--#{$i} {
+        margin-right: -#{$i}px;
+        margin-left: -#{$i}px;
+    }
+
+    $i: $i + $step;
+}
+
+$i: 0;
+
+@while $i <=$upto {
+    .my--#{$i} {
+        margin-top: -#{$i}px;
+        margin-bottom: -#{$i}px;
+    }
+
+    $i: $i + $step;
+}
+
+$i: 0;
+
+@while $i <=$upto {
+    .mt--#{$i} {
+        margin-top: -#{$i}px !important;
+    }
+
+    $i: $i + $step;
+}
+
+$i: 0;
+
+@while $i <=$upto {
+    .mr--#{$i} {
+        margin-right: -#{$i}px;
+    }
+
+    $i: $i + $step;
+}
+
+$i: 0;
+
+@while $i <=$upto {
+    .mb--#{$i} {
+        margin-bottom: -#{$i}px;
+    }
+
+    $i: $i + $step;
+}
+
+$i: 0;
+
+@while $i <=$upto {
+    .ml--#{$i} {
+        margin-left: -#{$i}px;
+    }
+
+    $i: $i + $step;
+}
+
+.m-auto {
+    margin: auto;
+}
+
+$i: 0;
+
+@while $i <=$upto {
+    .m-#{$i} {
+        margin: #{$i}px;
+    }
+
+    $i: $i + $step;
+}
+
+$i: 0;
+
+@while $i <=$upto {
+    .mx-#{$i} {
+        margin-right: #{$i}px;
+        margin-left: #{$i}px;
+    }
+
+    $i: $i + $step;
+}
+
+$i: 0;
+
+@while $i <=$upto {
+    .my-#{$i} {
+        margin-top: #{$i}px;
+        margin-bottom: #{$i}px;
+    }
+
+    $i: $i + $step;
+}
+
+$i: 0;
+
+@while $i <=$upto {
+    .mt-#{$i} {
+        margin-top: #{$i}px;
+    }
+
+    $i: $i + $step;
+}
+
+$i: 0;
+
+@while $i <=$upto {
+    .mr-#{$i} {
+        margin-right: #{$i}px;
+    }
+
+    $i: $i + $step;
+}
+
+$i: 0;
+
+@while $i <=$upto {
+    .mb-#{$i} {
+        margin-bottom: #{$i}px;
+    }
+
+    $i: $i + $step;
+}
+
+$i: 0;
+
+@while $i <=$upto {
+    .ml-#{$i} {
+        margin-left: #{$i}px;
+    }
+
+    $i: $i + $step;
+}
+
+$i: 0;
+
+@while $i <=$upto {
+    .p-#{$i} {
+        padding: #{$i}px;
+    }
+
+    $i: $i + $step;
+}
+
+$i: 0;
+
+@while $i <=$upto {
+    .px-#{$i} {
+        padding-right: #{$i}px;
+        padding-left: #{$i}px;
+    }
+
+    $i: $i + $step;
+}
+
+$i: 0;
+
+@while $i <=$upto {
+    .py-#{$i} {
+        padding-top: #{$i}px;
+        padding-bottom: #{$i}px;
+    }
+
+    $i: $i + $step;
+}
+
+$i: 0;
+
+@while $i <=$upto {
+    .pt-#{$i} {
+        padding-top: #{$i}px;
+    }
+
+    $i: $i + $step;
+}
+
+$i: 0;
+
+@while $i <=$upto {
+    .pr-#{$i} {
+        padding-right: #{$i}px;
+    }
+
+    $i: $i + $step;
+}
+
+$i: 0;
+
+@while $i <=$upto {
+    .pb-#{$i} {
+        padding-bottom: #{$i}px;
+    }
+
+    $i: $i + $step;
+}
+
+$i: 0;
+
+@while $i <=$upto {
+    .pl-#{$i} {
+        padding-left: #{$i}px;
+    }
+
+    $i: $i + $step;
+}
+
+//====================================================================
+
+$upto: 50;
+$step: 1;
+$i: 6;
+
+@while $i <=$upto {
+    .font-#{$i} {
+        font-size: #{$i}px !important;
+    }
+
+    $i: $i + $step;
+}
+
+.align-left {
+    text-align: left !important;
+}
+
+.align-center {
+    text-align: center !important;
+}
+
+.align-right {
+    text-align: right !important;
+}
+
+.align-justify {
+    text-align: justify !important;
+}
+
+.text-left {
+    text-align: left !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.text-justify {
+    text-align: justify !important;
+}
+
+//====================================================================
+$upto: 100;
+$step: 25;
+$i: 0;
+
+@while $i <=$upto {
+    .w-#{$i} {
+        width: #{$i + 0%};
+    }
+
+    $i: $i + $step;
+}
+
+//====================================================================
+$upto: 2000;
+$step: 100;
+$i: 100;
+
+@while $i <=$upto {
+    .animate-#{$i} {
+        animation-duration: #{$i + ms};
+    }
+
+    $i: $i + $step;
+}
+
+//====================================================================
+$upto: 5;
+$i: 1;
+
+@while $i <=$upto {
+    .flex-#{$i} {
+        flex: #{$i};
+    }
+
+    $i: $i + 1;
+}
+
+$upto: 1000;
+$step: 5;
+$i: 0;
+@while $i <=$upto {
+    .height-#{$i} {
+        height: #{$i}px !important;
+    }
+
+    $i: $i + $step;
+}
+
+.scroll {
+    overflow: auto;
+}
+
+.scroll-x {
+    overflow-x: auto;
+
+    &::-webkit-scrollbar {
+        width: 3px;
+        border-radius: 1rem;
+        height: 3px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: rgb(39, 39, 39);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #363636;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+}
+
+.scroll-y {
+    overflow-y: auto;
+}
+$upto: 2000;
+$step: 1;
+$i: 0;
+@while $i <=$upto {
+    .height-#{$i} {
+        height: #{$i}px !important;
+    }
+
+    $i: $i + $step;
+}

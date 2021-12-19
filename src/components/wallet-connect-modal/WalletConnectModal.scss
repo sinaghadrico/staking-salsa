@@ -1,0 +1,31 @@
+.notify-wallet-connect-modal {
+    > div {
+        > .ui-modal-main {
+            > .ui-modal-header {
+                label {
+                    padding-bottom: 12px;
+                }
+
+                a {
+                    display: none !important;
+                }
+            }
+        }
+    }
+
+    &-content {
+        margin-top: 40px;
+
+        &-title {
+            margin: 30px 0;
+            line-height: 30px;
+        }
+
+        &-actions {
+            > .ui-button {
+                width: 60% !important;
+                margin-bottom: 0;
+            }
+        }
+    }
+}

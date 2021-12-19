@@ -1,0 +1,7 @@
+{
+    "viewportWidth": 1500,
+    "viewportHeight": 950,
+    "baseUrl": "http://localhost:3000",
+    "experimentalStudio": true,
+    "env": {}
+}
