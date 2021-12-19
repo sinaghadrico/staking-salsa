@@ -10,7 +10,16 @@ const usePredictorStakes = (pageNumber: number, perPage = 10, filter: any = {}, 
             const result: StakeData = {
                 stakes: [
                     {
-                        id: "0xfC0C40272c75A5711ef34DA32C4E156cFBE9892C",
+                        id: "1",
+                        address: "0xfC0C40272c75A5711ef34DA32C4E156cFBE9892C",
+                        asset: "BNB",
+                        APY: "0",
+                        TVL: "0",
+                        earned: "0",
+                        status: "",
+                    },
+                    {
+                        id: "2",
                         address: "0xfC0C40272c75A5711ef34DA32C4E156cFBE9892C",
                         asset: "BNB",
                         APY: "0",
@@ -27,7 +36,6 @@ const usePredictorStakes = (pageNumber: number, perPage = 10, filter: any = {}, 
             keepPreviousData: true,
             refetchOnWindowFocus: false,
             refetchInterval: intervalDataUpdate,
-            enabled: !!account,
         },
     );
 };

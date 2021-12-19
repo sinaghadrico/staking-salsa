@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { ConnectWallet } from "components/header/connect-wallet";
-import { Helmet } from "react-helmet-async";
+// import { Helmet } from "react-helmet-async";
 import "./AccountManagement.scss";
 
 import { AccountPredictor } from "./account-predictor";
@@ -8,10 +8,10 @@ import { AccountPredictor } from "./account-predictor";
 const AccountManagement: FC = () => {
     return (
         <ConnectWallet type="popup">
-            <Helmet>
+            {/* <Helmet>
                 <title> Account Management </title>
                 <meta name="description" content="Account Management" />
-            </Helmet>
+            </Helmet> */}
             <div className="account-management">
                 <div className="row  ">
                     <div className="col-md-12 ">

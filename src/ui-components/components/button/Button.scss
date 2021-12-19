@@ -13,7 +13,7 @@
     width: fit-content;
 
     &-secondary {
-        background: linear-gradient(180deg, #707e84 0%, #404a4f 100%);
+        background: linear-gradient(180deg, #00CDE4 0%, #00CDE4 100%);
     }
 
     &-secondary-dark {
@@ -45,11 +45,13 @@
 
     &.orange-theme {
         &.ui-button-primary {
-            background: linear-gradient(90deg, #ffa005 0%, #ff7b03 100%);
+            background: linear-gradient(96.02deg, #ED824E -12.08%, #ED2A2A 137.69%);
+            box-shadow: 0px 4px 61px rgba(237, 130, 78, 0.36), 0px 0px 25px rgba(237, 42, 42, 0.24);
+            border-radius: 4px;
         }
 
         &.ui-button-outlined {
-            border: solid 2px #ffa005;
+            border: solid 2px #ED2A2A;
         }
     }
 

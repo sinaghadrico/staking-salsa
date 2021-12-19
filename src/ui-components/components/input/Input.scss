@@ -23,13 +23,14 @@
 
     input {
         border: 2px solid;
-        background-color: #1c2129;
+        background-color: rgba(255, 255, 255, 0.03);
+
         width: 100%;
         border-radius: 5px;
         text-align: center;
         padding: 5px !important;
         color: white;
-        border-color: transparent;
+        border: 1px solid #BDD7FB;
         height: 40px;
         font-size: 18px;
         box-shadow: rgba(0, 0, 0, 0.1) 2px 2px 3px 0 inset;

@@ -1,11 +1,8 @@
 @import "styles/mixin/theme";
 
-$themes: (
-    light: (
-        footer-bg-color: var(--color-white),
+$themes: (light: (footer-bg-color: var(--color-white),
     ),
-    dark: (
-        footer-bg-color: var(--color-black),
+    dark: (footer-bg-color: var(--color-black),
     ),
 );
 
@@ -15,4 +12,8 @@ $themes: (
     height: 40px;
     padding: 10px 0;
     width: 100%;
+    background-image: url("../../assets/images/Bg-footer.svg");
+
+    background-size: cover;
+    background-repeat: no-repeat;
 }

@@ -1,7 +1,6 @@
 @import "styles/mixin/theme";
 
-$themes: (
-    light: (),
+$themes: (light: (),
     dark: (),
 );
 
@@ -19,12 +18,44 @@ $themes: (
     }
 
     &.border-bottom-row {
-        border-bottom: 1px solid rgba(182, 182, 180, 0.1) !important;
+
+        @media (max-width: 750px) {
+
+
+            .ui-table-cell:last-child {
+                border-radius: 0 0 0 0 !important;
+                -webkit-border-radius: 0 0 0 0 !important;
+                -moz-border-radius: 0 0 0 0 !important;
+                -ms-border-radius: 0 0 0 0 !important;
+                -o-border-radius: 0 0 0 0 !important;
+            }
+        }
+
+        @media (min-width: 750px) {
+            .ui-table-cell:first-child {
+                border-radius: 16px 0 0 0 !important;
+                -webkit-border-radius: 16px 0 0 0 !important;
+                -moz-border-radius: 16px 0 0 0 !important;
+                -ms-border-radius: 16px 0 0 0 !important;
+                -o-border-radius: 16px 0 0 0 !important;
+            }
+
+            .ui-table-cell:last-child {
+                border-radius: 0 16px 0 0 !important;
+                -webkit-border-radius: 0 16px 0 0 !important;
+                -moz-border-radius: 0 16px 0 0 !important;
+                -ms-border-radius: 0 16px 0 0 !important;
+                -o-border-radius: 0 16px 0 0 !important;
+            }
+        }
+
+
+
     }
 
     .ui-table-cell {
         &:first-child {
-            > div {
+            >div {
                 margin-left: 20px;
             }
         }

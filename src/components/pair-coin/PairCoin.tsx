@@ -39,13 +39,13 @@ const getIcon = (coin?: string) => {
             return BtcLogo;
     }
 };
-const PairCoin = ({ supCoin, subCoin, size = 40 }: PairCoinProps) => {
+const PairCoin = ({ supCoin, subCoin, size = 24 }: PairCoinProps) => {
     const SubIcon: any = subCoin?.includes("http") ? null : getIcon(subCoin);
 
     const SupIcon: any = supCoin?.includes("http") ? null : getIcon(supCoin);
     const cssSize = `${size}px`;
-    const translateSup = supCoin && subCoin ? `translate(${-1 * size}px, 0px)` : `translate(0px)`;
-    const translateSub = supCoin && subCoin ? `translate(${size - size / 5}px, 0px)` : `translate(0px)`;
+    const translateSup = supCoin && subCoin ? `translate(${-1 * 32}px, -4px)` : `translate(0px)`;
+    const translateSub = supCoin && subCoin ? `translate(${24 - 24 / 5}px, 0px)` : `translate(0px)`;
 
     return (
         <span className="pair-coin">
@@ -53,29 +53,29 @@ const PairCoin = ({ supCoin, subCoin, size = 40 }: PairCoinProps) => {
                 <Icon
                     src={subCoin}
                     style={{
-                        width: cssSize,
-                        height: cssSize,
+                        width: 24,
+                        height: 24,
                         transform: translateSub,
                         marginLeft: "-4px",
                         marginTop: "-4px",
                     }}
                 />
             ) : (
-                subCoin && <SubIcon style={{ width: cssSize, height: cssSize, transform: translateSub }} />
+                subCoin && <SubIcon style={{ width: 24, height: 24, transform: translateSub }} />
             )}
             {supCoin && supCoin?.includes("http") ? (
                 <Icon
                     src={supCoin}
                     style={{
-                        width: cssSize,
-                        height: cssSize,
+                        width: 24,
+                        height: 24,
                         transform: translateSup,
                         marginLeft: "-4px",
                         marginTop: "-4px",
                     }}
                 />
             ) : (
-                supCoin && <SupIcon style={{ width: cssSize, height: cssSize, transform: translateSup }} />
+                supCoin && <SupIcon style={{ width: 32, height: 32, transform: translateSup }} />
             )}
         </span>
     );

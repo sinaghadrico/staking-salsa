@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Header } from "components/header";
-// import { Footer } from "components/footer";
+import { Footer } from "components/footer";
 // import { Sidebar } from "components/sidebar";
 import "./Layout.scss";
 import { LayoutProps } from "./Layout.interface";
@@ -15,7 +15,7 @@ const Layout: FC<LayoutProps> = ({ children }: LayoutProps) => (
                     <div className="col-md-12">{children}</div>
                 </div>
             </div>
-            {/* <Footer /> */}
+            <Footer />
         </div>
     </div>
 );

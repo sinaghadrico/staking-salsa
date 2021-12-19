@@ -5,10 +5,4 @@
 export type { WrappedERC20Token } from "./WrappedERC20Token";
 export { WrappedERC20Token__factory } from "./factories/WrappedERC20Token__factory";
 
-export type { TotemToken } from "./TotemToken";
-export { TotemToken__factory } from "./factories/TotemToken__factory";
 
-export type { StakingPoolImplementation } from "./StakingPoolImplementation";
-export { StakingPoolImplementation__factory } from "./factories/StakingPoolImplementation__factory";
-export type { StakingPoolFactory } from "./StakingPoolFactory";
-export { StakingPoolFactory__factory } from "./factories/StakingPoolFactory__factory";

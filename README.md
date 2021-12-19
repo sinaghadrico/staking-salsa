@@ -1,6 +1,6 @@
-# totem-predictor
+# Staking-TWA
 
-> TotemFi Predictor
+> Staking TWA 
 
 ## Getting Started
 

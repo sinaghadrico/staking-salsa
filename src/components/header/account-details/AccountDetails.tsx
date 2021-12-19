@@ -3,14 +3,15 @@ import { useWebWallet } from "hooks/use-web-wallet/useWebWallet";
 import { useGlobalDispatch } from "states/globalContext";
 import { Icon } from "components/icon";
 import "./AccountDetails.scss";
-import { useTotemToken } from "services/useTotemToken";
+
 import { useQuery } from "react-query";
 import logo from "assets/icons/svgs/totem.svg";
 import { formatNumberWithCommas } from "utils/number";
+import { useUsdcToken } from "services/useUsdcToken";
 
 const AccountDetails: FC = () => {
     const { active, account } = useWebWallet();
-    const token = useTotemToken();
+    const token = useUsdcToken();
     const { data: balance } = useQuery(["token-balance", account], () => token.getBalance(account), {
         enabled: !!token.contract,
     });
@@ -24,7 +25,7 @@ const AccountDetails: FC = () => {
         <div className="account-details-wrapper" onClick={() => globalDispatch({ type: "toggleWalletOptions" })}>
             <div className="account-details">
                 <div className="account-details-balance">
-                    <Icon src={logo} style={{ width: 12 }} /> {formatNumberWithCommas(balance)}
+                    <Icon src={logo} style={{ width: 20 }} /> {formatNumberWithCommas(balance)}
                 </div>
             </div>
             <div className="account-details-address">

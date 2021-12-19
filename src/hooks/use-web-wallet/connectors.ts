@@ -37,7 +37,7 @@ export const walletconnect = new WalletConnectConnector({
 
 export const walletlink = new WalletLinkConnector({
     url: selectedRpcUrl,
-    appName: "TotemFi App",
+    appName: "Staking TWA App",
     supportedChainIds,
 });
 
@@ -49,7 +49,7 @@ export const ledger = new LedgerConnector({
 
 export const lattice = new LatticeConnector({
     chainId: 4,
-    appName: "TotemFi App",
+    appName: "Staking TWA App",
     url: selectedRpcUrl,
 });
 

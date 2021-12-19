@@ -52,12 +52,12 @@ const AccountPredictorRewardsRow: FC<AccountPredictorRewardsRowProps> = ({
         <>
             <TableRow
                 className={
-                    hasExpandRow ? "account-predictor-rewards-row border-bottom-row" : "account-predictor-rewards-row"
+                    isExpand ? "account-predictor-rewards-row border-bottom-row" : "account-predictor-rewards-row"
                 }
             >
                 <TableCell dataHead={columns[0]?.title}>
                     <div className="account-predictor-rewards-row-title">
-                        <PairCoin size={30} subCoin={asset} supCoin={"wolf"} />
+                        <PairCoin size={24} subCoin={asset} supCoin={"totem"} />
                         {"TWA + " + asset}
                     </div>
                 </TableCell>

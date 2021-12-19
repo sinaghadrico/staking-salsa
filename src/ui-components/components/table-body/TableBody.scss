@@ -1,3 +1,48 @@
 .ui-table-body {
     font-size: 1em;
+
+    .ui-table-cell {
+        background-color: #1F2641;
+    }
+
+    @media (min-width: 750px) {
+        .ui-table-cell:first-child {
+            border-radius: 16px 0 0 16px;
+            -webkit-border-radius: 16px 0 0 16px;
+            -moz-border-radius: 16px 0 0 16px;
+            -ms-border-radius: 16px 0 0 16px;
+            -o-border-radius: 16px 0 0 16px;
+        }
+
+        .ui-table-cell:last-child {
+            border-radius: 0 16px 16px 0;
+            -webkit-border-radius: 0 16px 16px 0;
+            -moz-border-radius: 0 16px 16px 0;
+            -ms-border-radius: 0 16px 16px 0;
+            -o-border-radius: 0 16px 16px 0;
+        }
+    }
+
+    @media (max-width: 750px) {
+        .ui-table-row {
+            .ui-table-cell:first-child {
+                border-radius: 16px 16px 0 0;
+                -webkit-border-radius: 16px 16px 0 0;
+                -moz-border-radius: 16px 16px 0 0;
+                -ms-border-radius: 16px 16px 0 0;
+                -o-border-radius: 16px 16px 0 0;
+            }
+
+            .ui-table-cell:last-child {
+                border-radius: 0 0 16px 16px;
+                -webkit-border-radius: 0 0 16px 16px;
+                -moz-border-radius: 0 0 16px 16px;
+                -ms-border-radius: 0 0 16px 16px;
+                -o-border-radius: 0 0 16px 16px;
+            }
+        }
+
+    }
+
+
 }

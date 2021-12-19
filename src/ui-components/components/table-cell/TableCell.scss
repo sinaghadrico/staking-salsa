@@ -11,6 +11,7 @@ th.ui-table-cell {
         display: flex;
         justify-content: space-between;
         align-items: center;
+
         &:before {
             content: attr(data-th) " ";
             display: flex;
@@ -21,6 +22,7 @@ th.ui-table-cell {
             height: 42px;
             // width: 6.5em; // magic number :( adjust according to your own content
         }
-        margin: 0.5em 1em;
+
+        // margin: 0.5em 1em;
     }
 }
