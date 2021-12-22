@@ -38,11 +38,11 @@ const TotemClaimDetails = ({ data, initialData, refetchPoolData, isLoading }: To
     const { active, account } = useWebWallet();
     const { id, address, asset, earned, status } = data;
     const {
-        tokenContractAddress,
-        apy,
-        remainLockTime,
-        totalValueLock,
-        rewards,
+        tokenContractAddress = "0x00",
+        apy = "0",
+        remainLockTime = "0",
+        totalValueLock = "0",
+        rewards = new Date().getTime(),
         stakeAmount: stakeAmountNumber,
     } = initialData;
     const isLoadingOriginalStake = isLoading;
