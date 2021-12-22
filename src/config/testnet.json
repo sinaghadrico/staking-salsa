@@ -34,5 +34,5 @@
             "StakingPoolFactory": "0xeFb3275EbfbBEFfd25F06e7B73D963578f03dCff"
         }
     },
-    "transactionEndpoint": "https://testnet.bscscan.com/tx"
+    "transactionEndpoint": "https://testnet.bscscan.com/address"
 }

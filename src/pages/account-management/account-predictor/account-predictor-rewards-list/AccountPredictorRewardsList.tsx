@@ -16,7 +16,7 @@ const AccountPredictorRewardsList: FC = () => {
         { title: "Asset", description: null },
         { title: "APY", description: null },
         { title: "TVL", description: null },
-        { title: "Earned", description: null },
+        { title: "Rewards", description: null },
         { title: "Details", description: null },
     ];
 

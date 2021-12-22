@@ -17,9 +17,9 @@ const TimerElements = memo(
                 className={`ui-timer-elements ui-timer-elements-${mode}`}
                 style={{ ...getStyle(ref, size), visibility }}
             >
-                {/* {Object.keys(elements)
-                    .filter((item: TimerElementLabel) => labels.includes(item))
-                    .map((elementName: string, index: number, array: []) => (
+                {Object.keys(elements)
+                    .filter((item: any) => labels?.includes(item))
+                    .map((elementName: string, index: number, array) => (
                         <TimerElement
                             key={`timer-element-key-${index}`}
                             name={elementName}
@@ -29,7 +29,7 @@ const TimerElements = memo(
                             useCharInstead={useCharInstead}
                             className={index === array.length - 1 ? "" : "ui-timer-after-symbol"}
                         />
-                    ))} */}
+                    ))}
                 <p className="ui-timer-description">{description}</p>
             </div>
         );

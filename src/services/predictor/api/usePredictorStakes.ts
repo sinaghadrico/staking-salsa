@@ -16,7 +16,7 @@ const usePredictorStakes = (pageNumber: number, perPage = 10, filter: any = {}, 
                         APY: "0",
                         TVL: "0",
                         earned: "0",
-                        status: "",
+                        status: "Completed",
                     },
                     {
                         id: "2",

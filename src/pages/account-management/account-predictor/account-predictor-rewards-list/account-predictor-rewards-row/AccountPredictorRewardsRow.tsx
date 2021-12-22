@@ -41,9 +41,13 @@ const AccountPredictorRewardsRow: FC<AccountPredictorRewardsRowProps> = ({
     const { id, address, asset, APY, TVL, earned, status } = data;
     const { account } = useWebWallet();
     const lpstaker = useLPStaker(address);
-    const { data: currenctcalculation } = useQuery(["currenctcalculation", account], () => lpstaker.getPoolInfo(), {
-        enabled: !!lpstaker.contract && !!account,
-    });
+    const { data: initialData, isLoading } = useQuery(
+        ["initialData", account],
+        () => lpstaker.getInitialData(account || "0x00"),
+        {
+            enabled: !!lpstaker.contract && !!account,
+        },
+    );
 
     const hasExpandRow = true;
 
@@ -63,7 +67,7 @@ const AccountPredictorRewardsRow: FC<AccountPredictorRewardsRowProps> = ({
                 </TableCell>
 
                 <TableCell dataHead={columns[1]?.title}>
-                    {APY === null ? (
+                    {isLoading ? (
                         <ContentLoader
                             animate={true}
                             speed={2}
@@ -76,13 +80,13 @@ const AccountPredictorRewardsRow: FC<AccountPredictorRewardsRowProps> = ({
                             <rect x="5" y="0" rx="3" ry="3" width="100" height="6" />
                         </ContentLoader>
                     ) : status === "Completed" ? (
-                        <Currency size="16px" value={APY || 0} unit={CurrencyUnit.USD} />
+                        <span style={{ color: "#52C41A" }}>{initialData?.apy} PEX</span>
                     ) : (
                         "-"
                     )}
                 </TableCell>
                 <TableCell dataHead={columns[2]?.title}>
-                    {TVL === null ? (
+                    {isLoading ? (
                         <ContentLoader
                             animate={true}
                             speed={2}
@@ -95,13 +99,13 @@ const AccountPredictorRewardsRow: FC<AccountPredictorRewardsRowProps> = ({
                             <rect x="5" y="0" rx="3" ry="3" width="100" height="6" />
                         </ContentLoader>
                     ) : status === "Completed" ? (
-                        <Currency size="16px" value={TVL || 0} unit={CurrencyUnit.USD} />
+                        <Currency size="16px" value={initialData?.totalValueLock || 0} unit={CurrencyUnit.DOLLAR} />
                     ) : (
                         "-"
                     )}
                 </TableCell>
                 <TableCell dataHead={columns[3]?.title}>
-                    {earned === null ? (
+                    {isLoading ? (
                         <ContentLoader
                             animate={true}
                             speed={2}
@@ -114,7 +118,7 @@ const AccountPredictorRewardsRow: FC<AccountPredictorRewardsRowProps> = ({
                             <rect x="5" y="0" rx="3" ry="3" width="100" height="6" />
                         </ContentLoader>
                     ) : status === "Completed" ? (
-                        <Currency size="16px" value={earned || 0} unit={CurrencyUnit.USD} />
+                        <Currency size="16px" value={initialData?.rewards || 0} unit={CurrencyUnit.TWA} />
                     ) : (
                         "-"
                     )}
@@ -138,7 +142,12 @@ const AccountPredictorRewardsRow: FC<AccountPredictorRewardsRowProps> = ({
                 {hasExpandRow && isExpand && (
                     <motion.tr initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                         <td colSpan={5}>
-                            <TotemClaimDetails data={data} refetchPoolData={refetchPoolData} />
+                            <TotemClaimDetails
+                                data={data}
+                                isLoading={isLoading}
+                                initialData={initialData}
+                                refetchPoolData={refetchPoolData}
+                            />
                         </td>
                     </motion.tr>
                 )}

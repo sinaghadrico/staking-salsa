@@ -1,9 +1,19 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Label, Currency, CurrencyUnit, Button, ButtonWidth, ButtonForm, Input } from "ui-components";
+import {
+    Label,
+    Currency,
+    CurrencyUnit,
+    Button,
+    ButtonWidth,
+    ButtonForm,
+    Input,
+    Timer,
+    TimerShowType,
+} from "ui-components";
 import { Stake } from "models";
 import "./TotemClaimDetails.scss";
-import { useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -11,25 +21,42 @@ import ContentLoader from "react-content-loader";
 import { formatNumberWithCommas, isValidNumber, parseValueToNumber } from "utils/number";
 import { useLPStaker } from "services/predictor/contract/useLPStaker";
 import { useNotification } from "hooks";
+import { transactionEndpoint } from "utils/configs";
+import { TransactionAddress } from "components/transaction-address";
+import { useUsdcToken } from "services/useUsdcToken";
+import useWebWallet from "hooks/use-web-wallet/useWebWallet";
 
 export interface TotemClaimDetailsProps {
     className?: string;
-
+    initialData: any;
     data: any;
-
+    isLoading: boolean;
     refetchPoolData: any;
 }
 
-const TotemClaimDetails = ({ data, refetchPoolData }: TotemClaimDetailsProps) => {
-    const { id, address, asset, APY, TVL, earned, status } = data;
-
-    const isLoadingOriginalStake = false;
+const TotemClaimDetails = ({ data, initialData, refetchPoolData, isLoading }: TotemClaimDetailsProps) => {
+    const { active, account } = useWebWallet();
+    const { id, address, asset, earned, status } = data;
+    const {
+        tokenContractAddress,
+        apy,
+        remainLockTime,
+        totalValueLock,
+        rewards,
+        stakeAmount: stakeAmountNumber,
+    } = initialData;
+    const isLoadingOriginalStake = isLoading;
 
     const [stakeAmount, setStakeAmount] = useState<any>(0);
     const [withdrawAmount, setWithdrawAmount] = useState<any>(0);
 
     const lpstaker = useLPStaker(address);
     const notification = useNotification();
+
+    const token = useUsdcToken();
+    const { data: balance } = useQuery(["token-balance", account], () => token.getBalance(account), {
+        enabled: !!token.contract,
+    });
 
     const handleChange = (event: any) => {
         const { name, value: _value } = event.target;
@@ -47,13 +74,16 @@ const TotemClaimDetails = ({ data, refetchPoolData }: TotemClaimDetailsProps) =>
         }
     };
     const mutationStake = useMutation((_form: any): any => {
-        return lpstaker?.deposit(_form?.stakeAmount);
+        return lpstaker?.stake(_form?.stakeAmount);
     });
     const mutationClaim = useMutation((_form: any): any => {
         return lpstaker?.claim();
     });
     const mutationWithdraw = useMutation((_form: any): any => {
         return lpstaker?.withdraw(_form?.withdrawAmount);
+    });
+    const mutationEmergencyWithdraw = useMutation((_form: any): any => {
+        return lpstaker?.emergencyWithdraw();
     });
 
     const handleStake = () => {
@@ -119,6 +149,27 @@ const TotemClaimDetails = ({ data, refetchPoolData }: TotemClaimDetailsProps) =>
             );
         }
     };
+    const handleEmergencyWithdraw = () => {
+        // if (Number(form.price) === 0) {
+        //     notification.error(`Price value must be greater than 0`);
+        // mutationStake.reset();
+        //     return;
+        // }
+
+        // if (totemTokenBalance && form.amount > totemTokenBalance) {
+        //     notification.error("You don't have sufficient amount of TOTM.");
+        // mutationStake.reset();
+        //     return;
+        // }
+        if (!mutationStake?.isSuccess) {
+            mutationEmergencyWithdraw.mutate(
+                {},
+                {
+                    onSuccess: () => {},
+                },
+            );
+        }
+    };
     return (
         <>
             <AnimatePresence>
@@ -146,7 +197,7 @@ const TotemClaimDetails = ({ data, refetchPoolData }: TotemClaimDetailsProps) =>
                                             <rect x="5" y="0" rx="3" ry="3" width="100" height="6" />
                                         </ContentLoader>
                                     ) : (
-                                        <Currency color="#ff8103" value={TVL} unit={CurrencyUnit.TWA} />
+                                        <Currency color="#ff8103" value={totalValueLock} unit={CurrencyUnit.DOLLAR} />
                                     )}
                                 </div>
                             </div>
@@ -166,7 +217,10 @@ const TotemClaimDetails = ({ data, refetchPoolData }: TotemClaimDetailsProps) =>
                                             <rect x="5" y="0" rx="3" ry="3" width="100" height="6" />
                                         </ContentLoader>
                                     ) : (
-                                        <Currency color="#ff8103" value={APY} unit={CurrencyUnit.TWA} />
+                                        <span>
+                                            {" "}
+                                            <Currency color="#ff8103" value={apy} unit={CurrencyUnit.DOLLAR} /> in TWA
+                                        </span>
                                     )}
                                 </div>
                             </div>
@@ -186,12 +240,16 @@ const TotemClaimDetails = ({ data, refetchPoolData }: TotemClaimDetailsProps) =>
                                             <rect x="5" y="0" rx="3" ry="3" width="100" height="6" />
                                         </ContentLoader>
                                     ) : (
-                                        <Currency color="#ff8103" value={APY} unit={CurrencyUnit.TWA} />
+                                        <TransactionAddress
+                                            transactionEndpoint={transactionEndpoint}
+                                            address={tokenContractAddress || "0"}
+                                            type="full"
+                                        />
                                     )}
                                 </div>
                             </div>
                             <div className="totem-claim-details-item mt-10  py-10  height-35">
-                                <div className="flex-align-center"> {"TWA + " + asset} LP token price:</div>
+                                <div className="flex-align-center"> Remain LockTime:</div>
                                 <div className="text-right flex-align-center-justify-end">
                                     {isLoadingOriginalStake ? (
                                         <ContentLoader
@@ -206,15 +264,25 @@ const TotemClaimDetails = ({ data, refetchPoolData }: TotemClaimDetailsProps) =>
                                             <rect x="5" y="0" rx="3" ry="3" width="100" height="6" />
                                         </ContentLoader>
                                     ) : (
-                                        <Currency color="#ff8103" value={APY} unit={CurrencyUnit.TWA} />
+                                        <Timer
+                                            epoch={remainLockTime || new Date().getTime()}
+                                            size={75}
+                                            mode={TimerShowType.COMMA}
+                                        />
                                     )}
                                 </div>
                             </div>
                         </div>
                         <div className="col-md-4 col-xs-12 flex-column-align-center">
-                            <div className="flex-align-center ">Add liquidity on PancakeSwap v2</div>
+                            {/* <div className="flex-align-center ">Add liquidity on PancakeSwap v2</div> */}
 
-                            <div className="flex-align-center mt-50">Rewards : - TWA</div>
+                            <div className="flex-align-center mt-50">
+                                Rewards : {rewards}{" "}
+                                <span style={{ color: "#52C41A" }} className="px-5">
+                                    {" "}
+                                    TWA
+                                </span>
+                            </div>
 
                             <div className="flex-align-center mt-50">
                                 <Button
@@ -228,7 +296,7 @@ const TotemClaimDetails = ({ data, refetchPoolData }: TotemClaimDetailsProps) =>
                         </div>
                         <div className="col-md-4 col-xs-12 flex-column">
                             <div className=" py-10  flex-column">
-                                <div className="">Your wallet balance: NaN</div>
+                                <div className="">Your wallet balance: {formatNumberWithCommas(balance)}</div>
                                 <div className="flex mt-15">
                                     <Input
                                         className="predictor-pool-details-container-form-predict-price-input"
@@ -250,7 +318,7 @@ const TotemClaimDetails = ({ data, refetchPoolData }: TotemClaimDetailsProps) =>
                                 </div>
                             </div>
                             <div className="py-10  flex-column">
-                                <div className="">Your staked balance: NaN</div>
+                                <div className="">Your staked balance: {stakeAmountNumber}</div>
                                 <div className="flex mt-15">
                                     <Input
                                         className="predictor-pool-details-container-form-predict-price-input"
@@ -268,6 +336,21 @@ const TotemClaimDetails = ({ data, refetchPoolData }: TotemClaimDetailsProps) =>
                                         >
                                             Withdraw
                                         </Button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="py-10  flex-column">
+                                <div className="flex ">
+                                    <div className="flex ">
+                                        <div className="flex-align-center">
+                                            <Button
+                                                width={ButtonWidth.FIT_PARENT}
+                                                onClick={handleEmergencyWithdraw}
+                                                buttonForm={ButtonForm.SECONDARY}
+                                            >
+                                                Emergency Withdraw
+                                            </Button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
