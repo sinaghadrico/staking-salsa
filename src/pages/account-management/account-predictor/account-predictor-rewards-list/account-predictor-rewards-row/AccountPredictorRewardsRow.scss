@@ -137,7 +137,7 @@ $themes: (light: (),
                 img {
                     background-color: #363a3f;
                     border-radius: 50%;
-
+                    height: 35px !important;
                     transition: transform 0.5s linear;
                     -webkit-transform: rotate(180deg);
                     transform: rotate(180deg);
@@ -150,6 +150,7 @@ $themes: (light: (),
         &-close {
             .ui-icon {
                 img {
+                    height: 35px !important;
                     transform: rotate(0deg);
                     transition: transform 0.5s linear;
                     transition: transform 0.5s linear, -webkit-transform 0.5s linear;

@@ -8,19 +8,28 @@ $themes: (light: (header-bg-color: var(--color-white),
 
 .header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     height: 45px;
     color: #979797;
-    padding: 20px 30px;
+    padding: 20px 60px;
     position: -webkit-sticky;
     position: sticky;
     z-index: 100;
     top: 0;
     background-color: #2c324c;
+
+
     // background-color: #1f2641f0;
     // background-image: url("../../assets/images/Bg.svg");
     // background-size: cover;
     // background-repeat: no-repeat;
+    &-title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 24px;
+    }
 
     >div {
         margin: 0 5px;
