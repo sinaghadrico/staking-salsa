@@ -9,6 +9,11 @@ $themes: (light: (header-bg-color: var(--color-white),
 .header {
     display: flex;
     justify-content: space-between;
+
+    @media (max-width: 620px) {
+        justify-content: space-around !important;
+    }
+
     height: 45px;
     color: #979797;
     padding: 20px 60px;
