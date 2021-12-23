@@ -3,9 +3,9 @@ import { useQuery } from "react-query";
 import { StakeData } from "models/stake";
 import { intervalDataUpdate } from "utils/configs";
 
-const usePredictorStakes = (pageNumber: number, perPage = 10, filter: any = {}, account: any) => {
+const usePredictorStakes = (pageNumber: number, perPage = 10) => {
     return useQuery<StakeData>(
-        [`get-predictor-stakes`, account, pageNumber, perPage],
+        [`get-predictor-stakes`, pageNumber, perPage],
         async () => {
             const result: StakeData = {
                 stakes: [

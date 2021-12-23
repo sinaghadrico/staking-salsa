@@ -118,7 +118,10 @@ const AccountPredictorRewardsRow: FC<AccountPredictorRewardsRowProps> = ({
                             <rect x="5" y="0" rx="3" ry="3" width="100" height="6" />
                         </ContentLoader>
                     ) : status === "Completed" ? (
-                        <Currency size="16px" value={initialData?.rewards || 0} unit={CurrencyUnit.TWA} />
+                        <span>
+                            {" "}
+                            <Currency size="16px" value={initialData?.rewards || 0} unit={CurrencyUnit.NONE} /> TWA
+                        </span>
                     ) : (
                         "-"
                     )}

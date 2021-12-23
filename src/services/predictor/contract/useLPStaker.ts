@@ -325,7 +325,7 @@ export const useLPStaker = (address: string) => {
 
         const poolInfo: any = await getPoolInfo();
 
-        const apy: any = (poolInfo?.rewardTokenCount * 365 * apyPrice) / totalValueLock;
+        const apy: any = totalValueLock !== 0 ? (poolInfo?.rewardTokenCount * 365 * apyPrice) / totalValueLock : 0;
         const tokenContractAddress: any = poolInfo?.stakeTokenAddress;
 
         const remainLockTime = 0;

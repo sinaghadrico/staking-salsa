@@ -24,20 +24,11 @@ const AccountPredictorRewardsList: FC = () => {
 
     const history = useHistory();
 
-    const { account } = useWebWallet();
-
     const params = new URLSearchParams(history?.location?.search);
     const pageParam = params.get("page");
     const currentPage = pageParam ? Number(pageParam) : 1;
 
-    const { data, isLoading, isFetching } = usePredictorStakes(
-        currentPage - 1,
-        pageSize,
-        {
-            user: account ? account.toLowerCase() : "0x0",
-        },
-        account,
-    );
+    const { data, isLoading, isFetching } = usePredictorStakes(currentPage - 1, pageSize);
 
     return (
         <div className="account-predictor-rewards-list">
@@ -60,7 +51,7 @@ const AccountPredictorRewardsList: FC = () => {
                 </TableHead>
 
                 <TableBody>
-                    {isLoading || isFetching || (!data && account) ? (
+                    {isLoading || isFetching || !data ? (
                         <>
                             {[0, 1, 2, 3, 4, 5]?.map((item) => (
                                 <AccountPredictorRewardsRowLoader key={item} />

@@ -25,6 +25,7 @@ import { transactionEndpoint } from "utils/configs";
 import { TransactionAddress } from "components/transaction-address";
 import { useUsdcToken } from "services/useUsdcToken";
 import useWebWallet from "hooks/use-web-wallet/useWebWallet";
+import { useGlobalDispatch } from "states/globalContext";
 
 export interface TotemClaimDetailsProps {
     className?: string;
@@ -34,16 +35,17 @@ export interface TotemClaimDetailsProps {
     refetchPoolData: any;
 }
 
-const TotemClaimDetails = ({ data, initialData, refetchPoolData, isLoading }: TotemClaimDetailsProps) => {
+const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading }: TotemClaimDetailsProps) => {
     const { active, account } = useWebWallet();
+    const globalDispatch = useGlobalDispatch();
     const { id, address, asset, earned, status } = data;
     const {
         tokenContractAddress = "0x00",
         apy = "0",
-        remainLockTime = "0",
+        remainLockTime = new Date().getTime(),
         totalValueLock = "0",
-        rewards = new Date().getTime(),
-        stakeAmount: stakeAmountNumber,
+        rewards = "0",
+        stakeAmount: stakeAmountNumber = "0",
     } = initialData;
     const isLoadingOriginalStake = isLoading;
 
@@ -87,6 +89,10 @@ const TotemClaimDetails = ({ data, initialData, refetchPoolData, isLoading }: To
     });
 
     const handleStake = () => {
+        if (!token.contract) {
+            globalDispatch({ type: "setWalletOptions", value: true });
+            return;
+        }
         // if (Number(form.price) === 0) {
         //     notification.error(`Price value must be greater than 0`);
         // mutationStake.reset();
@@ -108,6 +114,10 @@ const TotemClaimDetails = ({ data, initialData, refetchPoolData, isLoading }: To
         }
     };
     const handleClaim = () => {
+        if (!token.contract) {
+            globalDispatch({ type: "setWalletOptions", value: true });
+            return;
+        }
         // if (Number(form.price) === 0) {
         //     notification.error(`Price value must be greater than 0`);
         // mutationStake.reset();
@@ -129,6 +139,10 @@ const TotemClaimDetails = ({ data, initialData, refetchPoolData, isLoading }: To
         }
     };
     const handleWithdraw = () => {
+        if (!token.contract) {
+            globalDispatch({ type: "setWalletOptions", value: true });
+            return;
+        }
         // if (Number(form.price) === 0) {
         //     notification.error(`Price value must be greater than 0`);
         // mutationStake.reset();
@@ -150,6 +164,10 @@ const TotemClaimDetails = ({ data, initialData, refetchPoolData, isLoading }: To
         }
     };
     const handleEmergencyWithdraw = () => {
+        if (!token.contract) {
+            globalDispatch({ type: "setWalletOptions", value: true });
+            return;
+        }
         // if (Number(form.price) === 0) {
         //     notification.error(`Price value must be greater than 0`);
         // mutationStake.reset();
@@ -239,12 +257,14 @@ const TotemClaimDetails = ({ data, initialData, refetchPoolData, isLoading }: To
                                         >
                                             <rect x="5" y="0" rx="3" ry="3" width="100" height="6" />
                                         </ContentLoader>
-                                    ) : (
+                                    ) : account ? (
                                         <TransactionAddress
                                             transactionEndpoint={transactionEndpoint}
                                             address={tokenContractAddress || "0"}
                                             type="full"
                                         />
+                                    ) : (
+                                        ""
                                     )}
                                 </div>
                             </div>
