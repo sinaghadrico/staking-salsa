@@ -1,0 +1,102 @@
+.mobile-menu {
+    $drawer-width: 90px;
+    $drawer-backdrop-opacity: 0.4;
+
+    @keyframes openDrawer {
+        0% {
+            left: -$drawer-width;
+        }
+        100% {
+            left: 0;
+        }
+    }
+
+    @keyframes closeDrawer {
+        0% {
+            left: 0px;
+        }
+        100% {
+            left: -$drawer-width;
+        }
+    }
+
+    @keyframes backdrop {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: $drawer-backdrop-opacity;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        display: none;
+    }
+
+    &-icon {
+        cursor: pointer;
+        filter: invert(0.6);
+        position: fixed;
+        left: 10px;
+        top: 20px;
+    }
+    &-container {
+        width: $drawer-width;
+        height: 100%;
+        background: rgba(#272e38, 0.75);
+        position: fixed;
+        top: 0;
+        left: -$drawer-width;
+        padding-top: 85px;
+    }
+    &-container-close {
+        animation-name: closeDrawer;
+        animation-duration: 0.2s;
+        left: -$drawer-width;
+    }
+    &-container-open {
+        transition-delay: 0;
+        animation-name: openDrawer;
+        animation-duration: 0.3s;
+        left: 0;
+    }
+    &-backdrop-visible {
+        display: block;
+        background-color: black;
+        opacity: $drawer-backdrop-opacity;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        animation-name: backdrop;
+        animation-duration: 0.3s;
+    }
+    &-backdrop-invisible {
+        display: none;
+    }
+
+    &-items {
+        position: relative;
+
+        .sidebar {
+            display: block;
+            width: $drawer-width;
+
+            li {
+                margin: 15px auto;
+            }
+
+            li:nth-child(1) {
+                margin-top: 0;
+            }
+
+            li.v1-dapp {
+                margin-top: 0 !important;
+                position: absolute;
+                bottom: 90px;
+                left: calc(50% - 30px);
+            }
+        }
+    }
+}

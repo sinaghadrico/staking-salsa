@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { PairCoinProps } from "./PairCoin.interface";
 import "./PairCoin.scss";
 

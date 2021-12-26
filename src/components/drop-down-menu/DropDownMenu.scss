@@ -1,0 +1,93 @@
+.ui-drop-down-menu {
+    color: #8e9092;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #232831;
+    position: relative;
+    min-width: 200px;
+    border-radius: 8px;
+    font-size: 15px;
+
+    &-toggle {
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &-list {
+        position: absolute;
+        left: 0;
+        top: 38px;
+        overflow: hidden;
+        background-image: var(--box-background-color);
+        display: inline-block;
+        height: auto;
+        width: 100%;
+
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 9999;
+        // border: 1px solid #ffffff3d;
+        border-radius: 0 0 20px 20px;
+        -webkit-border-radius: 0 0 20px 20px;
+        -moz-border-radius: 0 0 20px 20px;
+        -ms-border-radius: 0 0 20px 20px;
+        -o-border-radius: 0 0 20px 20px;
+
+        ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 10px;
+
+            li {
+                cursor: pointer;
+                transition: background 0.25s, color 0.25s;
+            }
+        }
+
+        ul li:last-child {
+            div {
+                border-bottom: 0;
+            }
+        }
+
+        &-label {
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(182, 182, 180, 0.1);
+            color: var(--box-key-label-color);
+        }
+    }
+
+    &-expanded {
+        height: auto;
+        display: inline-block;
+        width: inherit;
+        height: inherit;
+    }
+
+    .ui-collapse {
+        cursor: pointer;
+
+        &-expand {
+            svg {
+                transition: transform 0.5s linear;
+                -webkit-transform: rotate(180deg);
+                transform: rotate(180deg);
+                transition: -webkit-transform 0.5s linear;
+                transition: transform 0.5s linear, -webkit-transform 0.5s linear;
+            }
+        }
+
+        &-close {
+            svg {
+                transform: rotate(0deg);
+                transition: transform 0.5s linear;
+                transition: transform 0.5s linear, -webkit-transform 0.5s linear;
+            }
+        }
+    }
+}

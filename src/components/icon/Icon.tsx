@@ -10,11 +10,22 @@ interface IconProps {
     target?: string;
     className?: string;
     style?: any;
+    width?: string;
+    height?: string;
 }
 const onImageError = (ev: any) => {
     ev.target.src = ido_logo;
 };
-const Icon: FC<IconProps> = ({ src, alt = "logo", link = "", target = "", className = "", style }: IconProps) => {
+const Icon: FC<IconProps> = ({
+    src,
+    alt = "logo",
+    link = "",
+    target = "",
+    className = "",
+    style,
+    width,
+    height,
+}: IconProps) => {
     const href = link.startsWith("http") ? link : `/${link}`;
 
     return link ? (
@@ -26,7 +37,14 @@ const Icon: FC<IconProps> = ({ src, alt = "logo", link = "", target = "", classN
                 aria-label={alt}
                 rel="noopener noreferrer"
             >
-                <img alt={alt} src={src} style={style} onError={onImageError} height="auto" />
+                <img
+                    alt={alt}
+                    src={src}
+                    style={style}
+                    onError={onImageError}
+                    width={width ? `${width}px` : undefined}
+                    height={height ? `${height}px` : "auto"}
+                />
             </a>
         ) : (
             <NavLink
@@ -38,12 +56,26 @@ const Icon: FC<IconProps> = ({ src, alt = "logo", link = "", target = "", classN
                 aria-label={alt}
                 rel="noopener noreferrer"
             >
-                <img alt={alt} src={src} style={style} onError={onImageError} height="auto" />
+                <img
+                    alt={alt}
+                    src={src}
+                    style={style}
+                    onError={onImageError}
+                    width={width ? `${width}px` : undefined}
+                    height={height ? `${height}px` : "auto"}
+                />
             </NavLink>
         )
     ) : (
         <span className={classnames("ui-icon", className)}>
-            <img alt={alt} src={src} style={style} onError={onImageError} height="auto" />
+            <img
+                alt={alt}
+                src={src}
+                style={style}
+                onError={onImageError}
+                width={width ? `${width}px` : undefined}
+                height={height ? `${height}px` : "auto"}
+            />
         </span>
     );
 };

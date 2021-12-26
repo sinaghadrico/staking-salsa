@@ -3,7 +3,6 @@ import { Table, TableHead, TableRow, TableCell, Tooltip, TooltipPosition, TableB
 import { Icon } from "components/icon";
 import { AccountPredictorRewardsRowLoader } from "./account-predictor-rewards-row";
 import info_logo from "assets/icons/svgs/info.svg";
-import useWebWallet from "hooks/use-web-wallet/useWebWallet";
 import usePredictorStakes from "services/predictor/api/usePredictorStakes";
 
 import { Column } from "models/column";
