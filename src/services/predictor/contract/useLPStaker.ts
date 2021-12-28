@@ -2,10 +2,11 @@
 import { ContractTransaction } from "ethers";
 import useWebWallet, { getErrorMessage } from "hooks/use-web-wallet/useWebWallet";
 import useNotification from "hooks/useNotification";
-import { parseTokenValue, toPriceValue, toTokenValue } from "utils/convert";
+import { parseTokenValue, setDigit, toPriceValue, toTokenValue } from "utils/convert";
 import { useContractFromAddressByABI } from "services/contract";
 
 export const useLPStaker = (address: string) => {
+    const { account } = useWebWallet();
     const notification = useNotification();
     const contractMethod: any = useContractFromAddressByABI(address);
 
@@ -15,14 +16,10 @@ export const useLPStaker = (address: string) => {
         return new Promise((resolve: (response: any) => void, reject) => {
             contractMethod
                 ?.claim()
-                .call()
+                .send({ from: account })
                 .then((transaction: ContractTransaction) => {
-                    debugger;
                     notification.success("claim confirmed");
-                    // transaction.wait(1).then(() => {
-                    //     notification.success("claim confirmed");
-                    //     resolve(transaction);
-                    // });
+                    resolve(transaction);
                 })
                 .catch((error: any) => {
                     notification.error(getErrorMessage(error));
@@ -30,33 +27,15 @@ export const useLPStaker = (address: string) => {
                 });
         });
     };
-    const claimableReward = (UserAddress: string) => {
-        return new Promise((resolve: (response: any) => void, reject) => {
-            contractMethod
-                ?.claimableReward(UserAddress)
-                .call()
-                .then((transaction: ContractTransaction) => {
-                    transaction.wait(1).then(() => {
-                        notification.success("claimableReward confirmed");
-                        resolve(transaction);
-                    });
-                })
-                .catch((error: any) => {
-                    notification.error(getErrorMessage(error));
-                    reject(error);
-                });
-        });
-    };
+
     const stake = (amount: string) => {
         return new Promise((resolve: (response: any) => void, reject) => {
             contractMethod
-                ?.deposit(amount)
-                .call()
+                ?.deposit(toTokenValue(amount))
+                .send({ from: account })
                 .then((transaction: ContractTransaction) => {
-                    transaction.wait(1).then(() => {
-                        notification.success("deposit confirmed");
-                        resolve(transaction);
-                    });
+                    notification.success("stake confirmed");
+                    resolve(transaction);
                 })
                 .catch((error: any) => {
                     notification.error(getErrorMessage(error));
@@ -68,12 +47,10 @@ export const useLPStaker = (address: string) => {
         return new Promise((resolve: (response: any) => void, reject) => {
             contractMethod
                 ?.emergencyWithdraw()
-                .call()
+                .send({ from: account })
                 .then((transaction: ContractTransaction) => {
-                    transaction.wait(1).then(() => {
-                        notification.success("emergencyWithdraw confirmed");
-                        resolve(transaction);
-                    });
+                    notification.success("emergencyWithdraw confirmed");
+                    resolve(transaction);
                 })
                 .catch((error: any) => {
                     notification.error(getErrorMessage(error));
@@ -81,16 +58,14 @@ export const useLPStaker = (address: string) => {
                 });
         });
     };
-    const rechargeReward = (amount: string) => {
+    const releaseReward = (amount: string) => {
         return new Promise((resolve: (response: any) => void, reject) => {
             contractMethod
-                ?.rechargeReward(amount)
-                .call()
+                ?.releaseReward(toTokenValue(amount))
+                .send({ from: account })
                 .then((transaction: ContractTransaction) => {
-                    transaction.wait(1).then(() => {
-                        notification.success("rechargeReward confirmed");
-                        resolve(transaction);
-                    });
+                    notification.success("releaseReward confirmed");
+                    resolve(transaction);
                 })
                 .catch((error: any) => {
                     notification.error(getErrorMessage(error));
@@ -102,12 +77,10 @@ export const useLPStaker = (address: string) => {
         return new Promise((resolve: (response: any) => void, reject) => {
             contractMethod
                 ?.renounceOwnership()
-                .call()
+                .send({ from: account })
                 .then((transaction: ContractTransaction) => {
-                    transaction.wait(1).then(() => {
-                        notification.success("renounceOwnership confirmed");
-                        resolve(transaction);
-                    });
+                    notification.success("renounceOwnership confirmed");
+                    resolve(transaction);
                 })
                 .catch((error: any) => {
                     notification.error(getErrorMessage(error));
@@ -119,12 +92,25 @@ export const useLPStaker = (address: string) => {
         return new Promise((resolve: (response: any) => void, reject) => {
             contractMethod
                 ?.setCalculationFactor(calculationFactor)
-                .call()
+                .send({ from: account })
                 .then((transaction: ContractTransaction) => {
-                    transaction.wait(1).then(() => {
-                        notification.success("setCalculationFactor confirmed");
-                        resolve(transaction);
-                    });
+                    notification.success("setCalculationFactor confirmed");
+                    resolve(transaction);
+                })
+                .catch((error: any) => {
+                    notification.error(getErrorMessage(error));
+                    reject(error);
+                });
+        });
+    };
+    const setLostRewardAddress = (rewardAddress: string) => {
+        return new Promise((resolve: (response: any) => void, reject) => {
+            contractMethod
+                ?.setLostRewardAddress(rewardAddress)
+                .send({ from: account })
+                .then((transaction: ContractTransaction) => {
+                    notification.success("setLostRewardAddress confirmed");
+                    resolve(transaction);
                 })
                 .catch((error: any) => {
                     notification.error(getErrorMessage(error));
@@ -136,12 +122,25 @@ export const useLPStaker = (address: string) => {
         return new Promise((resolve: (response: any) => void, reject) => {
             contractMethod
                 ?.setPoolRewardTokenCount(rewardTokenCount)
-                .call()
+                .send({ from: account })
                 .then((transaction: ContractTransaction) => {
-                    transaction.wait(1).then(() => {
-                        notification.success("setPoolRewardTokenCount confirmed");
-                        resolve(transaction);
-                    });
+                    notification.success("setPoolRewardTokenCount confirmed");
+                    resolve(transaction);
+                })
+                .catch((error: any) => {
+                    notification.error(getErrorMessage(error));
+                    reject(error);
+                });
+        });
+    };
+    const setminimumBalabce = (minimumBalabce: string) => {
+        return new Promise((resolve: (response: any) => void, reject) => {
+            contractMethod
+                ?.setminimumBalabce(minimumBalabce)
+                .send({ from: account })
+                .then((transaction: ContractTransaction) => {
+                    notification.success("setminimumBalabce confirmed");
+                    resolve(transaction);
                 })
                 .catch((error: any) => {
                     notification.error(getErrorMessage(error));
@@ -153,7 +152,7 @@ export const useLPStaker = (address: string) => {
         return new Promise((resolve: (response: any) => void, reject) => {
             contractMethod
                 ?.start()
-                .call()
+                .send({ from: account })
                 .then((transaction: ContractTransaction) => {
                     transaction.wait(1).then(() => {
                         notification.success("start confirmed");
@@ -166,16 +165,14 @@ export const useLPStaker = (address: string) => {
                 });
         });
     };
-    const transferOwnership = (UserAddress: string) => {
+    const transferOwnership = (userAddress: string) => {
         return new Promise((resolve: (response: any) => void, reject) => {
             contractMethod
-                ?.transferOwnership(UserAddress)
-                .call()
+                ?.transferOwnership(userAddress)
+                .send({ from: account })
                 .then((transaction: ContractTransaction) => {
-                    transaction.wait(1).then(() => {
-                        notification.success("transferOwnership confirmed");
-                        resolve(transaction);
-                    });
+                    notification.success("transferOwnership confirmed");
+                    resolve(transaction);
                 })
                 .catch((error: any) => {
                     notification.error(getErrorMessage(error));
@@ -186,13 +183,11 @@ export const useLPStaker = (address: string) => {
     const withdraw = (amount: string) => {
         return new Promise((resolve: (response: any) => void, reject) => {
             contractMethod
-                ?.withdraw(amount)
-                .call()
+                ?.withdraw(toTokenValue(amount))
+                .send({ from: account })
                 .then((transaction: ContractTransaction) => {
-                    transaction.wait(1).then(() => {
-                        notification.success("withdraw confirmed");
-                        resolve(transaction);
-                    });
+                    notification.success("withdraw confirmed");
+                    resolve(transaction);
                 })
                 .catch((error: any) => {
                     notification.error(getErrorMessage(error));
@@ -203,9 +198,22 @@ export const useLPStaker = (address: string) => {
 
     //read contract
 
-    const getCurrenctcalculation = () => {
+    const claimableReward = (UserAddress: string, time: string) => {
+        contractMethod
+            ?.claimableReward(UserAddress, time)
+            .call()
+            .then((data: any) => {
+                return parseTokenValue(data);
+            })
+            .catch((error: any) => {
+                return 0;
+                notification.error(getErrorMessage(error));
+            });
+    };
+
+    const getCalculationFactor = () => {
         return contractMethod
-            ?.currenctcalculation()
+            ?.getCalculationFactor()
             .call()
             .then((data: any) => {
                 return {
@@ -220,9 +228,33 @@ export const useLPStaker = (address: string) => {
                 notification.error(getErrorMessage(error));
             });
     };
-    const getPoolTotalStakeSupply = () => {
+    const getLostRewardAddress = () => {
         return contractMethod
-            ?.getPoolTotalLPSupply()
+            ?.getLostRewardAddress()
+            .call()
+            .then((data: any) => {
+                return parseTokenValue(data);
+            })
+            .catch((error: any) => {
+                return 0;
+                // notification.error(getErrorMessage(error));
+            });
+    };
+    const getPeriodRewardTokenCount = () => {
+        return contractMethod
+            ?.getPeriodRewardTokenCount()
+            .call()
+            .then((data: any) => {
+                return parseTokenValue(data);
+            })
+            .catch((error: any) => {
+                return 0;
+                // notification.error(getErrorMessage(error));
+            });
+    };
+    const getPoolTotalStakedSupply = () => {
+        return contractMethod
+            ?.getPoolTotalStakedSupply()
             .call()
             .then((data: any) => {
                 return parseTokenValue(data);
@@ -235,6 +267,28 @@ export const useLPStaker = (address: string) => {
     const getPoolTotalRewardSupply = () => {
         return contractMethod
             ?.getPoolTotalRewardSupply()
+            .call()
+            .then((data: any) => {
+                return data;
+            })
+            .catch((error: any) => {
+                notification.error(getErrorMessage(error));
+            });
+    };
+    const getminimumBalance = () => {
+        return contractMethod
+            ?.getminimumBalance()
+            .call()
+            .then((data: any) => {
+                return data;
+            })
+            .catch((error: any) => {
+                notification.error(getErrorMessage(error));
+            });
+    };
+    const getLockPeriod = () => {
+        return contractMethod
+            ?.lockPeriod()
             .call()
             .then((data: any) => {
                 return data;
@@ -260,9 +314,9 @@ export const useLPStaker = (address: string) => {
             .call()
             .then((data: any) => {
                 return {
-                    stakeTokenAddress: data?.lpToken,
-                    rewardToken: data?.rewardToken,
-                    rewardTokenCount: data?.rewardTokenCount,
+                    stakeTokenAddress: data?.stakeToken,
+                    rewardToken: parseTokenValue(data?.periodRewardTokenCount),
+                    rewardTokenCount: parseTokenValue(data?.periodRewardTokenCount),
                 };
             })
             .catch((error: any) => {
@@ -274,6 +328,21 @@ export const useLPStaker = (address: string) => {
                 // notification.error(getErrorMessage(error));
             });
     };
+    const getRemainLockTime = (userAddress: string) => {
+        return contractMethod
+            ?.remainLockTime(userAddress)
+            .call()
+            .then((data: any) => {
+                const _remainLockTime = new Date().getTime() + (Number(data) || 0) * 1000;
+
+                return _remainLockTime;
+            })
+            .catch((error: any) => {
+                return new Date().getTime();
+                // notification.error(getErrorMessage(error));
+            });
+    };
+
     const getStartTime = () => {
         return contractMethod
             ?.startTime()
@@ -292,6 +361,7 @@ export const useLPStaker = (address: string) => {
                 return {
                     stakeAmount: parseTokenValue(data?.amount),
                     rewardDebt: parseTokenValue(data?.rewardDebt),
+                    depositTime: data?.depositTime,
                     lastWithdraw: parseTokenValue(data?.lastWithdraw),
                 };
             })
@@ -304,36 +374,26 @@ export const useLPStaker = (address: string) => {
                 // notification.error(getErrorMessage(error));
             });
     };
-    const getRemainLockTime = () => {
-        return contractMethod
-            ?.remainLockTime()
-            .call()
-            .then((data: any) => {
-                return new Date().getTime() + (data || 0);
-            })
-            .catch((error: any) => {
-                return new Date().getTime();
-                // notification.error(getErrorMessage(error));
-            });
-    };
 
     const getInitialData = async (address: string): Promise<any> => {
         const tvlPrice = 1;
         const apyPrice = 1;
 
-        const totalValueLock: any = (await getPoolTotalStakeSupply()) * tvlPrice;
+        const totalValueLock: any = setDigit((await getPoolTotalStakedSupply()) * tvlPrice);
 
         const poolInfo: any = await getPoolInfo();
 
-        const apy: any = totalValueLock !== 0 ? (poolInfo?.rewardTokenCount * 365 * apyPrice) / totalValueLock : 0;
+        const apy: any = setDigit(
+            totalValueLock !== 0 ? (poolInfo?.rewardTokenCount * 365 * apyPrice) / totalValueLock : 0,
+        );
         const tokenContractAddress: any = poolInfo?.stakeTokenAddress;
 
-        const remainLockTime = 0;
+        const remainLockTime = await getRemainLockTime(address);
 
         const userInfo = await getUserInfo(address);
 
         const rewards: any = userInfo?.rewardDebt;
-        const stakeAmount = userInfo?.stakeAmount;
+        const stakeAmount = setDigit(userInfo?.stakeAmount);
 
         return { totalValueLock, apy, tokenContractAddress, remainLockTime, rewards, stakeAmount };
     };
@@ -344,21 +404,28 @@ export const useLPStaker = (address: string) => {
     return {
         claim,
         claimableReward,
+        getLostRewardAddress,
+        getminimumBalance,
+        getLockPeriod,
+        getPeriodRewardTokenCount,
         stake,
         emergencyWithdraw,
-        rechargeReward,
+        releaseReward,
         renounceOwnership,
         setCalculationFactor,
+        setLostRewardAddress,
+        setminimumBalabce,
         setPoolRewardTokenCount,
         start,
         transferOwnership,
         withdraw,
 
-        getCurrenctcalculation,
-        getPoolTotalStakeSupply,
+        getCalculationFactor,
+        getPoolTotalStakedSupply,
         getPoolTotalRewardSupply,
         getOwner,
         getPoolInfo,
+        getRemainLockTime,
         getStartTime,
         getUserInfo,
 

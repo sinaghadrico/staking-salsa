@@ -11,7 +11,7 @@ const usePredictorStakes = (pageNumber: number, perPage = 10) => {
                 stakes: [
                     {
                         id: "1",
-                        address: "0xfC0C40272c75A5711ef34DA32C4E156cFBE9892C",
+                        address: "0xcC76B070169eD9e43681b364c31F8E877c436f4F",
                         asset: "BNB",
                         APY: "0",
                         TVL: "0",
@@ -20,7 +20,7 @@ const usePredictorStakes = (pageNumber: number, perPage = 10) => {
                     },
                     {
                         id: "2",
-                        address: "0xfC0C40272c75A5711ef34DA32C4E156cFBE9892C",
+                        address: "0xcC76B070169eD9e43681b364c31F8E877c436f4F",
                         asset: "BNB",
                         APY: "0",
                         TVL: "0",

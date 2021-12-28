@@ -13,7 +13,7 @@ import {
 } from "ui-components";
 import { Stake } from "models";
 import "./TotemClaimDetails.scss";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -26,6 +26,7 @@ import { TransactionAddress } from "components/transaction-address";
 import { useUsdcToken } from "services/useUsdcToken";
 import useWebWallet from "hooks/use-web-wallet/useWebWallet";
 import { useGlobalDispatch } from "states/globalContext";
+import usePrices from "services/usePrices";
 
 export interface TotemClaimDetailsProps {
     className?: string;
@@ -38,6 +39,7 @@ export interface TotemClaimDetailsProps {
 const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading }: TotemClaimDetailsProps) => {
     const { active, account } = useWebWallet();
     const globalDispatch = useGlobalDispatch();
+    const queryClient = useQueryClient();
     const { id, address, asset, earned, status } = data;
     const {
         tokenContractAddress = "0x00",
@@ -48,7 +50,7 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
         stakeAmount: stakeAmountNumber = "0",
     } = initialData;
     const isLoadingOriginalStake = isLoading;
-
+    const { coinPrice } = usePrices("BNB");
     const [stakeAmount, setStakeAmount] = useState<any>(0);
     const [withdrawAmount, setWithdrawAmount] = useState<any>(0);
 
@@ -93,11 +95,11 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
             globalDispatch({ type: "setWalletOptions", value: true });
             return;
         }
-        // if (Number(form.price) === 0) {
-        //     notification.error(`Price value must be greater than 0`);
-        // mutationStake.reset();
-        //     return;
-        // }
+        if (Number(stakeAmount) === 0) {
+            notification.error(`stake value must be greater than 0`);
+            mutationStake.reset();
+            return;
+        }
 
         // if (totemTokenBalance && form.amount > totemTokenBalance) {
         //     notification.error("You don't have sufficient amount of TOTM.");
@@ -108,7 +110,11 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
             mutationStake.mutate(
                 { stakeAmount },
                 {
-                    onSuccess: () => {},
+                    onSuccess: () => {
+                        queryClient.invalidateQueries(`initialData-${id}`);
+                        queryClient.invalidateQueries(`token-balance`);
+                        setStakeAmount(0);
+                    },
                 },
             );
         }
@@ -129,11 +135,14 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
         // mutationStake.reset();
         //     return;
         // }
-        if (!mutationStake?.isSuccess) {
+        if (!mutationClaim?.isSuccess) {
             mutationClaim.mutate(
                 {},
                 {
-                    onSuccess: () => {},
+                    onSuccess: () => {
+                        queryClient.invalidateQueries(`initialData-${id}`);
+                        queryClient.invalidateQueries(`token-balance`);
+                    },
                 },
             );
         }
@@ -143,22 +152,26 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
             globalDispatch({ type: "setWalletOptions", value: true });
             return;
         }
-        // if (Number(form.price) === 0) {
-        //     notification.error(`Price value must be greater than 0`);
-        // mutationStake.reset();
-        //     return;
-        // }
+        if (Number(withdrawAmount) === 0) {
+            notification.error(`withdraw value must be greater than 0`);
+            mutationWithdraw.reset();
+            return;
+        }
 
         // if (totemTokenBalance && form.amount > totemTokenBalance) {
         //     notification.error("You don't have sufficient amount of TOTM.");
         // mutationStake.reset();
         //     return;
         // }
-        if (!mutationStake?.isSuccess) {
+        if (!mutationWithdraw?.isSuccess) {
             mutationWithdraw.mutate(
                 { withdrawAmount },
                 {
-                    onSuccess: () => {},
+                    onSuccess: () => {
+                        queryClient.invalidateQueries(`initialData-${id}`);
+                        queryClient.invalidateQueries(`token-balance`);
+                        setWithdrawAmount(0);
+                    },
                 },
             );
         }
@@ -179,11 +192,14 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
         // mutationStake.reset();
         //     return;
         // }
-        if (!mutationStake?.isSuccess) {
+        if (!mutationEmergencyWithdraw?.isSuccess) {
             mutationEmergencyWithdraw.mutate(
                 {},
                 {
-                    onSuccess: () => {},
+                    onSuccess: () => {
+                        queryClient.invalidateQueries(`initialData-${id}`);
+                        queryClient.invalidateQueries(`token-balance`);
+                    },
                 },
             );
         }
@@ -215,7 +231,11 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
                                             <rect x="5" y="0" rx="3" ry="3" width="100" height="6" />
                                         </ContentLoader>
                                     ) : (
-                                        <Currency color="#ff8103" value={totalValueLock} unit={CurrencyUnit.DOLLAR} />
+                                        <Currency
+                                            color="#ff8103"
+                                            value={totalValueLock * coinPrice}
+                                            unit={CurrencyUnit.DOLLAR}
+                                        />
                                     )}
                                 </div>
                             </div>
@@ -237,7 +257,7 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
                                     ) : (
                                         <span>
                                             {" "}
-                                            <Currency color="#ff8103" value={apy} unit={CurrencyUnit.DOLLAR} /> in TWA
+                                            <Currency color="#ff8103" value={apy} unit={CurrencyUnit.DOLLAR} /> % in TWA
                                         </span>
                                     )}
                                 </div>
@@ -309,8 +329,9 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
                                     width={ButtonWidth.FIT_PARENT}
                                     onClick={handleClaim}
                                     buttonForm={ButtonForm.SECONDARY}
+                                    disabled={mutationClaim.isLoading}
                                 >
-                                    Claim rewards
+                                    {mutationClaim.isLoading ? "wait ..." : "Claim rewards"}
                                 </Button>
                             </div>
                         </div>
@@ -331,8 +352,9 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
                                             width={ButtonWidth.FIT_PARENT}
                                             onClick={handleStake}
                                             buttonForm={ButtonForm.SECONDARY}
+                                            disabled={mutationStake.isLoading}
                                         >
-                                            stake
+                                            {mutationStake.isLoading ? "wait ..." : "Stake"}
                                         </Button>
                                     </div>
                                 </div>
@@ -353,8 +375,9 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
                                             width={ButtonWidth.FIT_PARENT}
                                             onClick={handleWithdraw}
                                             buttonForm={ButtonForm.SECONDARY}
+                                            disabled={mutationWithdraw.isLoading}
                                         >
-                                            Withdraw
+                                            {mutationWithdraw.isLoading ? "wait ..." : "Withdraw"}
                                         </Button>
                                     </div>
                                 </div>
@@ -367,8 +390,11 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
                                                 width={ButtonWidth.FIT_PARENT}
                                                 onClick={handleEmergencyWithdraw}
                                                 buttonForm={ButtonForm.SECONDARY}
+                                                disabled={mutationEmergencyWithdraw.isLoading}
                                             >
-                                                Emergency Withdraw
+                                                {mutationEmergencyWithdraw.isLoading
+                                                    ? "wait ..."
+                                                    : "Emergency Withdraw"}
                                             </Button>
                                         </div>
                                     </div>

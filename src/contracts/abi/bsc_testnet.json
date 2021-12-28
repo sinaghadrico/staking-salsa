@@ -4,9 +4,8 @@
     "abi": [
         {
             "inputs": [
-                { "internalType": "contract IERC20", "name": "_lpToken", "type": "address" },
-                { "internalType": "contract IERC20", "name": "_rewardToken", "type": "address" },
-                { "internalType": "uint256", "name": "_rewardsPerDuration", "type": "uint256" }
+                { "internalType": "contract IERC20", "name": "_stakeToken", "type": "address" },
+                { "internalType": "uint256", "name": "_periodRewardTokenCount", "type": "uint256" }
             ],
             "stateMutability": "nonpayable",
             "type": "constructor"
@@ -49,22 +48,12 @@
         },
         { "inputs": [], "name": "claim", "outputs": [], "stateMutability": "nonpayable", "type": "function" },
         {
-            "inputs": [{ "internalType": "address", "name": "_user", "type": "address" }],
+            "inputs": [
+                { "internalType": "address", "name": "_user", "type": "address" },
+                { "internalType": "uint256", "name": "_calculationTime", "type": "uint256" }
+            ],
             "name": "claimableReward",
             "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [],
-            "name": "currenctcalculation",
-            "outputs": [
-                { "internalType": "uint256", "name": "duration", "type": "uint256" },
-                { "internalType": "uint256", "name": "durationCount", "type": "uint256" },
-                { "internalType": "uint256", "name": "rewardTokenCount", "type": "uint256" },
-                { "internalType": "address", "name": "userAddress", "type": "address" },
-                { "internalType": "uint256", "name": "userReward", "type": "uint256" }
-            ],
             "stateMutability": "view",
             "type": "function"
         },
@@ -84,8 +73,22 @@
         },
         {
             "inputs": [],
-            "name": "getPoolTotalLPSupply",
-            "outputs": [{ "internalType": "uint256", "name": "LPTotalSupply", "type": "uint256" }],
+            "name": "getCalculationFactor",
+            "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "getLostRewardAddress",
+            "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "getPeriodRewardTokenCount",
+            "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
             "stateMutability": "view",
             "type": "function"
         },
@@ -93,6 +96,27 @@
             "inputs": [],
             "name": "getPoolTotalRewardSupply",
             "outputs": [{ "internalType": "uint256", "name": "RewardTotalSupply", "type": "uint256" }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "getPoolTotalStakedSupply",
+            "outputs": [{ "internalType": "uint256", "name": "StakeTotalSupply", "type": "uint256" }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "getminimumBalance",
+            "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "lockPeriod",
+            "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
             "stateMutability": "view",
             "type": "function"
         },
@@ -107,18 +131,27 @@
             "inputs": [],
             "name": "poolInfo",
             "outputs": [
-                { "internalType": "contract IERC20", "name": "lpToken", "type": "address" },
-                { "internalType": "contract IERC20", "name": "rewardToken", "type": "address" },
-                { "internalType": "uint256", "name": "rewardTokenCount", "type": "uint256" }
+                { "internalType": "contract IERC20", "name": "stakeToken", "type": "address" },
+                { "internalType": "uint256", "name": "periodRewardTokenCount", "type": "uint256" },
+                { "internalType": "uint256", "name": "lastMassUpdate", "type": "uint256" },
+                { "internalType": "uint256", "name": "poolTotalSupply", "type": "uint256" },
+                { "internalType": "uint256", "name": "poolTotalRewardDebt", "type": "uint256" }
             ],
             "stateMutability": "view",
             "type": "function"
         },
         {
             "inputs": [{ "internalType": "uint256", "name": "_amount", "type": "uint256" }],
-            "name": "rechargeReward",
+            "name": "releaseReward",
             "outputs": [],
             "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [{ "internalType": "address", "name": "_user", "type": "address" }],
+            "name": "remainLockTime",
+            "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+            "stateMutability": "view",
             "type": "function"
         },
         {
@@ -136,8 +169,22 @@
             "type": "function"
         },
         {
+            "inputs": [{ "internalType": "address", "name": "_lostRewardAddress", "type": "address" }],
+            "name": "setLostRewardAddress",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
             "inputs": [{ "internalType": "uint256", "name": "_rewardTokenCount", "type": "uint256" }],
             "name": "setPoolRewardTokenCount",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [{ "internalType": "uint256", "name": "_minimumBalance", "type": "uint256" }],
+            "name": "setminimumBalabce",
             "outputs": [],
             "stateMutability": "nonpayable",
             "type": "function"
@@ -161,9 +208,10 @@
             "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
             "name": "userInfo",
             "outputs": [
+                { "internalType": "uint256", "name": "userId", "type": "uint256" },
                 { "internalType": "uint256", "name": "amount", "type": "uint256" },
                 { "internalType": "uint256", "name": "rewardDebt", "type": "uint256" },
-                { "internalType": "uint256", "name": "lastWithdraw", "type": "uint256" }
+                { "internalType": "uint256", "name": "depositTime", "type": "uint256" }
             ],
             "stateMutability": "view",
             "type": "function"

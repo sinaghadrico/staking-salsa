@@ -20,6 +20,7 @@ import { Column } from "models/column";
 import { useLPStaker } from "services/predictor/contract/useLPStaker";
 import { useQuery } from "react-query";
 import useWebWallet from "hooks/use-web-wallet/useWebWallet";
+import usePrices from "services/usePrices";
 
 export interface AccountPredictorRewardsRowProps {
     className?: string;
@@ -41,8 +42,9 @@ const AccountPredictorRewardsRow: FC<AccountPredictorRewardsRowProps> = ({
     const { id, address, asset, APY, TVL, earned, status } = data;
     const { account } = useWebWallet();
     const lpstaker = useLPStaker(address);
+    const { coinPrice } = usePrices("BNB");
     const { data: initialData, isLoading } = useQuery(
-        ["initialData", account],
+        [`initialData-${id}`, id, account],
         () => lpstaker.getInitialData(account || "0x00"),
         {
             enabled: !!lpstaker.contract && !!account,
@@ -80,7 +82,7 @@ const AccountPredictorRewardsRow: FC<AccountPredictorRewardsRowProps> = ({
                             <rect x="5" y="0" rx="3" ry="3" width="100" height="6" />
                         </ContentLoader>
                     ) : status === "Completed" ? (
-                        <span style={{ color: "#52C41A" }}>{initialData?.apy} PEX</span>
+                        <span style={{ color: "#52C41A" }}>{initialData?.apy} % PEX</span>
                     ) : (
                         "-"
                     )}
@@ -99,7 +101,11 @@ const AccountPredictorRewardsRow: FC<AccountPredictorRewardsRowProps> = ({
                             <rect x="5" y="0" rx="3" ry="3" width="100" height="6" />
                         </ContentLoader>
                     ) : status === "Completed" ? (
-                        <Currency size="16px" value={initialData?.totalValueLock || 0} unit={CurrencyUnit.DOLLAR} />
+                        <Currency
+                            size="16px"
+                            value={initialData?.totalValueLock * coinPrice || 0}
+                            unit={CurrencyUnit.DOLLAR}
+                        />
                     ) : (
                         "-"
                     )}
