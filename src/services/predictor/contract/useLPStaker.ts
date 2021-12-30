@@ -4,11 +4,13 @@ import useWebWallet, { getErrorMessage } from "hooks/use-web-wallet/useWebWallet
 import useNotification from "hooks/useNotification";
 import { parseTokenValue, setDigit, toPriceValue, toTokenValue } from "utils/convert";
 import { useContractFromAddressByABI } from "services/contract";
+import { useUsdContract } from "services/contracts";
 
 export const useLPStaker = (address: string) => {
     const { account } = useWebWallet();
     const notification = useNotification();
     const contractMethod: any = useContractFromAddressByABI(address);
+    const usdContract = useUsdContract();
 
     //write-contract
 
@@ -30,12 +32,44 @@ export const useLPStaker = (address: string) => {
 
     const stake = (amount: string) => {
         return new Promise((resolve: (response: any) => void, reject) => {
-            contractMethod
-                ?.deposit(toTokenValue(amount))
-                .send({ from: account })
+            usdContract
+                ?.approve(address, toTokenValue(amount))
                 .then((transaction: ContractTransaction) => {
-                    notification.success("stake confirmed");
-                    resolve(transaction);
+                    transaction
+                        .wait(1)
+                        .then(() => {
+                            usdContract
+                                ?.allowance(account || "0x00", address)
+                                .then((allowance: any) => {
+                                    const _allowance = parseTokenValue(allowance);
+                                    const _amount = parseTokenValue(toTokenValue(amount));
+
+                                    if (_allowance >= _amount) {
+                                        contractMethod
+                                            ?.deposit(toTokenValue(amount))
+                                            .send({ from: account })
+                                            .then((transaction: ContractTransaction) => {
+                                                notification.success("stake confirmed");
+                                                resolve(transaction);
+                                            })
+                                            .catch((error: any) => {
+                                                notification.error(getErrorMessage(error));
+                                                reject(error);
+                                            });
+                                    } else {
+                                        notification.error("allowance != newStake._amount");
+                                        reject();
+                                    }
+                                })
+                                .catch((error: any) => {
+                                    notification.error(getErrorMessage(error));
+                                    reject(error);
+                                });
+                        })
+                        .catch((error: any) => {
+                            notification.error(getErrorMessage(error));
+                            reject(error);
+                        });
                 })
                 .catch((error: any) => {
                     notification.error(getErrorMessage(error));
@@ -43,6 +77,7 @@ export const useLPStaker = (address: string) => {
                 });
         });
     };
+
     const emergencyWithdraw = () => {
         return new Promise((resolve: (response: any) => void, reject) => {
             contractMethod
