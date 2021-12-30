@@ -114,6 +114,7 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
                         queryClient.invalidateQueries(`initialData-${id}`);
                         queryClient.invalidateQueries(`token-balance`);
                         setStakeAmount(0);
+                        mutationStake.reset();
                     },
                 },
             );
@@ -142,6 +143,7 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
                     onSuccess: () => {
                         queryClient.invalidateQueries(`initialData-${id}`);
                         queryClient.invalidateQueries(`token-balance`);
+                        mutationStake.reset();
                     },
                 },
             );
@@ -171,6 +173,7 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
                         queryClient.invalidateQueries(`initialData-${id}`);
                         queryClient.invalidateQueries(`token-balance`);
                         setWithdrawAmount(0);
+                        mutationStake.reset();
                     },
                 },
             );
@@ -199,6 +202,7 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
                     onSuccess: () => {
                         queryClient.invalidateQueries(`initialData-${id}`);
                         queryClient.invalidateQueries(`token-balance`);
+                        mutationStake.reset();
                     },
                 },
             );
