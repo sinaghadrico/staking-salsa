@@ -8,7 +8,7 @@ const getMarketInformation = (token: string) => {
 
     return axios.get(endpoint).then(({ data }) => {
         return {
-            price: data?.data?.TOTM?.quote?.USD?.price.toFixed(4),
+            price: data?.market_data?.current_price?.usd?.toFixed(4),
         };
     });
 };

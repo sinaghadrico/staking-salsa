@@ -232,16 +232,17 @@ export const useTokenStaker = (address: string) => {
     //read contract
 
     const claimableReward = (UserAddress: string, time: string) => {
-        contractMethod
-            ?.claimableReward(UserAddress, time)
-            .call()
-            .then((data: any) => {
-                return parseTokenValue(data);
-            })
-            .catch((error: any) => {
-                return 0;
-                notification.error(getErrorMessage(error));
-            });
+        return new Promise((resolve: (response: any) => void, reject) => {
+            contractMethod
+                ?.claimableReward(UserAddress, time)
+                .call()
+                .then((data: any) => {
+                    resolve(parseTokenValue(data));
+                })
+                .catch((error: any) => {
+                    resolve(0);
+                });
+        });
     };
 
     const getCalculationFactor = () => {
@@ -425,7 +426,7 @@ export const useTokenStaker = (address: string) => {
 
         const userInfo = await getUserInfo(address);
 
-        const _claimableReward = 0;
+        const _claimableReward = await claimableReward(address, "0");
 
         const rewards: any = userInfo?.rewardDebt + _claimableReward;
         const stakeAmount = setDigit(userInfo?.stakeAmount);
