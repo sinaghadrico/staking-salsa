@@ -47,6 +47,7 @@ const AccountPredictorRewardsRow: FC<AccountPredictorRewardsRowProps> = ({
         [`initialData-${id}`, id, account],
         () => lpstaker.getInitialData(account || "0x00"),
         {
+            refetchOnWindowFocus: false,
             enabled: !!lpstaker.contract && !!account,
         },
     );

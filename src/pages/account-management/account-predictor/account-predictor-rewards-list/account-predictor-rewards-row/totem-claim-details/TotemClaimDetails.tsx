@@ -341,7 +341,14 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
                         </div>
                         <div className="col-md-4 col-xs-12 flex-column">
                             <div className=" py-10  flex-column">
-                                <div className="">Your wallet balance: {formatNumberWithCommas(balance)}</div>
+                                <div
+                                    className=""
+                                    onClick={() => {
+                                        setStakeAmount(balance);
+                                    }}
+                                >
+                                    Your wallet balance: {formatNumberWithCommas(balance)}
+                                </div>
                                 <div className="flex mt-15">
                                     <Input
                                         className="predictor-pool-details-container-form-predict-price-input"
@@ -351,7 +358,7 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
                                         onChange={handleChange}
                                         autoComplete="off"
                                     />
-                                    <div className="flex-align-center">
+                                    <div className="flex-align-center  ml-10" style={{ width: "120px" }}>
                                         <Button
                                             width={ButtonWidth.FIT_PARENT}
                                             onClick={handleStake}
@@ -364,7 +371,14 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
                                 </div>
                             </div>
                             <div className="py-10  flex-column">
-                                <div className="">Your staked balance: {stakeAmountNumber}</div>
+                                <div
+                                    className=""
+                                    onClick={() => {
+                                        setWithdrawAmount(stakeAmountNumber);
+                                    }}
+                                >
+                                    Your staked balance: {stakeAmountNumber}
+                                </div>
                                 <div className="flex mt-15">
                                     <Input
                                         className="predictor-pool-details-container-form-predict-price-input"
@@ -374,7 +388,7 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
                                         onChange={handleChange}
                                         autoComplete="off"
                                     />
-                                    <div className="flex-align-center">
+                                    <div className="flex-align-center ml-10" style={{ width: "120px" }}>
                                         <Button
                                             width={ButtonWidth.FIT_PARENT}
                                             onClick={handleWithdraw}
@@ -389,7 +403,7 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
                             <div className="py-10  flex-column">
                                 <div className="flex ">
                                     <div className="flex ">
-                                        <div className="flex-align-center">
+                                        <div className="flex-align-center" style={{ width: "204px" }}>
                                             <Button
                                                 width={ButtonWidth.FIT_PARENT}
                                                 onClick={handleEmergencyWithdraw}
