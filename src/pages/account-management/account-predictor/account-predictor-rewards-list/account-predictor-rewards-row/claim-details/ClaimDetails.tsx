@@ -11,36 +11,34 @@ import {
     Timer,
     TimerShowType,
 } from "ui-components";
-import { Stake } from "models";
-import "./TotemClaimDetails.scss";
+import "./ClaimDetails.scss";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import ContentLoader from "react-content-loader";
 import { formatNumberWithCommas, isValidNumber, parseValueToNumber } from "utils/number";
-import { useLPStaker } from "services/predictor/contract/useLPStaker";
+import { useTokenStaker } from "services/predictor/contract/useTokenStaker";
 import { useNotification } from "hooks";
 import { transactionEndpoint } from "utils/configs";
 import { TransactionAddress } from "components/transaction-address";
-import { useUsdcToken } from "services/useUsdcToken";
+import { useTSTToken } from "services/useTSTToken";
 import useWebWallet from "hooks/use-web-wallet/useWebWallet";
 import { useGlobalDispatch } from "states/globalContext";
 import usePrices from "services/usePrices";
 
-export interface TotemClaimDetailsProps {
+export interface ClaimDetailsProps {
     className?: string;
     initialData: any;
     data: any;
     isLoading: boolean;
-    refetchPoolData: any;
 }
 
-const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading }: TotemClaimDetailsProps) => {
-    const { active, account } = useWebWallet();
+const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) => {
+    const { account } = useWebWallet();
     const globalDispatch = useGlobalDispatch();
     const queryClient = useQueryClient();
-    const { id, address, asset, earned, status } = data;
+    const { id, address } = data;
     const {
         tokenContractAddress = "0x00",
         apy = "0",
@@ -54,10 +52,10 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
     const [stakeAmount, setStakeAmount] = useState<any>(0);
     const [withdrawAmount, setWithdrawAmount] = useState<any>(0);
 
-    const lpstaker = useLPStaker(address);
+    const tokenStaker = useTokenStaker(address);
     const notification = useNotification();
 
-    const token = useUsdcToken();
+    const token = useTSTToken();
     const { data: balance } = useQuery(["token-balance", account], () => token.getBalance(account), {
         enabled: !!token.contract,
     });
@@ -78,16 +76,16 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
         }
     };
     const mutationStake = useMutation((_form: any): any => {
-        return lpstaker?.stake(_form?.stakeAmount);
+        return tokenStaker?.stake(_form?.stakeAmount);
     });
     const mutationClaim = useMutation((_form: any): any => {
-        return lpstaker?.claim();
+        return tokenStaker?.claim();
     });
     const mutationWithdraw = useMutation((_form: any): any => {
-        return lpstaker?.withdraw(_form?.withdrawAmount);
+        return tokenStaker?.withdraw(_form?.withdrawAmount);
     });
     const mutationEmergencyWithdraw = useMutation((_form: any): any => {
-        return lpstaker?.emergencyWithdraw();
+        return tokenStaker?.emergencyWithdraw();
     });
 
     const handleStake = () => {
@@ -101,11 +99,6 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
             return;
         }
 
-        // if (totemTokenBalance && form.amount > totemTokenBalance) {
-        //     notification.error("You don't have sufficient amount of TOTM.");
-        // mutationStake.reset();
-        //     return;
-        // }
         if (!mutationStake?.isSuccess) {
             mutationStake.mutate(
                 { stakeAmount },
@@ -125,17 +118,7 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
             globalDispatch({ type: "setWalletOptions", value: true });
             return;
         }
-        // if (Number(form.price) === 0) {
-        //     notification.error(`Price value must be greater than 0`);
-        // mutationStake.reset();
-        //     return;
-        // }
 
-        // if (totemTokenBalance && form.amount > totemTokenBalance) {
-        //     notification.error("You don't have sufficient amount of TOTM.");
-        // mutationStake.reset();
-        //     return;
-        // }
         if (!mutationClaim?.isSuccess) {
             mutationClaim.mutate(
                 {},
@@ -160,11 +143,6 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
             return;
         }
 
-        // if (totemTokenBalance && form.amount > totemTokenBalance) {
-        //     notification.error("You don't have sufficient amount of TOTM.");
-        // mutationStake.reset();
-        //     return;
-        // }
         if (!mutationWithdraw?.isSuccess) {
             mutationWithdraw.mutate(
                 { withdrawAmount },
@@ -184,17 +162,7 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
             globalDispatch({ type: "setWalletOptions", value: true });
             return;
         }
-        // if (Number(form.price) === 0) {
-        //     notification.error(`Price value must be greater than 0`);
-        // mutationStake.reset();
-        //     return;
-        // }
 
-        // if (totemTokenBalance && form.amount > totemTokenBalance) {
-        //     notification.error("You don't have sufficient amount of TOTM.");
-        // mutationStake.reset();
-        //     return;
-        // }
         if (!mutationEmergencyWithdraw?.isSuccess) {
             mutationEmergencyWithdraw.mutate(
                 {},
@@ -211,15 +179,10 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
     return (
         <>
             <AnimatePresence>
-                <motion.div
-                    className="totem-claim-details"
-                    // initial={{ height: 0 }}
-                    // animate={{ height: "auto" }}
-                    // exit={{ height: 0 }}
-                >
-                    <div className="row totem-claim-details-main">
+                <motion.div className="claim-details">
+                    <div className="row claim-details-main">
                         <div className="col-md-4 col-xs-12 flex-column-align-center">
-                            <div className="totem-claim-details-item py-10 height-45">
+                            <div className="claim-details-item py-10 height-45">
                                 <div className="flex-align-center">TVL</div>
                                 <div className="flex-align-center-justify-end">
                                     {isLoadingOriginalStake ? (
@@ -243,7 +206,7 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
                                     )}
                                 </div>
                             </div>
-                            <div className="totem-claim-details-item mt-10  py-10  height-35">
+                            <div className="claim-details-item mt-10  py-10  height-35">
                                 <div className="flex-align-center">APY</div>
                                 <div className="text-right flex-align-center-justify-end">
                                     {isLoadingOriginalStake ? (
@@ -266,7 +229,7 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
                                     )}
                                 </div>
                             </div>
-                            <div className="totem-claim-details-item mt-10  py-10  height-35">
+                            <div className="claim-details-item mt-10  py-10  height-35">
                                 <div className="flex-align-center">Token contract</div>
                                 <div className="text-right flex-align-center-justify-end">
                                     {isLoadingOriginalStake ? (
@@ -292,7 +255,7 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
                                     )}
                                 </div>
                             </div>
-                            <div className="totem-claim-details-item mt-10  py-10  height-35">
+                            <div className="claim-details-item mt-10  py-10  height-35">
                                 <div className="flex-align-center"> Remain LockTime:</div>
                                 <div className="text-right flex-align-center-justify-end">
                                     {isLoadingOriginalStake ? (
@@ -426,4 +389,4 @@ const TotemClaimDetails = ({ data, initialData = {}, refetchPoolData, isLoading 
     );
 };
 
-export default TotemClaimDetails;
+export default ClaimDetails;

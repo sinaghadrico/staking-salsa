@@ -5,13 +5,13 @@ import { Icon } from "components/icon";
 import "./AccountDetails.scss";
 
 import { useQuery } from "react-query";
-import logo from "assets/icons/svgs/totem.svg";
+import logo from "assets/icons/svgs/logo.svg";
 import { formatNumberWithCommas } from "utils/number";
-import { useUsdcToken } from "services/useUsdcToken";
+import { useTSTToken } from "services/useTSTToken";
 
 const AccountDetails: FC = () => {
     const { active, account } = useWebWallet();
-    const token = useUsdcToken();
+    const token = useTSTToken();
     const { data: balance } = useQuery(["token-balance", account], () => token.getBalance(account), {
         enabled: !!token.contract,
     });

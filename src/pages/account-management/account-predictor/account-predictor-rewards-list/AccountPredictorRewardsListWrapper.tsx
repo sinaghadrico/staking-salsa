@@ -22,7 +22,6 @@ const AccountPredictorRewardsListWrapper = ({ data, columns }: AccountPredictorR
                             expandItem={expandItem}
                             setExpandItem={setExpandItem}
                             columns={columns}
-                            // refetchPoolData={refetchPoolData}
                         />
                     );
                 })}

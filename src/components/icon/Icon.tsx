@@ -1,4 +1,4 @@
-import ido_logo from "assets/icons/svgs/spark.svg";
+import logo from "assets/icons/svgs/logo.svg";
 import classnames from "classnames";
 import { FC } from "react";
 import { NavLink } from "react-router-dom";
@@ -14,7 +14,7 @@ interface IconProps {
     height?: string;
 }
 const onImageError = (ev: any) => {
-    ev.target.src = ido_logo;
+    ev.target.src = logo;
 };
 const Icon: FC<IconProps> = ({
     src,

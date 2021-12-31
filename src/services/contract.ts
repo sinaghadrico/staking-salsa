@@ -7,9 +7,9 @@ import Web3 from "web3";
 import { contractAddress, networks } from "utils/configs";
 
 export interface ContractName {
-    USDCToken: string;
+    TSTToken: string;
 }
-export type ContractTypeName = "USDCToken";
+export type ContractTypeName = "TSTToken";
 
 export interface ContractChain {
     [chainId: number]: ContractName;

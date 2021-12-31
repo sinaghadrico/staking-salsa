@@ -37,12 +37,12 @@
 
     &-orange {
         &-empty {
-            border-color: var(--totem-ui-component-color-orange);
+            border-color: var(--ui-component-color-orange);
         }
 
         &-filled {
-            color: var(--totem-ui-component-color-orange);
-            border-color: var(--totem-ui-component-color-orange);
+            color: var(--ui-component-color-orange);
+            border-color: var(--ui-component-color-orange);
             background-color: #c2620391;
             opacity: 0.8;
         }
@@ -50,11 +50,11 @@
 
     &-purple {
         &-empty {
-            border-color: var(--totem-ui-component-color-purple);
+            border-color: var(--ui-component-color-purple);
         }
 
         &-filled {
-            color: var(--totem-ui-component-color-purple);
+            color: var(--ui-component-color-purple);
             border-color: #9529d9;
             background-color: #811fcc8e;
             opacity: 0.8;

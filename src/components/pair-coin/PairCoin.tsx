@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { PairCoinProps } from "./PairCoin.interface";
 import "./PairCoin.scss";
 
@@ -7,7 +6,7 @@ import { ReactComponent as BtcLogo } from "assets/icons/coins/btc.svg";
 import { ReactComponent as DotLogo } from "assets/icons/coins/dot.svg";
 import { ReactComponent as FoxLogo } from "assets/icons/coins/fox.svg";
 import { ReactComponent as LtcLogo } from "assets/icons/coins/ltc.svg";
-import { ReactComponent as TotemLogo } from "assets/icons/coins/totem.svg";
+import { ReactComponent as Logo } from "assets/icons/coins/logo.svg";
 import { ReactComponent as WlfLogo } from "assets/icons/coins/wolf.svg";
 import { ReactComponent as OwlLogo } from "assets/icons/coins/owl.svg";
 import { ReactComponent as WbnbLogo } from "assets/icons/coins/wbnb.svg";
@@ -26,8 +25,8 @@ const getIcon = (coin?: string) => {
             return FoxLogo;
         case "ltc":
             return LtcLogo;
-        case "totem":
-            return TotemLogo;
+        case "token":
+            return Logo;
         case "wolf":
             return WlfLogo;
         case "owl":
@@ -40,11 +39,10 @@ const getIcon = (coin?: string) => {
             return BtcLogo;
     }
 };
-const PairCoin = ({ supCoin, subCoin, size = 24 }: PairCoinProps) => {
+const PairCoin = ({ supCoin, subCoin }: PairCoinProps) => {
     const SubIcon: any = subCoin?.includes("http") ? null : getIcon(subCoin);
 
     const SupIcon: any = supCoin?.includes("http") ? null : getIcon(supCoin);
-    const cssSize = `${size}px`;
     const translateSup = supCoin && subCoin ? `translate(${-1 * 32}px, -4px)` : `translate(0px)`;
     const translateSub = supCoin && subCoin ? `translate(${24 - 24 / 5}px, 0px)` : `translate(0px)`;
 

@@ -3,7 +3,7 @@ import { AccountDetails } from "./account-details";
 import { ConnectWallet } from "./connect-wallet";
 import { WalletOptions } from "components/wallet-options";
 import { Modal } from "ui-components";
-import { ReactComponent as TotemLogo } from "assets/icons/coins/totem.svg";
+import { ReactComponent as Logo } from "assets/icons/coins/logo.svg";
 import { useGlobalState, useGlobalDispatch } from "states/globalContext";
 // import { ThemeSelector } from "./theme-selector";
 import "./Header.scss";
@@ -14,7 +14,7 @@ const Header: FC = () => {
     return (
         <div className="header">
             <div className="header-title">
-                <TotemLogo width="50" /> Staking
+                <Logo width="50" /> Staking
             </div>
             <ConnectWallet>
                 <AccountDetails />

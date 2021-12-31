@@ -90,24 +90,24 @@
     &.orange-theme {
         .ui-radio-before {
             input + .ui-radio-control::before {
-                color: var(--totem-ui-component-color-orange);
+                color: var(--ui-component-color-orange);
             }
         }
 
         input:checked + .ui-radio-control {
-            border: 0.1em solid var(--totem-ui-component-color-orange);
+            border: 0.1em solid var(--ui-component-color-orange);
         }
     }
 
     &.purple-theme {
         .ui-radio-before {
             input + .ui-radio-control::before {
-                color: var(--totem-ui-component-color-purple);
+                color: var(--ui-component-color-purple);
             }
         }
 
         input:checked + .ui-radio-control {
-            border: 0.1em solid var(--totem-ui-component-color-purple);
+            border: 0.1em solid var(--ui-component-color-purple);
         }
     }
 }

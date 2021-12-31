@@ -1,23 +1,20 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Stake, StatusClass } from "models";
-import { FC, useEffect } from "react";
-import { Label, Currency, CurrencyUnit, Button, TableRow, TableCell, ButtonWidth } from "ui-components";
+
+import { FC } from "react";
+import { Currency, CurrencyUnit, TableRow, TableCell } from "ui-components";
 import "./AccountPredictorRewardsRow.scss";
 import ContentLoader from "react-content-loader";
-import { TransactionAddress } from "components/transaction-address";
 
 import { Icon } from "components/icon";
 import expand_logo from "assets/icons/svgs/expand.svg";
 
-import { transactionEndpoint } from "utils/configs";
-
-import { TotemClaimDetails } from "./totem-claim-details";
+import { ClaimDetails } from "./claim-details";
 import { PairCoin } from "components/pair-coin";
 
 import { motion, AnimatePresence } from "framer-motion";
 import { Column } from "models/column";
-import { useLPStaker } from "services/predictor/contract/useLPStaker";
+import { useTokenStaker } from "services/predictor/contract/useTokenStaker";
 import { useQuery } from "react-query";
 import useWebWallet from "hooks/use-web-wallet/useWebWallet";
 import usePrices from "services/usePrices";
@@ -28,7 +25,7 @@ export interface AccountPredictorRewardsRowProps {
     data: any;
     expandItem: string | null;
     columns: Column[];
-    refetchPoolData?: any;
+
     setExpandItem: (expand: string | null) => void;
 }
 
@@ -37,18 +34,17 @@ const AccountPredictorRewardsRow: FC<AccountPredictorRewardsRowProps> = ({
     expandItem,
     setExpandItem,
     columns,
-    refetchPoolData,
 }: AccountPredictorRewardsRowProps) => {
-    const { id, address, asset, APY, TVL, earned, status } = data;
+    const { id, address, asset, status } = data;
     const { account } = useWebWallet();
-    const lpstaker = useLPStaker(address);
+    const tokenStaker = useTokenStaker(address);
     const { coinPrice } = usePrices("BNB");
     const { data: initialData, isLoading } = useQuery(
         [`initialData-${id}`, id, account],
-        () => lpstaker.getInitialData(account || "0x00"),
+        () => tokenStaker.getInitialData(account || "0x00"),
         {
             refetchOnWindowFocus: false,
-            enabled: !!lpstaker.contract && !!account,
+            enabled: !!tokenStaker.contract && !!account,
         },
     );
 
@@ -64,7 +60,7 @@ const AccountPredictorRewardsRow: FC<AccountPredictorRewardsRowProps> = ({
             >
                 <TableCell dataHead={columns[0]?.title}>
                     <div className="account-predictor-rewards-row-title">
-                        <PairCoin size={24} subCoin={asset} supCoin={"totem"} />
+                        <PairCoin size={24} subCoin={asset} supCoin={"token"} />
                         {"TWA + " + asset}
                     </div>
                 </TableCell>
@@ -152,12 +148,7 @@ const AccountPredictorRewardsRow: FC<AccountPredictorRewardsRowProps> = ({
                 {hasExpandRow && isExpand && (
                     <motion.tr initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                         <td colSpan={5}>
-                            <TotemClaimDetails
-                                data={data}
-                                isLoading={isLoading}
-                                initialData={initialData}
-                                refetchPoolData={refetchPoolData}
-                            />
+                            <ClaimDetails data={data} isLoading={isLoading} initialData={initialData} />
                         </td>
                     </motion.tr>
                 )}

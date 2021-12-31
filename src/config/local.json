@@ -17,18 +17,16 @@
         "97": "https://data-seed-prebsc-1-s1.binance.org:8545/"
     },
     "offchain": {
-        "predictor": "https://new-offchain.totemfi.com/api/v1/"
+        "predictor": ""
     },
     "subgraph": {
         "97": {
-            "predictor": "https://graph-dev.totemfi.com/subgraphs/name/totemfi/predictor"
+            "predictor": ""
         }
     },
     "contractAddress": {
         "97": {
-            "TotemToken": "0xf2cf56fBE1Ae8E40f0e0D8672305c3bB115625A2",
-            "USDCToken": "0x78867bbeef44f2326bf8ddd1941a4439382ef2a7",
-            "StakingPoolFactory": "0xFA495bB732e298e1275a7EEf996E23745A475e67"
+            "TSTToken": "0x78867bbeef44f2326bf8ddd1941a4439382ef2a7"
         }
     },
     "transactionEndpoint": "https://testnet.bscscan.com/address"

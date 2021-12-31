@@ -62,13 +62,13 @@
 
     &.orange-theme {
         input:focus {
-            border: 2px solid var(--totem-ui-component-color-orange) !important;
+            border: 2px solid var(--ui-component-color-orange) !important;
         }
     }
 
     &.purple-theme {
         input:focus {
-            border: 2px solid var(--totem-ui-component-color-purple) !important;
+            border: 2px solid var(--ui-component-color-purple) !important;
         }
     }
 }

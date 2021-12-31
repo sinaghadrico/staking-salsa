@@ -18,21 +18,19 @@
         "56": "https://bsc-dataseed.binance.org/"
     },
     "offchain": {
-        "predictor": "https://new-offchain.totemfi.com/api/v1/"
+        "predictor": ""
     },
     "stats": {
-        "predictor": "https://totem-stats.totemfi.com/api/v1/"
+        "predictor": ""
     },
     "subgraph": {
         "56": {
-            "predictor": "https://graph.totemfi.com/subgraphs/name/totemfi/predictor/v2"
+            "predictor": ""
         }
     },
     "contractAddress": {
         "56": {
-            "TotemToken": "0x6FF1BFa14A57594a5874B37ff6AC5efbD9F9599A",
-            "USDCToken": "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
-            "StakingPoolFactory": "0x5f2Ebcb4DedBc91549ffb5D2dCc0e8D1E90C916C"
+            "TSTToken": "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d"
         }
     },
     "transactionEndpoint": "https://bscscan.com/address"

@@ -10,9 +10,7 @@ $themes: (light: (layout-bg-color: #121212,
 
 .layout {
 
-    // @include themify() {
-    //     background-color: themed("layout-bg-color");
-    // }
+
     background-color: #1f2641f0;
     display: flex;
     flex-direction: column;
@@ -37,7 +35,6 @@ $themes: (light: (layout-bg-color: #121212,
             padding: 0 25px;
 
             @media (min-width: 1200px) {
-                // max-width: 80%;
                 margin: auto;
             }
         }

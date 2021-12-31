@@ -4,13 +4,13 @@ import useWebWallet, { getErrorMessage } from "hooks/use-web-wallet/useWebWallet
 import useNotification from "hooks/useNotification";
 import { parseTokenValue, setDigit, toPriceValue, toTokenValue } from "utils/convert";
 import { useContractFromAddressByABI } from "services/contract";
-import { useUsdContract } from "services/contracts";
+import { useTSTContract } from "services/contracts";
 
-export const useLPStaker = (address: string) => {
+export const useTokenStaker = (address: string) => {
     const { account } = useWebWallet();
     const notification = useNotification();
     const contractMethod: any = useContractFromAddressByABI(address);
-    const usdContract = useUsdContract();
+    const TSTContract = useTSTContract();
 
     //write-contract
 
@@ -32,14 +32,12 @@ export const useLPStaker = (address: string) => {
 
     const stake = (amount: string) => {
         return new Promise((resolve: (response: any) => void, reject) => {
-            usdContract
-                ?.approve(address, toTokenValue(amount))
+            TSTContract?.approve(address, toTokenValue(amount))
                 .then((transaction: ContractTransaction) => {
                     transaction
                         .wait(1)
                         .then(() => {
-                            usdContract
-                                ?.allowance(account || "0x00", address)
+                            TSTContract?.allowance(account || "0x00", address)
                                 .then((allowance: any) => {
                                     const _allowance = parseTokenValue(allowance);
                                     const _amount = parseTokenValue(toTokenValue(amount));
