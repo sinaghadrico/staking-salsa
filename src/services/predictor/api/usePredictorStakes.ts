@@ -35,7 +35,7 @@ const usePredictorStakes = (pageNumber: number, perPage = 10) => {
         {
             keepPreviousData: true,
             refetchOnWindowFocus: false,
-            refetchInterval: intervalDataUpdate,
+            // refetchInterval: intervalDataUpdate,
         },
     );
 };

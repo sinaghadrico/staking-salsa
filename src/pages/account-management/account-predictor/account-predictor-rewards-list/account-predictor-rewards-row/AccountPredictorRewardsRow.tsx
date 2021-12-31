@@ -18,6 +18,7 @@ import { useTokenStaker } from "services/predictor/contract/useTokenStaker";
 import { useQuery } from "react-query";
 import useWebWallet from "hooks/use-web-wallet/useWebWallet";
 import usePrices from "services/usePrices";
+import { intervalDataUpdate } from "utils/configs";
 
 export interface AccountPredictorRewardsRowProps {
     className?: string;
@@ -45,6 +46,7 @@ const AccountPredictorRewardsRow: FC<AccountPredictorRewardsRowProps> = ({
         {
             refetchOnWindowFocus: false,
             enabled: !!tokenStaker.contract && !!account,
+            refetchInterval: intervalDataUpdate,
         },
     );
 
