@@ -61,9 +61,6 @@ const toPriceValue = (amount: string): BigNumberish => {
 const toBTC = (amount: BigNumberish): number => {
     return parseFloat(formatUnits(amount, 6)) / 100;
 };
-const toTOTM = (amount: BigNumberish): number => {
-    return parseFloat(formatUnits(amount, 15)) / 1000;
-};
 
 const setDigit = (value: number): number => {
     return Number(
@@ -106,7 +103,6 @@ export {
     parsePriceValue,
     parseIdoTokenValue,
     toBTC,
-    toTOTM,
     untilDays,
     untilMinutes,
     expToken,

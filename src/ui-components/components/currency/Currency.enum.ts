@@ -1,9 +1,8 @@
 export enum CurrencyUnit {
     USD = "USD",
     USDC = "USDC",
-    TOTEM = "TOTM",
     TWA = "TWA",
-    SPRK = "SPRK",
+    TST = "TST",
     BTC = "BTC",
     DOLLAR = "$",
     NONE = "",

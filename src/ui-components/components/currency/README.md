@@ -28,7 +28,7 @@ makeRaw(value: 42000, unit: CurrencyUnit.USD, decimal: 1); // 42,000.0 USD
 
 `unit` [required CurrencyUnit]
 
-**Unit for representing value as USD, TOTM, BTC, DOLLAR($) or NONE('')**
+**Unit for representing value as USD, BTC, DOLLAR($) or NONE('')**
 
 ---
 
