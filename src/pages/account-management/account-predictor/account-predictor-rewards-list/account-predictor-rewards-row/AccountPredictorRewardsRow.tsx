@@ -81,7 +81,7 @@ const AccountPredictorRewardsRow: FC<AccountPredictorRewardsRowProps> = ({
                             <rect x="5" y="0" rx="3" ry="3" width="100" height="6" />
                         </ContentLoader>
                     ) : (
-                        <span style={{ color: "#52C41A" }}>{initialData?.apy} % TokenStaker</span>
+                        <span style={{ color: "#52C41A" }}>{initialData?.apy} % TST</span>
                     )}
                 </TableCell>
                 <TableCell dataHead={columns[2]?.title}>

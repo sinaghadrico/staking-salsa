@@ -80,15 +80,15 @@
         },
         {
             "inputs": [],
-            "name": "getLostRewardAddress",
-            "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+            "name": "getPeriodRewardTokenCount",
+            "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
             "stateMutability": "view",
             "type": "function"
         },
         {
             "inputs": [],
-            "name": "getPeriodRewardTokenCount",
-            "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+            "name": "getPoolTotalLostRewardAmount",
+            "outputs": [{ "internalType": "uint256", "name": "RewardTotalLostRewardAmount", "type": "uint256" }],
             "stateMutability": "view",
             "type": "function"
         },
@@ -110,6 +110,13 @@
             "inputs": [],
             "name": "getminimumBalance",
             "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "getpoolLostRewardAddress",
+            "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
             "stateMutability": "view",
             "type": "function"
         },
@@ -169,13 +176,6 @@
             "type": "function"
         },
         {
-            "inputs": [{ "internalType": "address", "name": "_lostRewardAddress", "type": "address" }],
-            "name": "setLostRewardAddress",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
             "inputs": [{ "internalType": "uint256", "name": "_rewardTokenCount", "type": "uint256" }],
             "name": "setPoolRewardTokenCount",
             "outputs": [],
@@ -185,6 +185,13 @@
         {
             "inputs": [{ "internalType": "uint256", "name": "_minimumBalance", "type": "uint256" }],
             "name": "setminimumBalabce",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [{ "internalType": "address", "name": "_poolLostRewardAddress", "type": "address" }],
+            "name": "setpoolLostRewardAddress",
             "outputs": [],
             "stateMutability": "nonpayable",
             "type": "function"

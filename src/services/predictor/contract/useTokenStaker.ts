@@ -136,13 +136,13 @@ export const useTokenStaker = (address: string) => {
                 });
         });
     };
-    const setLostRewardAddress = (rewardAddress: string) => {
+    const setPoolLostRewardAddress = (rewardAddress: string) => {
         return new Promise((resolve: (response: any) => void, reject) => {
             contractMethod
-                ?.setLostRewardAddress(rewardAddress)
+                ?.setpoolLostRewardAddress(rewardAddress)
                 .send({ from: account })
                 .then((transaction: ContractTransaction) => {
-                    notification.success("setLostRewardAddress confirmed");
+                    notification.success("setpoolLostRewardAddress confirmed");
                     resolve(transaction);
                 })
                 .catch((error: any) => {
@@ -262,9 +262,9 @@ export const useTokenStaker = (address: string) => {
                 notification.error(getErrorMessage(error));
             });
     };
-    const getLostRewardAddress = () => {
+    const getPoolTotalLostRewardAmount = () => {
         return contractMethod
-            ?.getLostRewardAddress()
+            ?.getPoolTotalLostRewardAmount()
             .call()
             .then((data: any) => {
                 return parseTokenValue(data);
@@ -367,7 +367,7 @@ export const useTokenStaker = (address: string) => {
             ?.remainLockTime(userAddress)
             .call()
             .then((data: any) => {
-                const _remainLockTime = new Date().getTime() + (Number(data) || 0) * 1000;
+                const _remainLockTime = new Date().getTime() + (Number(data) || 0);
 
                 return _remainLockTime;
             })
@@ -440,7 +440,7 @@ export const useTokenStaker = (address: string) => {
     return {
         claim,
         claimableReward,
-        getLostRewardAddress,
+        getPoolTotalLostRewardAmount,
         getminimumBalance,
         getLockPeriod,
         getPeriodRewardTokenCount,
@@ -449,7 +449,7 @@ export const useTokenStaker = (address: string) => {
         releaseReward,
         renounceOwnership,
         setCalculationFactor,
-        setLostRewardAddress,
+        setPoolLostRewardAddress,
         setminimumBalabce,
         setPoolRewardTokenCount,
         start,
