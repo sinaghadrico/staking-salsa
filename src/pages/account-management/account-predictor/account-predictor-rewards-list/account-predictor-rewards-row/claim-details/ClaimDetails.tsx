@@ -224,7 +224,7 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                                     ) : (
                                         <span>
                                             {" "}
-                                            <Currency color="#ff8103" value={apy} unit={CurrencyUnit.DOLLAR} /> % in TWA
+                                            <Currency color="#ff8103" value={apy} unit={CurrencyUnit.DOLLAR} /> % in TST
                                         </span>
                                     )}
                                 </div>
@@ -287,7 +287,7 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                                 Rewards : {rewards}{" "}
                                 <span style={{ color: "#52C41A" }} className="px-5">
                                     {" "}
-                                    TWA
+                                    TST
                                 </span>
                             </div>
 

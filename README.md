@@ -1,6 +1,6 @@
-# Staking-TWA
+# Staking-TST
 
-> Staking TWA 
+> Staking TST
 
 ## Getting Started
 

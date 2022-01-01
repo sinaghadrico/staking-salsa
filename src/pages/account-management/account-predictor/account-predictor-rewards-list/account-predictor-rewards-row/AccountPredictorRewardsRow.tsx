@@ -63,7 +63,7 @@ const AccountPredictorRewardsRow: FC<AccountPredictorRewardsRowProps> = ({
                 <TableCell dataHead={columns[0]?.title}>
                     <div className="account-predictor-rewards-row-title">
                         <PairCoin size={24} subCoin={asset} supCoin={"token"} />
-                        {"TWA + " + asset}
+                        {"TST + " + asset}
                     </div>
                 </TableCell>
 
@@ -120,7 +120,7 @@ const AccountPredictorRewardsRow: FC<AccountPredictorRewardsRowProps> = ({
                         </ContentLoader>
                     ) : (
                         <>
-                            <Currency size="16px" value={initialData?.rewards || 0} unit={CurrencyUnit.NONE} /> TWA
+                            <Currency size="16px" value={initialData?.rewards || 0} unit={CurrencyUnit.NONE} /> TST
                         </>
                     )}
                 </TableCell>

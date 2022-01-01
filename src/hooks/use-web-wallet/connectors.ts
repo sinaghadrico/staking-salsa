@@ -37,7 +37,7 @@ export const walletconnect = new WalletConnectConnector({
 
 export const walletlink = new WalletLinkConnector({
     url: selectedRpcUrl,
-    appName: "Staking TWA App",
+    appName: "Staking TST App",
     supportedChainIds,
 });
 
@@ -49,7 +49,7 @@ export const ledger = new LedgerConnector({
 
 export const lattice = new LatticeConnector({
     chainId: 4,
-    appName: "Staking TWA App",
+    appName: "Staking TST App",
     url: selectedRpcUrl,
 });
 
