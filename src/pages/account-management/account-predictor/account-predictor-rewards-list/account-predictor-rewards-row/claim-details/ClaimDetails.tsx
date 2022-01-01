@@ -198,11 +198,7 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                                             <rect x="5" y="0" rx="3" ry="3" width="100" height="6" />
                                         </ContentLoader>
                                     ) : (
-                                        <Currency
-                                            color="#ff8103"
-                                            value={totalValueLock * coinPrice}
-                                            unit={CurrencyUnit.DOLLAR}
-                                        />
+                                        <Currency value={totalValueLock * coinPrice} unit={CurrencyUnit.DOLLAR} />
                                     )}
                                 </div>
                             </div>
@@ -222,10 +218,7 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                                             <rect x="5" y="0" rx="3" ry="3" width="100" height="6" />
                                         </ContentLoader>
                                     ) : (
-                                        <span>
-                                            {" "}
-                                            <Currency color="#ff8103" value={apy} unit={CurrencyUnit.DOLLAR} /> % in TST
-                                        </span>
+                                        <span> {apy} % in TST</span>
                                     )}
                                 </div>
                             </div>
@@ -256,7 +249,7 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                                 </div>
                             </div>
                             <div className="claim-details-item mt-10  py-10  height-35">
-                                <div className="flex-align-center"> Remain LockTime:</div>
+                                <div className="flex-align-center"> Remain locktime</div>
                                 <div className="text-right flex-align-center-justify-end">
                                     {isLoadingOriginalStake ? (
                                         <ContentLoader
@@ -284,7 +277,7 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                             {/* <div className="flex-align-center ">Add liquidity on PancakeSwap v2</div> */}
 
                             <div className="flex-align-center mt-50">
-                                Rewards : {rewards}{" "}
+                                Rewards: {rewards}{" "}
                                 <span style={{ color: "#52C41A" }} className="px-5">
                                     {" "}
                                     TST
@@ -298,7 +291,7 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                                     buttonForm={ButtonForm.SECONDARY}
                                     disabled={mutationClaim.isLoading}
                                 >
-                                    {mutationClaim.isLoading ? "wait ..." : "Claim rewards"}
+                                    {mutationClaim.isLoading ? "wait..." : "Claim rewards"}
                                 </Button>
                             </div>
                         </div>
@@ -309,6 +302,8 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                                     onClick={() => {
                                         setStakeAmount(balance);
                                     }}
+                                    style={{ cursor: "pointer" }}
+                                    title="Click to stake max value"
                                 >
                                     Your wallet balance: {formatNumberWithCommas(balance)}
                                 </div>
@@ -328,7 +323,7 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                                             buttonForm={ButtonForm.SECONDARY}
                                             disabled={mutationStake.isLoading}
                                         >
-                                            {mutationStake.isLoading ? "wait ..." : "Stake"}
+                                            {mutationStake.isLoading ? "wait..." : "Stake"}
                                         </Button>
                                     </div>
                                 </div>
@@ -339,6 +334,8 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                                     onClick={() => {
                                         setWithdrawAmount(stakeAmountNumber);
                                     }}
+                                    style={{ cursor: "pointer" }}
+                                    title="Click to withdraw max value"
                                 >
                                     Your staked balance: {stakeAmountNumber}
                                 </div>
@@ -358,7 +355,7 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                                             buttonForm={ButtonForm.SECONDARY}
                                             disabled={mutationWithdraw.isLoading}
                                         >
-                                            {mutationWithdraw.isLoading ? "wait ..." : "Withdraw"}
+                                            {mutationWithdraw.isLoading ? "wait..." : "Withdraw"}
                                         </Button>
                                     </div>
                                 </div>
@@ -373,9 +370,7 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                                                 buttonForm={ButtonForm.SECONDARY}
                                                 disabled={mutationEmergencyWithdraw.isLoading}
                                             >
-                                                {mutationEmergencyWithdraw.isLoading
-                                                    ? "wait ..."
-                                                    : "Emergency Withdraw"}
+                                                {mutationEmergencyWithdraw.isLoading ? "wait..." : "Emergency Withdraw"}
                                             </Button>
                                         </div>
                                     </div>

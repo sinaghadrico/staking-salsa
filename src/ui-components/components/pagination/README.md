@@ -24,4 +24,4 @@ If you want to browse the data by navigating through pages.
 | onPageChange | Called when the page number is changed, and it takes the resulting page number as its argument | function(page) | (page: number) => console.log(page) |
 | className    | Custom Class                                                                                   | string         | -                                   |
 | style        | Custom style                                                                                   | Object         | -                                   |
-| theme        | theme of orange for totem and purple for spark                                                 | Object         | orange                              |
+| theme        | theme of orange and purple                                                                     | Object         | orange                              |

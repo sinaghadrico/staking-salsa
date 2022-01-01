@@ -11,15 +11,6 @@ const usePredictorStakes = (pageNumber: number, perPage = 10) => {
                 stakes: [
                     {
                         id: "1",
-                        address: "0xcC76B070169eD9e43681b364c31F8E877c436f4F",
-                        asset: "BTC",
-                        APY: "0",
-                        TVL: "0",
-                        earned: "0",
-                        status: "Completed",
-                    },
-                    {
-                        id: "2",
                         address: "0x1939b94A77686285e27A50AC330423111D3AcE37",
                         asset: "BTC",
                         APY: "0",
