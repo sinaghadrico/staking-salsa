@@ -302,6 +302,8 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                                     onClick={() => {
                                         setStakeAmount(balance);
                                     }}
+                                    style={{ cursor: "pointer" }}
+                                    title="Click to stake max value"
                                 >
                                     Your wallet balance: {formatNumberWithCommas(balance)}
                                 </div>
@@ -332,6 +334,8 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                                     onClick={() => {
                                         setWithdrawAmount(stakeAmountNumber);
                                     }}
+                                    style={{ cursor: "pointer" }}
+                                    title="Click to withdraw max value"
                                 >
                                     Your staked balance: {stakeAmountNumber}
                                 </div>
