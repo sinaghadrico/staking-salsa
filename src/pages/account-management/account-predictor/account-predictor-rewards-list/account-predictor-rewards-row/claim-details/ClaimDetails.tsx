@@ -48,7 +48,7 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
         stakeAmount: stakeAmountNumber = "0",
     } = initialData;
     const isLoadingOriginalStake = isLoading;
-    const { coinPrice } = usePrices("BNB");
+    const { coinPrice } = usePrices("bitcoin");
     const [stakeAmount, setStakeAmount] = useState<any>(0);
     const [withdrawAmount, setWithdrawAmount] = useState<any>(0);
 

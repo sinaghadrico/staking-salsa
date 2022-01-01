@@ -17,7 +17,7 @@ const usePrices = (coinType?: any) => {
     // const { data: TST } = useQuery("TST", () => getMarketInformation("TST"), {
     //     refetchOnWindowFocus: false,
     // });
-    const { data: _coinPrice } = useQuery(coinType, () => getMarketInformation("bitcoin"), {
+    const { data: _coinPrice } = useQuery(coinType, () => getMarketInformation(coinType), {
         refetchOnWindowFocus: false,
         enabled: !!coinType,
     });

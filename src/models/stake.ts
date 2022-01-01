@@ -1,7 +1,10 @@
 export interface StakeData {
-    stakes: any[];
+    stakes: Stake[];
     total: number;
 }
 export class Stake {
     id!: string;
+    address!: string;
+    description!: string;
+    asset!: string;
 }

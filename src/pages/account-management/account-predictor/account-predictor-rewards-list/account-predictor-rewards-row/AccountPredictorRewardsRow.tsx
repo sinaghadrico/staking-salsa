@@ -19,11 +19,12 @@ import { useQuery } from "react-query";
 import useWebWallet from "hooks/use-web-wallet/useWebWallet";
 import usePrices from "services/usePrices";
 import { intervalDataUpdate } from "utils/configs";
+import { Stake } from "models";
 
 export interface AccountPredictorRewardsRowProps {
     className?: string;
     children?: React.ReactNode;
-    data: any;
+    data: Stake;
     expandItem: string | null;
     columns: Column[];
 
@@ -36,10 +37,10 @@ const AccountPredictorRewardsRow: FC<AccountPredictorRewardsRowProps> = ({
     setExpandItem,
     columns,
 }: AccountPredictorRewardsRowProps) => {
-    const { id, address, asset, status } = data;
+    const { id, address, asset } = data;
     const { account } = useWebWallet();
     const tokenStaker = useTokenStaker(address);
-    const { coinPrice } = usePrices("BNB");
+    const { coinPrice } = usePrices("bitcoin");
     const { data: initialData, isLoading } = useQuery(
         [`initialData-${id}`, id, account],
         () => tokenStaker.getInitialData(account || "0x00"),
