@@ -428,7 +428,7 @@ export const useTokenStaker = (address: string) => {
 
         const _claimableReward = await claimableReward(address, "0");
 
-        const rewards: any = userInfo?.rewardDebt + _claimableReward;
+        const rewards: any = setDigit(userInfo?.rewardDebt + _claimableReward);
         const stakeAmount = setDigit(userInfo?.stakeAmount);
 
         return { totalValueLock, apy, tokenContractAddress, remainLockTime, rewards, stakeAmount };
