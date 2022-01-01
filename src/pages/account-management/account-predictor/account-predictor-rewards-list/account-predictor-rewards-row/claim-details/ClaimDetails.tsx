@@ -198,11 +198,7 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                                             <rect x="5" y="0" rx="3" ry="3" width="100" height="6" />
                                         </ContentLoader>
                                     ) : (
-                                        <Currency
-                                            color="#ff8103"
-                                            value={totalValueLock * coinPrice}
-                                            unit={CurrencyUnit.DOLLAR}
-                                        />
+                                        <Currency value={totalValueLock * coinPrice} unit={CurrencyUnit.DOLLAR} />
                                     )}
                                 </div>
                             </div>
@@ -222,10 +218,7 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                                             <rect x="5" y="0" rx="3" ry="3" width="100" height="6" />
                                         </ContentLoader>
                                     ) : (
-                                        <span>
-                                            {" "}
-                                            <Currency color="#ff8103" value={apy} unit={CurrencyUnit.DOLLAR} /> % in TWA
-                                        </span>
+                                        <span> {apy} % in TWA</span>
                                     )}
                                 </div>
                             </div>
