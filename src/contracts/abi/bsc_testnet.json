@@ -88,34 +88,27 @@
         {
             "inputs": [],
             "name": "getPoolTotalLostRewardAmount",
-            "outputs": [{ "internalType": "uint256", "name": "RewardTotalLostRewardAmount", "type": "uint256" }],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [],
-            "name": "getPoolTotalRewardSupply",
-            "outputs": [{ "internalType": "uint256", "name": "RewardTotalSupply", "type": "uint256" }],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [],
-            "name": "getPoolTotalStakedSupply",
-            "outputs": [{ "internalType": "uint256", "name": "StakeTotalSupply", "type": "uint256" }],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [],
-            "name": "getminimumBalance",
             "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
             "stateMutability": "view",
             "type": "function"
         },
         {
             "inputs": [],
-            "name": "getpoolLostRewardAddress",
+            "name": "getPoolTotalRewardSupply",
+            "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "getPoolTotalStakedSupply",
+            "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "getpoolUnusedRewardAddress",
             "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
             "stateMutability": "view",
             "type": "function"
@@ -183,25 +176,10 @@
             "type": "function"
         },
         {
-            "inputs": [{ "internalType": "uint256", "name": "_minimumBalance", "type": "uint256" }],
-            "name": "setminimumBalabce",
+            "inputs": [{ "internalType": "address", "name": "_poolUnusedRewardAddress", "type": "address" }],
+            "name": "setpoolUnusedRewardAddress",
             "outputs": [],
             "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [{ "internalType": "address", "name": "_poolLostRewardAddress", "type": "address" }],
-            "name": "setpoolLostRewardAddress",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        { "inputs": [], "name": "start", "outputs": [], "stateMutability": "nonpayable", "type": "function" },
-        {
-            "inputs": [],
-            "name": "startTime",
-            "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-            "stateMutability": "view",
             "type": "function"
         },
         {
@@ -217,7 +195,7 @@
             "outputs": [
                 { "internalType": "uint256", "name": "userId", "type": "uint256" },
                 { "internalType": "uint256", "name": "amount", "type": "uint256" },
-                { "internalType": "uint256", "name": "rewardDebt", "type": "uint256" },
+                { "internalType": "uint256", "name": "rewardEarned", "type": "uint256" },
                 { "internalType": "uint256", "name": "depositTime", "type": "uint256" }
             ],
             "stateMutability": "view",
