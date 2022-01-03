@@ -1,16 +1,16 @@
 import { parseTokenValue } from "utils/convert";
-import { useTSTContract } from "./contracts";
+import { useTokenContract } from "./contracts";
 
 import { getErrorMessage } from "hooks/use-web-wallet/useWebWallet";
 import useNotification from "hooks/useNotification";
 
-export const useTSTToken = () => {
-    const TSTContract = useTSTContract();
+export const useToken = () => {
+    const TokenContract = useTokenContract();
 
     const notification = useNotification();
 
     const getBalance = (account: any) => {
-        return TSTContract?.balanceOf(account)
+        return TokenContract?.balanceOf(account)
             .then((balance: any) => {
                 return parseTokenValue(balance);
             })
@@ -21,6 +21,6 @@ export const useTSTToken = () => {
 
     return {
         getBalance,
-        contract: TSTContract || false,
+        contract: TokenContract || false,
     };
 };

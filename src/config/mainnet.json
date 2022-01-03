@@ -30,8 +30,19 @@
     },
     "contractAddress": {
         "56": {
-            "TSTToken": "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d"
+            "Token": "0x3F165995FddA6283F7e0116b589C774ee8EF9499"
         }
     },
+    "stakeContracts": {
+        "56": [
+            {
+                "id": "1",
+                "address": "0x1939b94A77686285e27A50AC330423111D3AcE37",
+                "description": "TST 3 Month Lock",
+                "asset": "BTC"
+            }
+        ]
+    },
+    "tokenName": "TST",
     "transactionEndpoint": "https://bscscan.com/address"
 }

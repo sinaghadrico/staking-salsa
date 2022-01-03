@@ -4,13 +4,13 @@ import useWebWallet, { getErrorMessage } from "hooks/use-web-wallet/useWebWallet
 import useNotification from "hooks/useNotification";
 import { parseTokenValue, setDigit, toPriceValue, toTokenValue } from "utils/convert";
 import { useContractFromAddressByABI } from "services/contract";
-import { useTSTContract } from "services/contracts";
+import { useTokenContract } from "services/contracts";
 
 export const useTokenStaker = (address: string) => {
     const { account } = useWebWallet();
     const notification = useNotification();
     const contractMethod: any = useContractFromAddressByABI(address);
-    const TSTContract = useTSTContract();
+    const tokenContract = useTokenContract();
 
     //write-contract
 
@@ -32,12 +32,14 @@ export const useTokenStaker = (address: string) => {
 
     const stake = (amount: string) => {
         return new Promise((resolve: (response: any) => void, reject) => {
-            TSTContract?.approve(address, toTokenValue(amount))
+            tokenContract
+                ?.approve(address, toTokenValue(amount))
                 .then((transaction: ContractTransaction) => {
                     transaction
                         .wait(1)
                         .then(() => {
-                            TSTContract?.allowance(account || "0x00", address)
+                            tokenContract
+                                ?.allowance(account || "0x00", address)
                                 .then((allowance: any) => {
                                     const _allowance = parseTokenValue(allowance);
                                     const _amount = parseTokenValue(toTokenValue(amount));
@@ -418,7 +420,7 @@ export const useTokenStaker = (address: string) => {
 
         const rewards: any = setDigit(userInfo?.rewardEarned + _claimableReward);
         const stakeAmount = setDigit(userInfo?.stakeAmount);
-        debugger;
+
         return { totalValueLock, apy, tokenContractAddress, remainLockTime, rewards, stakeAmount };
     };
 

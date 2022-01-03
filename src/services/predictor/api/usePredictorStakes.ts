@@ -1,24 +1,22 @@
 import { useQuery } from "react-query";
-import { StakeData } from "models/stake";
+import { StakeData, Stake } from "models/stake";
+import { stakeContracts } from "utils/configs";
+import { useWeb3React } from "@web3-react/core";
 
 const usePredictorStakes = (pageNumber: number, perPage = 10) => {
+    const { chainId } = useWeb3React();
     return useQuery<StakeData>(
         [`get-predictor-stakes`, pageNumber, perPage],
         async () => {
+            const stakes: Stake[] = stakeContracts[chainId as number];
             const result: StakeData = {
-                stakes: [
-                    {
-                        id: "1",
-                        address: "0x1939b94A77686285e27A50AC330423111D3AcE37",
-                        description: "TST 3 Month Lock",
-                        asset: "BTC",
-                    },
-                ],
-                total: 1,
+                stakes: stakes,
+                total: stakes?.length,
             };
             return result;
         },
         {
+            enabled: !!chainId,
             keepPreviousData: true,
             refetchOnWindowFocus: false,
         },

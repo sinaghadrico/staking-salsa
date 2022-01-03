@@ -14,7 +14,7 @@ const getMarketInformation = (token: string) => {
 };
 
 const usePrices = (coinType?: any) => {
-    // const { data: TST } = useQuery("TST", () => getMarketInformation("TST"), {
+    // const { data: Token } = useQuery("Token", () => getMarketInformation("Token"), {
     //     refetchOnWindowFocus: false,
     // });
     const { data: _coinPrice } = useQuery(coinType, () => getMarketInformation(coinType), {
@@ -22,7 +22,7 @@ const usePrices = (coinType?: any) => {
         enabled: !!coinType,
     });
     return {
-        // tstPrice: TST?.price ? setDigit(TST?.price) : 0,
+        // tokenPrice: Token?.price ? setDigit(Token?.price) : 0,
         coinPrice: _coinPrice?.price ? setDigit(_coinPrice?.price) : 0,
     };
 };

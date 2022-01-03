@@ -7,9 +7,9 @@ import Web3 from "web3";
 import { contractAddress, networks } from "utils/configs";
 
 export interface ContractName {
-    TSTToken: string;
+    Token: string;
 }
-export type ContractTypeName = "TSTToken";
+export type ContractTypeName = "Token";
 
 export interface ContractChain {
     [chainId: number]: ContractName;
@@ -35,7 +35,7 @@ export const getAddress = (chainId: number, name: ContractTypeName): string | nu
     return address;
 };
 
-export function useContract<C>(
+export function useContractByName<C>(
     connector: (address: string, signerOrProvider: Signer | Provider) => C,
     name: ContractTypeName,
 ): C | undefined {

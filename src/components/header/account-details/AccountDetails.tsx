@@ -7,11 +7,11 @@ import "./AccountDetails.scss";
 import { useQuery } from "react-query";
 import logo from "assets/icons/svgs/logo.svg";
 import { formatNumberWithCommas } from "utils/number";
-import { useTSTToken } from "services/useTSTToken";
+import { useToken } from "services/useToken";
 
 const AccountDetails: FC = () => {
     const { active, account } = useWebWallet();
-    const token = useTSTToken();
+    const token = useToken();
     const { data: balance } = useQuery(["token-balance", account], () => token.getBalance(account), {
         enabled: !!token.contract,
     });

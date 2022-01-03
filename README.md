@@ -1,6 +1,6 @@
-# Staking-TST
+# Staking-Token
 
-> Staking TST
+> Staking Token
 
 ## Getting Started
 

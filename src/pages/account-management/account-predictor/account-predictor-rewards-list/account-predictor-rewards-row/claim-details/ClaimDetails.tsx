@@ -20,9 +20,9 @@ import ContentLoader from "react-content-loader";
 import { formatNumberWithCommas, isValidNumber, parseValueToNumber } from "utils/number";
 import { useTokenStaker } from "services/predictor/contract/useTokenStaker";
 import { useNotification } from "hooks";
-import { transactionEndpoint } from "utils/configs";
+import { tokenName, transactionEndpoint } from "utils/configs";
 import { TransactionAddress } from "components/transaction-address";
-import { useTSTToken } from "services/useTSTToken";
+import { useToken } from "services/useToken";
 import useWebWallet from "hooks/use-web-wallet/useWebWallet";
 import { useGlobalDispatch } from "states/globalContext";
 import usePrices from "services/usePrices";
@@ -55,7 +55,7 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
     const tokenStaker = useTokenStaker(address);
     const notification = useNotification();
 
-    const token = useTSTToken();
+    const token = useToken();
     const { data: balance } = useQuery(["token-balance", account], () => token.getBalance(account), {
         enabled: !!token.contract,
     });
@@ -218,7 +218,10 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                                             <rect x="5" y="0" rx="3" ry="3" width="100" height="6" />
                                         </ContentLoader>
                                     ) : (
-                                        <span> {apy} % in TST</span>
+                                        <span>
+                                            {" "}
+                                            {apy} % in {tokenName}
+                                        </span>
                                     )}
                                 </div>
                             </div>
@@ -280,7 +283,7 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                                 Rewards: {rewards}{" "}
                                 <span style={{ color: "#52C41A" }} className="px-5">
                                     {" "}
-                                    TST
+                                    {tokenName}
                                 </span>
                             </div>
 

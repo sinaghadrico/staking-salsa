@@ -18,7 +18,7 @@ import { useTokenStaker } from "services/predictor/contract/useTokenStaker";
 import { useQuery } from "react-query";
 import useWebWallet from "hooks/use-web-wallet/useWebWallet";
 import usePrices from "services/usePrices";
-import { intervalDataUpdate } from "utils/configs";
+import { intervalDataUpdate, tokenName } from "utils/configs";
 import { Stake } from "models";
 
 export interface AccountPredictorRewardsRowProps {
@@ -64,7 +64,7 @@ const AccountPredictorRewardsRow: FC<AccountPredictorRewardsRowProps> = ({
                 <TableCell dataHead={columns[0]?.title}>
                     <div className="account-predictor-rewards-row-title">
                         <PairCoin size={24} subCoin={asset} supCoin={"token"} />
-                        {"TST + " + asset}
+                        {`${tokenName} + ${asset}`}
                     </div>
                 </TableCell>
 
@@ -82,7 +82,9 @@ const AccountPredictorRewardsRow: FC<AccountPredictorRewardsRowProps> = ({
                             <rect x="5" y="0" rx="3" ry="3" width="100" height="6" />
                         </ContentLoader>
                     ) : (
-                        <span style={{ color: "#52C41A" }}>{initialData?.apy} % TST</span>
+                        <span style={{ color: "#52C41A" }}>
+                            {initialData?.apy} % {tokenName}
+                        </span>
                     )}
                 </TableCell>
                 <TableCell dataHead={columns[2]?.title}>
@@ -121,7 +123,8 @@ const AccountPredictorRewardsRow: FC<AccountPredictorRewardsRowProps> = ({
                         </ContentLoader>
                     ) : (
                         <>
-                            <Currency size="16px" value={initialData?.rewards || 0} unit={CurrencyUnit.NONE} /> TST
+                            <Currency size="16px" value={initialData?.rewards || 0} unit={CurrencyUnit.NONE} /> {""}
+                            {tokenName}
                         </>
                     )}
                 </TableCell>

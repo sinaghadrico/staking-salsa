@@ -1,6 +1,6 @@
 import { WrappedERC20Token__factory, WrappedERC20Token } from "contracts/types";
-import { useContractFromAddress } from "./contract";
+import { useContractByName } from "./contract";
 
-export const useTSTContract = (): WrappedERC20Token | undefined => {
-    return useContractFromAddress(WrappedERC20Token__factory.connect, "0x3F165995FddA6283F7e0116b589C774ee8EF9499");
+export const useTokenContract = (): WrappedERC20Token | undefined => {
+    return useContractByName(WrappedERC20Token__factory.connect, "Token");
 };
