@@ -9,7 +9,7 @@ const stats = config.stats;
 const contractAddress = config.contractAddress;
 const transactionEndpoint = config.transactionEndpoint;
 const intervalDataUpdate = 2 * 60 * 1000;
-const stakeContracts: { [x: string]: Stake[] } = config.stakeContracts;
+const stakeContracts: Stake[] = config.stakesContract;
 const tokenName = config.tokenName;
 
 export {
