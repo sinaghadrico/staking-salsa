@@ -4,17 +4,18 @@
         "5": "goerli_testnet",
         "3": "ropsten_testnet",
         "4": "rinkeby_testnet",
-        "97": "bsc_testnet"
+        "97": "bsc_testnet",
+        "56": "bsc"
     },
     "_comment_rpcUrls": {
         "1": "https://mainnet.infura.io/v3/84842078b09946638c03157f83405213",
         "4": "https://rinkeby.infura.io/v3/84842078b09946638c03157f83405213"
     },
     "networks": {
-        "97": "bsc_testnet"
+        "56": "bsc"
     },
     "rpcUrls": {
-        "97": "https://data-seed-prebsc-1-s1.binance.org:8545/"
+        "56": "https://bsc-dataseed.binance.org/"
     },
     "offchain": {
         "predictor": ""
@@ -23,23 +24,23 @@
         "predictor": ""
     },
     "subgraph": {
-        "97": {
+        "56": {
             "predictor": ""
         }
     },
     "contractAddress": {
-        "97": {
-            "Token": "0x3F165995FddA6283F7e0116b589C774ee8EF9499"
+        "56": {
+            "Token": "0x94C00A7C30C93F7E8C9fD6865909Ae2aCe7Bc707"
         }
     },
     "stakesContract": [
         {
             "id": "1",
-            "address": "0x1939b94A77686285e27A50AC330423111D3AcE37",
-            "description": "TST 3 Month Lock",
+            "address": "0x592C4928C4F9f8A798D383fba2f878CD3f1DCd72",
+            "description": "Salsa 3 Month Lock",
             "asset": "BTC"
         }
     ],
-    "tokenName": "TST",
-    "transactionEndpoint": "https://testnet.bscscan.com/address"
+    "tokenName": "Salsa",
+    "transactionEndpoint": "https://bscscan.com/address"
 }

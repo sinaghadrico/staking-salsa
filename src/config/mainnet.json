@@ -30,17 +30,17 @@
     },
     "contractAddress": {
         "56": {
-            "Token": "0x3F165995FddA6283F7e0116b589C774ee8EF9499"
+            "Token": "0x94C00A7C30C93F7E8C9fD6865909Ae2aCe7Bc707"
         }
     },
     "stakesContract": [
         {
             "id": "1",
-            "address": "0x1939b94A77686285e27A50AC330423111D3AcE37",
-            "description": "TST 3 Month Lock",
+            "address": "0x592C4928C4F9f8A798D383fba2f878CD3f1DCd72",
+            "description": "Salsa 3 Month Lock",
             "asset": "BTC"
         }
     ],
-    "tokenName": "TST",
+    "tokenName": "Salsa",
     "transactionEndpoint": "https://bscscan.com/address"
 }
