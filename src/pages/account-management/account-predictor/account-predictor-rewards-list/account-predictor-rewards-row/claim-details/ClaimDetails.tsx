@@ -42,7 +42,7 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
     const {
         tokenContractAddress = "0x00",
         apy = "0",
-        remainLockTime = new Date().getTime(),
+        remainLockTime,
         totalValueLock = "0",
         rewards = "0",
         stakeAmount: stakeAmountNumber = "0",
@@ -57,7 +57,7 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
 
     const token = useToken();
     const { data: balance } = useQuery(["token-balance", account], () => token.getBalance(account), {
-        enabled: !!token.contract,
+        enabled: !!token.contract && !!account,
     });
 
     const handleChange = (event: any) => {
@@ -116,6 +116,11 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
     const handleClaim = () => {
         if (!token.contract) {
             globalDispatch({ type: "setWalletOptions", value: true });
+            return;
+        }
+
+        if (!remainLockTime || remainLockTime > new Date().getTime()) {
+            notification.error(`You can't claim before lock time`);
             return;
         }
 

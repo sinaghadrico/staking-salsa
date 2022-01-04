@@ -13,7 +13,7 @@ const AccountDetails: FC = () => {
     const { active, account } = useWebWallet();
     const token = useToken();
     const { data: balance } = useQuery(["token-balance", account], () => token.getBalance(account), {
-        enabled: !!token.contract,
+        enabled: !!token.contract && !!account,
     });
 
     const globalDispatch = useGlobalDispatch();
