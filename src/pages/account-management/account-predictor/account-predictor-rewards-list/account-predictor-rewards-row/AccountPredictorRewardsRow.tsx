@@ -37,7 +37,7 @@ const AccountPredictorRewardsRow: FC<AccountPredictorRewardsRowProps> = ({
     setExpandItem,
     columns,
 }: AccountPredictorRewardsRowProps) => {
-    const { id, address, asset } = data;
+    const { id, address, logoUrl } = data;
     const { account } = useWebWallet();
     const tokenStaker = useTokenStaker(address);
     const { coinPrice } = usePrices("bitcoin");
@@ -63,8 +63,8 @@ const AccountPredictorRewardsRow: FC<AccountPredictorRewardsRowProps> = ({
             >
                 <TableCell dataHead={columns[0]?.title}>
                     <div className="account-predictor-rewards-row-title">
-                        <PairCoin size={24} subCoin={asset} supCoin={"token"} />
-                        {`${tokenName} + ${asset}`}
+                        <PairCoin size={24} supCoin={logoUrl} />
+                        <span className="mx-5"> {`${tokenName}`}</span>
                     </div>
                 </TableCell>
 

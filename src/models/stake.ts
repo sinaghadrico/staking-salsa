@@ -6,5 +6,5 @@ export class Stake {
     id!: string;
     address!: string;
     description!: string;
-    asset!: string;
+    logoUrl!: string;
 }

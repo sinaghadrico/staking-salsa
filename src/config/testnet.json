@@ -37,7 +37,7 @@
             "id": "1",
             "address": "0x1939b94A77686285e27A50AC330423111D3AcE37",
             "description": "TST 3 Month Lock",
-            "asset": "BTC"
+            "logoUrl": "/"
         }
     ],
     "tokenName": "TST",

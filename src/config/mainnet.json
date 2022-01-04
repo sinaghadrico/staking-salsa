@@ -38,7 +38,7 @@
             "id": "1",
             "address": "0x592C4928C4F9f8A798D383fba2f878CD3f1DCd72",
             "description": "Salsa 3 Month Lock",
-            "asset": "BTC"
+            "logoUrl": "/"
         }
     ],
     "tokenName": "Salsa",

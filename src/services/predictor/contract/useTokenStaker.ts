@@ -357,7 +357,7 @@ export const useTokenStaker = (address: string) => {
             ?.remainLockTime(userAddress)
             .call()
             .then((data: any) => {
-                const _remainLockTime = new Date().getTime() + (Number(data) || 0);
+                const _remainLockTime = new Date().getTime() + (Number(data) || 0) * 1000;
 
                 return _remainLockTime;
             })

@@ -36,7 +36,7 @@ const getIcon = (coin?: string) => {
         case "featured":
             return AtlantisLogo;
         default:
-            return BtcLogo;
+            return Logo;
     }
 };
 const PairCoin = ({ supCoin, subCoin }: PairCoinProps) => {
