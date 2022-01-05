@@ -142,6 +142,12 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
             globalDispatch({ type: "setWalletOptions", value: true });
             return;
         }
+
+        if (!remainLockTime || remainLockTime > new Date().getTime()) {
+            notification.error(`You can't withdraw before lock time`);
+            return;
+        }
+
         if (Number(withdrawAmount) === 0) {
             notification.error(`withdraw value must be greater than 0`);
             mutationWithdraw.reset();
