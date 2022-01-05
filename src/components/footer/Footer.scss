@@ -1,8 +1,11 @@
 @import "styles/mixin/theme";
 
-$themes: (light: (footer-bg-color: var(--color-white),
+$themes: (
+    light: (
+        footer-bg-color: var(--color-white),
     ),
-    dark: (footer-bg-color: var(--color-black),
+    dark: (
+        footer-bg-color: var(--color-black),
     ),
 );
 

@@ -11,13 +11,13 @@
     -ms-border-radius: 0 0 16px 16px !important;
     -o-border-radius: 0 0 16px 16px !important;
 
-    >div {
+    > div {
         // max-width: 1000px;
         width: 100%;
     }
 
     @media (max-width: 500px) {
-        >div {
+        > div {
             padding: 40px 0;
         }
     }
@@ -28,7 +28,7 @@
         padding: 10px;
         border-radius: 5px;
         max-width: 345px;
-        background-color: #1F2641;
+        background-color: #1f2641;
         width: 100%;
         text-align: left;
     }

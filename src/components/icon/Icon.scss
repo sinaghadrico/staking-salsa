@@ -1,8 +1,11 @@
 @import "styles/mixin/theme";
 
-$themes: (light: (icon-bg-color: var(--color-gray-2),
+$themes: (
+    light: (
+        icon-bg-color: var(--color-gray-2),
     ),
-    dark: (icon-bg-color: var(--color-white),
+    dark: (
+        icon-bg-color: var(--color-white),
     ),
 );
 

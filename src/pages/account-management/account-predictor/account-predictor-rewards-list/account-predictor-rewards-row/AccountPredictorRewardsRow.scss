@@ -1,6 +1,7 @@
 @import "styles/mixin/theme";
 
-$themes: (light: (),
+$themes: (
+    light: (),
     dark: (),
 );
 
@@ -18,10 +19,7 @@ $themes: (light: (),
     }
 
     &.border-bottom-row {
-
         @media (max-width: 750px) {
-
-
             .ui-table-cell:last-child {
                 border-radius: 0 0 0 0 !important;
                 -webkit-border-radius: 0 0 0 0 !important;
@@ -48,14 +46,11 @@ $themes: (light: (),
                 -o-border-radius: 0 16px 0 0 !important;
             }
         }
-
-
-
     }
 
     .ui-table-cell {
         &:first-child {
-            >div {
+            > div {
                 margin-left: 20px;
             }
         }

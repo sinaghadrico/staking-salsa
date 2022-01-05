@@ -1,8 +1,11 @@
 @import "styles/mixin/theme";
 
-$themes: (light: (header-bg-color: var(--color-white),
+$themes: (
+    light: (
+        header-bg-color: var(--color-white),
     ),
-    dark: (header-bg-color: var(--color-black),
+    dark: (
+        header-bg-color: var(--color-black),
     ),
 );
 
@@ -23,7 +26,6 @@ $themes: (light: (header-bg-color: var(--color-white),
     top: 0;
     background-color: #2c324c;
 
-
     // background-color: #1f2641f0;
     // background-image: url("../../assets/images/Bg.svg");
     // background-size: cover;
@@ -36,7 +38,7 @@ $themes: (light: (header-bg-color: var(--color-white),
         font-size: 24px;
     }
 
-    >div {
+    > div {
         margin: 0 5px;
     }
 }
