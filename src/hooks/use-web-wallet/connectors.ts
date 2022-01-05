@@ -31,7 +31,7 @@ export const network = new NetworkConnector({
 });
 
 export const walletconnect = new WalletConnectConnector({
-    rpc: rpcUrls,
+    rpc: selectedRpcUrl,
     qrcode: true,
 });
 
