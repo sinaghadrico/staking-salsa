@@ -32,7 +32,7 @@ export const network = new NetworkConnector({
 
 export const walletconnect = new WalletConnectConnector({
     rpc: rpcUrls,
-    infuraId: "1b8490ce99144c548715a6785b671ea1",
+    infuraId: "eaa2537f621348f892bf195cb737545a",
     qrcode: true,
 });
 
