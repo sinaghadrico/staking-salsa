@@ -10,6 +10,7 @@ import {
     Input,
     Timer,
     TimerShowType,
+    ConfirmModal,
 } from "ui-components";
 import "./ClaimDetails.scss";
 import { useMutation, useQuery, useQueryClient } from "react-query";
@@ -26,6 +27,8 @@ import { useToken } from "services/useToken";
 import useWebWallet from "hooks/use-web-wallet/useWebWallet";
 import { useGlobalDispatch } from "states/globalContext";
 import usePrices from "services/usePrices";
+import success_logo from "assets/icons/svgs/rocket.svg";
+import { Icon } from "components/icon";
 
 export interface ClaimDetailsProps {
     className?: string;
@@ -54,6 +57,8 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
 
     const tokenStaker = useTokenStaker(address);
     const notification = useNotification();
+
+    const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
 
     const token = useToken();
     const { data: balance } = useQuery(["token-balance", account], () => token.getBalance(account), {
@@ -106,8 +111,10 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                     onSuccess: () => {
                         queryClient.invalidateQueries(`initialData-${id}`);
                         queryClient.invalidateQueries(`token-balance`);
-                        setStakeAmount(0);
-                        mutationStake.reset();
+                        debugger;
+                        setShowConfirmModal(true);
+                        // setStakeAmount(0);
+                        // mutationStake.reset();
                     },
                 },
             );
@@ -131,7 +138,9 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                     onSuccess: () => {
                         queryClient.invalidateQueries(`initialData-${id}`);
                         queryClient.invalidateQueries(`token-balance`);
-                        mutationStake.reset();
+                        debugger;
+                        setShowConfirmModal(true);
+                        // mutationStake.reset();
                     },
                 },
             );
@@ -161,8 +170,10 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                     onSuccess: () => {
                         queryClient.invalidateQueries(`initialData-${id}`);
                         queryClient.invalidateQueries(`token-balance`);
-                        setWithdrawAmount(0);
-                        mutationStake.reset();
+                        debugger;
+                        setShowConfirmModal(true);
+                        // setWithdrawAmount(0);
+                        // mutationStake.reset();
                     },
                 },
             );
@@ -181,12 +192,28 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                     onSuccess: () => {
                         queryClient.invalidateQueries(`initialData-${id}`);
                         queryClient.invalidateQueries(`token-balance`);
-                        mutationStake.reset();
+                        debugger;
+                        setShowConfirmModal(true);
+                        // mutationStake.reset();
                     },
                 },
             );
         }
     };
+
+    const handleCloseTxModal = () => {
+        setShowConfirmModal(false);
+        mutationStake.reset();
+        mutationClaim.reset();
+        mutationWithdraw.reset();
+
+        setWithdrawAmount(0);
+        setStakeAmount(0);
+    };
+
+    const transactionData: any =
+        mutationStake?.data || mutationClaim?.data || mutationWithdraw?.data || mutationEmergencyWithdraw?.data;
+    const transactionAddress: string = transactionData?.transactionHash;
     return (
         <>
             <AnimatePresence>
@@ -253,7 +280,7 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                                         </ContentLoader>
                                     ) : account ? (
                                         <TransactionAddress
-                                            transactionEndpoint={transactionEndpoint}
+                                            transactionEndpoint={transactionEndpoint + "address"}
                                             address={tokenContractAddress || "0"}
                                             type="full"
                                         />
@@ -394,6 +421,42 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                     </div>
                 </motion.div>
             </AnimatePresence>
+
+            {showConfirmModal && (
+                <ConfirmModal
+                    description={"Your transaction has been confirmed"}
+                    iconComponent={<Icon src={success_logo} style={{ width: 135 }} />}
+                    minHeight={"0"}
+                    open={showConfirmModal}
+                    onClose={handleCloseTxModal}
+                    confirmTitle={"Close"}
+                    cancelTitle={""}
+                    onConfirm={handleCloseTxModal}
+                    onCancel={handleCloseTxModal}
+                    title={undefined}
+                >
+                    <div className="predictor">
+                        <div>
+                            <div>
+                                <div>View your transaction</div>
+                                <div className="predictor-value">
+                                    {/* <Currency value={form?.price} unit={CurrencyUnit.USD} color="#ffa005" /> */}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {transactionAddress && (
+                        <span className="predictor-tx mt-15">
+                            <TransactionAddress
+                                transactionEndpoint={transactionEndpoint + "tx"}
+                                address={transactionAddress || "0"}
+                                type="full"
+                            />
+                        </span>
+                    )}
+                </ConfirmModal>
+            )}
         </>
     );
 };

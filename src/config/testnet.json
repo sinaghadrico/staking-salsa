@@ -41,5 +41,5 @@
         }
     ],
     "tokenName": "TST",
-    "transactionEndpoint": "https://testnet.bscscan.com/address"
+    "transactionEndpoint": "https://testnet.bscscan.com/"
 }

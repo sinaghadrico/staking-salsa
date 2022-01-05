@@ -67,3 +67,10 @@
         }
     }
 }
+.predictor {
+    &-tx {
+        border: 2px solid #de4837;
+        border-radius: 15px;
+        padding: 10px;
+    }
+}

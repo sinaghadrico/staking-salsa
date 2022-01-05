@@ -48,9 +48,10 @@ export const useTokenStaker = (address: string) => {
                                         contractMethod
                                             ?.deposit(toTokenValue(amount))
                                             .send({ from: account })
-                                            .then((transaction: ContractTransaction) => {
+                                            .then((transactionDeposit: ContractTransaction) => {
                                                 notification.success("stake confirmed");
-                                                resolve(transaction);
+                                                debugger;
+                                                resolve(transactionDeposit);
                                             })
                                             .catch((error: any) => {
                                                 notification.error(getErrorMessage(error));
