@@ -408,7 +408,7 @@ export const useTokenStaker = (address: string) => {
         const poolInfo: any = await getPoolInfo();
 
         const apy: any = setDigit(
-            totalValueLock !== 0 ? (poolInfo?.rewardTokenCount * 365 * apyPrice) / totalValueLock : 0,
+            totalValueLock !== 0 ? (poolInfo?.rewardTokenCount * 60 * 24 * 365 * 100 * apyPrice) / totalValueLock : 0,
         );
         const tokenContractAddress: any = poolInfo?.stakeTokenAddress;
 
