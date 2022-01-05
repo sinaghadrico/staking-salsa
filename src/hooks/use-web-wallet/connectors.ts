@@ -31,7 +31,7 @@ export const network = new NetworkConnector({
 });
 
 export const walletconnect = new WalletConnectConnector({
-    rpc: selectedRpcUrl,
+    rpc: { 56: "https://bsc-dataseed.binance.org/" },
     qrcode: true,
 });
 
