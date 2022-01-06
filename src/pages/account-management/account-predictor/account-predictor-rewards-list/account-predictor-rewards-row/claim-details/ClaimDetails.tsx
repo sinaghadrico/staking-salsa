@@ -80,6 +80,9 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
             }
         }
     };
+    const mutationApprove = useMutation((_form: any): any => {
+        return tokenStaker?.approve(_form?.stakeAmount);
+    });
     const mutationStake = useMutation((_form: any): any => {
         return tokenStaker?.stake(_form?.stakeAmount);
     });
@@ -92,6 +95,33 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
     const mutationEmergencyWithdraw = useMutation((_form: any): any => {
         return tokenStaker?.emergencyWithdraw();
     });
+    const handleApprove = () => {
+        if (!token.contract) {
+            globalDispatch({ type: "setWalletOptions", value: true });
+            return;
+        }
+        if (Number(stakeAmount) === 0) {
+            notification.error(`approve value must be greater than 0`);
+            mutationApprove.reset();
+            return;
+        }
+
+        if (!mutationApprove?.isSuccess) {
+            mutationApprove.mutate(
+                { stakeAmount },
+                {
+                    onSuccess: () => {
+                        queryClient.invalidateQueries(`initialData-${id}`);
+                        // queryClient.invalidateQueries(`token-balance`);
+
+                        setShowConfirmModal(true);
+
+                        // mutationApprove.reset();
+                    },
+                },
+            );
+        }
+    };
 
     const handleStake = () => {
         if (!token.contract) {
@@ -111,7 +141,7 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                     onSuccess: () => {
                         queryClient.invalidateQueries(`initialData-${id}`);
                         queryClient.invalidateQueries(`token-balance`);
-                        debugger;
+
                         setShowConfirmModal(true);
                         // setStakeAmount(0);
                         // mutationStake.reset();
@@ -138,7 +168,7 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                     onSuccess: () => {
                         queryClient.invalidateQueries(`initialData-${id}`);
                         queryClient.invalidateQueries(`token-balance`);
-                        debugger;
+
                         setShowConfirmModal(true);
                         // mutationStake.reset();
                     },
@@ -170,7 +200,7 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                     onSuccess: () => {
                         queryClient.invalidateQueries(`initialData-${id}`);
                         queryClient.invalidateQueries(`token-balance`);
-                        debugger;
+
                         setShowConfirmModal(true);
                         // setWithdrawAmount(0);
                         // mutationStake.reset();
@@ -192,7 +222,7 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                     onSuccess: () => {
                         queryClient.invalidateQueries(`initialData-${id}`);
                         queryClient.invalidateQueries(`token-balance`);
-                        debugger;
+
                         setShowConfirmModal(true);
                         // mutationStake.reset();
                     },
@@ -203,16 +233,23 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
 
     const handleCloseTxModal = () => {
         setShowConfirmModal(false);
+
+        mutationWithdraw.isSuccess && setWithdrawAmount(0);
+        mutationStake.isSuccess && setStakeAmount(0);
+
+        mutationApprove.reset();
         mutationStake.reset();
         mutationClaim.reset();
         mutationWithdraw.reset();
-
-        setWithdrawAmount(0);
-        setStakeAmount(0);
+        mutationEmergencyWithdraw.reset();
     };
 
     const transactionData: any =
-        mutationStake?.data || mutationClaim?.data || mutationWithdraw?.data || mutationEmergencyWithdraw?.data;
+        mutationApprove?.data ||
+        mutationStake?.data ||
+        mutationClaim?.data ||
+        mutationWithdraw?.data ||
+        mutationEmergencyWithdraw?.data;
     const transactionAddress: string = transactionData?.transactionHash;
     return (
         <>
@@ -358,6 +395,14 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                                         autoComplete="off"
                                     />
                                     <div className="flex-align-center  ml-10" style={{ width: "120px" }}>
+                                        <Button
+                                            width={ButtonWidth.FIT_PARENT}
+                                            onClick={handleApprove}
+                                            buttonForm={ButtonForm.SECONDARY}
+                                            disabled={mutationApprove.isLoading}
+                                        >
+                                            {mutationApprove.isLoading ? "wait..." : "Approve"}
+                                        </Button>
                                         <Button
                                             width={ButtonWidth.FIT_PARENT}
                                             onClick={handleStake}

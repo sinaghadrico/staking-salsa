@@ -33,39 +33,46 @@ export const useTokenStaker = (address: string) => {
     const stake = (amount: string) => {
         return new Promise((resolve: (response: any) => void, reject) => {
             tokenContract
+                ?.allowance(account || "0x00", address)
+                .then((allowance: any) => {
+                    const _allowance = parseTokenValue(allowance);
+                    const _amount = parseTokenValue(toTokenValue(amount));
+
+                    if (_allowance >= _amount) {
+                        contractMethod
+                            ?.deposit(toTokenValue(amount))
+                            .send({ from: account })
+                            .then((transactionDeposit: ContractTransaction) => {
+                                notification.success("stake confirmed");
+
+                                resolve(transactionDeposit);
+                            })
+                            .catch((error: any) => {
+                                notification.error(getErrorMessage(error));
+                                reject(error);
+                            });
+                    } else {
+                        notification.error("allowance != newStake._amount");
+                        reject();
+                    }
+                })
+                .catch((error: any) => {
+                    notification.error(getErrorMessage(error));
+                    reject(error);
+                });
+        });
+    };
+    const approve = (amount: string) => {
+        return new Promise((resolve: (response: any) => void, reject) => {
+            tokenContract
                 ?.approve(address, toTokenValue(amount))
                 .then((transaction: ContractTransaction) => {
                     transaction
                         .wait(1)
                         .then(() => {
-                            tokenContract
-                                ?.allowance(account || "0x00", address)
-                                .then((allowance: any) => {
-                                    const _allowance = parseTokenValue(allowance);
-                                    const _amount = parseTokenValue(toTokenValue(amount));
+                            notification.success("Approve confirmed");
 
-                                    if (_allowance >= _amount) {
-                                        contractMethod
-                                            ?.deposit(toTokenValue(amount))
-                                            .send({ from: account })
-                                            .then((transactionDeposit: ContractTransaction) => {
-                                                notification.success("stake confirmed");
-                                                debugger;
-                                                resolve(transactionDeposit);
-                                            })
-                                            .catch((error: any) => {
-                                                notification.error(getErrorMessage(error));
-                                                reject(error);
-                                            });
-                                    } else {
-                                        notification.error("allowance != newStake._amount");
-                                        reject();
-                                    }
-                                })
-                                .catch((error: any) => {
-                                    notification.error(getErrorMessage(error));
-                                    reject(error);
-                                });
+                            resolve(transaction);
                         })
                         .catch((error: any) => {
                             notification.error(getErrorMessage(error));
@@ -436,6 +443,7 @@ export const useTokenStaker = (address: string) => {
         getLockPeriod,
         getPeriodRewardTokenCount,
         stake,
+        approve,
         emergencyWithdraw,
         releaseReward,
         renounceOwnership,
