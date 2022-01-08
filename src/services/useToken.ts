@@ -5,22 +5,24 @@ import { getErrorMessage } from "hooks/use-web-wallet/useWebWallet";
 import useNotification from "hooks/useNotification";
 
 export const useToken = () => {
-    const TokenContract = useTokenContract();
+    const tokenContract = useTokenContract();
 
     const notification = useNotification();
 
     const getBalance = (account: any) => {
-        return TokenContract?.balanceOf(account)
+        return tokenContract
+            ?.balanceOf(account)
             .then((balance: any) => {
                 return parseTokenValue(balance);
             })
             .catch((error: any) => {
+                return 0;
                 notification.error(getErrorMessage(error));
             });
     };
 
     return {
         getBalance,
-        contract: TokenContract || false,
+        contract: tokenContract || undefined,
     };
 };

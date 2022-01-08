@@ -1,183 +1,50 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useWebWallet } from "hooks/use-web-wallet/useWebWallet";
-import { useState, useEffect } from "react";
-import { Signer } from "ethers";
-import { Provider } from "@ethersproject/providers";
+import { useMemo } from "react";
 
-import * as ContractETh from "@ethersproject/contracts";
+import { Contract } from "@ethersproject/contracts";
 
-import { contractAddress, networks } from "utils/configs";
+import { contractAddress } from "utils/configs";
 
-export interface ContractName {
-    Token: string;
+import NetworkAbi from "contracts/abi/bsc.json";
+
+export function useContractFromAddressByABI(address: string): Contract | undefined {
+    const { library, account } = useWebWallet();
+
+    const networkAbi = NetworkAbi;
+
+    const tokenABI = networkAbi.abi;
+    const tokenAddress = address;
+
+    return useMemo(
+        () =>
+            library
+                ? new Contract(
+                      tokenAddress,
+                      tokenABI,
+                      account ? library.getSigner(account).connectUnchecked() : library,
+                  )
+                : undefined,
+        [library, account],
+    );
 }
-export type ContractTypeName = "Token";
+export function useContractFromAddressByABIToken(): Contract | undefined {
+    const { library, chainId, account, active } = useWebWallet();
 
-export interface ContractChain {
-    [chainId: number]: ContractName;
-}
-export interface ContractNetwork {
-    [chainId: number]: string;
-}
+    const networkAbi = NetworkAbi;
 
-export const getAddress = (chainId: number, name: ContractTypeName): string | null => {
-    if (!chainId) {
-        // console.log(`Unsupported chain '${chainId}' for contract ${name}`);
-        return null;
-    }
-    const _contractAddress: ContractChain = contractAddress;
-    const contract = _contractAddress[chainId];
-    if (!contract) {
-        // console.log(`No ${name} deployed at network ${chain.name} (${chainId})`);
-        return null;
-    }
+    const tokenABI = networkAbi.tokenAbi;
+    const tokenAddress = contractAddress[chainId || 97]?.Token;
 
-    const address = name && contract[name];
-    // console.log(`${name} resolved to address ${address} at network ${chain.name} (${chainId})`);
-    return address;
-};
-
-export function useContractByName<C>(
-    connector: (address: string, signerOrProvider: Signer | Provider) => C,
-    name: ContractTypeName,
-): C | undefined {
-    const { library, chainId } = useWebWallet();
-    // contract is a state variable, because it's async
-    const [contract, setContract] = useState<C>();
-
-    // use an effect because it's async
-    useEffect(() => {
-        if (!library || !chainId) {
-            // library or chainId not set, reset to undefined
-            setContract(undefined);
-            return;
-        }
-        // use provider signer
-        const signer = library?.getSigner();
-
-        // try to resolve address
-        const address = getAddress(chainId, name);
-
-        if (address) {
-            // call the factory connector
-            setContract(connector(address, signer));
-        } else {
-            setContract(undefined);
-        }
-    }, [library, chainId, name, connector]);
-
-    return contract;
-}
-
-export function useContractFromAddress<C>(
-    connector: (address: string, signerOrProvider: Signer | Provider) => C,
-    address: string,
-): C | undefined {
-    const { library, chainId, error, account } = useWebWallet();
-
-    // contract is a state variable, because it's async
-    const [contract, setContract] = useState<C>();
-
-    // use an effect because it's async
-    useEffect(() => {
-        // eslint-disable-next-line no-empty
-        if (error) {
-        } else {
-            if (!address || !library || !chainId || address === "0x00") {
-                // library or chainId not set, reset to undefined
-                setContract(undefined);
-                return;
-            } else {
-                if (account) {
-                    // use provider signer
-                    const signer = library.getSigner(account).connectUnchecked();
-
-                    // call the factory connector
-                    setContract(connector(address, signer));
-                } else {
-                    setContract(undefined);
-                }
-            }
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [address, library, chainId]);
-
-    return contract;
-}
-export function useContractFromAddressByABI<C>(address: string): C | undefined {
-    const { library, chainId, account } = useWebWallet();
-
-    // contract is a state variable, because it's async
-    const [contract, setContract] = useState();
-
-    // use an effect because it's async
-    useEffect(() => {
-        // eslint-disable-next-line no-empty
-        if (!library || !chainId) {
-            // library or chainId not set, reset to undefined
-            setContract(undefined);
-            return;
-        }
-
-        async function loadContract() {
-            const chainName = networks[chainId || 97];
-
-            const networkAbi = await import(`contracts/abi/${chainName}.json`).then((module) => module.default);
-
-            const tokenABI = networkAbi.abi;
-            const tokenAddress = address;
-
-            const ContractEThContract = ContractETh.Contract;
-
-            if (library && account) {
-                const _contract: any = new ContractEThContract(tokenAddress, tokenABI, library.getSigner());
-
-                setContract(_contract);
-            } else {
-                setContract(undefined);
-            }
-        }
-        loadContract();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [address, library, chainId]);
-
-    return contract;
-}
-export function useContractFromAddressByABIToken<C>(): C | undefined {
-    const { library, chainId, account } = useWebWallet();
-
-    // contract is a state variable, because it's async
-    const [contract, setContract] = useState();
-
-    // use an effect because it's async
-    useEffect(() => {
-        // eslint-disable-next-line no-empty
-        if (!library || !chainId) {
-            // library or chainId not set, reset to undefined
-            setContract(undefined);
-            return;
-        }
-
-        async function loadContract() {
-            const chainName = networks[chainId || 97];
-
-            const networkAbi = await import(`contracts/abi/${chainName}.json`).then((module) => module.default);
-
-            const tokenABI = networkAbi.tokenAbi;
-            const tokenAddress = contractAddress[chainId || 97]?.Token;
-
-            const ContractEThContract = ContractETh.Contract;
-
-            if (library && account) {
-                const _contract: any = new ContractEThContract(tokenAddress, tokenABI, library.getSigner());
-
-                setContract(_contract);
-            } else {
-                setContract(undefined);
-            }
-        }
-        loadContract();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [library, chainId]);
-
-    return contract;
+    return useMemo(
+        () =>
+            library && active
+                ? new Contract(
+                      tokenAddress,
+                      tokenABI,
+                      account ? library.getSigner(account).connectUnchecked() : library,
+                  )
+                : undefined,
+        [library, account],
+    );
 }

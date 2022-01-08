@@ -46,7 +46,7 @@ const AccountPredictorRewardsRow: FC<AccountPredictorRewardsRowProps> = ({
         () => tokenStaker.getInitialData(account || "0x00"),
         {
             refetchOnWindowFocus: false,
-            enabled: !!tokenStaker.contract && !!account,
+            enabled: !!tokenStaker.contract,
             refetchInterval: intervalDataUpdate,
         },
     );

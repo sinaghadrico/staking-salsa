@@ -14,14 +14,14 @@ export interface ConnectWalletProps {
 
 const ConnectWallet: FC<ConnectWalletProps> = ({ children, type = "button", theme = "orange" }: ConnectWalletProps) => {
     const globalDispatch = useGlobalDispatch();
-    const { active } = useWebWallet();
+    const { account } = useWebWallet();
 
     useEffect(() => {
-        !active && type === "popup" && globalDispatch({ type: "setWalletOptions", value: true });
+        !account && type === "popup" && globalDispatch({ type: "setWalletOptions", value: true });
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [active, type]);
+    }, [account, type]);
 
-    return !active ? (
+    return !account ? (
         <>
             <div className={"connect-wallet connect-wallet-" + type}>
                 {type === "button" && (

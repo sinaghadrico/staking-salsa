@@ -1,6 +1,5 @@
-import { WrappedERC20Token } from "contracts/types";
 import { useContractFromAddressByABIToken } from "./contract";
-
-export const useTokenContract = (): WrappedERC20Token | undefined => {
+import * as ContractETh from "@ethersproject/contracts";
+export const useTokenContract = (): ContractETh.Contract | undefined => {
     return useContractFromAddressByABIToken();
 };

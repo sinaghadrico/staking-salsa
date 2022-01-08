@@ -96,7 +96,7 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
         return tokenStaker?.emergencyWithdraw();
     });
     const handleApprove = () => {
-        if (!token.contract) {
+        if (!account) {
             globalDispatch({ type: "setWalletOptions", value: true });
             return;
         }
@@ -124,7 +124,7 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
     };
 
     const handleStake = () => {
-        if (!token.contract) {
+        if (!account) {
             globalDispatch({ type: "setWalletOptions", value: true });
             return;
         }
@@ -151,7 +151,7 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
         }
     };
     const handleClaim = () => {
-        if (!token.contract) {
+        if (!account) {
             globalDispatch({ type: "setWalletOptions", value: true });
             return;
         }
@@ -177,7 +177,7 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
         }
     };
     const handleWithdraw = () => {
-        if (!token.contract) {
+        if (!account) {
             globalDispatch({ type: "setWalletOptions", value: true });
             return;
         }
@@ -210,7 +210,7 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
         }
     };
     const handleEmergencyWithdraw = () => {
-        if (!token.contract) {
+        if (!account) {
             globalDispatch({ type: "setWalletOptions", value: true });
             return;
         }

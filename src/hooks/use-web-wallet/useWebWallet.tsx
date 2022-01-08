@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React from "react";
+import React, { useEffect } from "react";
 import { Web3ReactProvider, useWeb3React, UnsupportedChainIdError } from "@web3-react/core";
 import {
     NoEthereumProviderError,
@@ -166,7 +166,7 @@ function useGetBalance() {
 
 function useWebWallet() {
     const context = useWeb3React<Web3Provider>();
-    const { connector } = context;
+    const { connector, activate, active, error } = context;
 
     // handle logic to recognize the connector currently being activated
     const [activatingConnector, setActivatingConnector] = React.useState<any>();
@@ -179,15 +179,21 @@ function useWebWallet() {
     // handle logic to eagerly connect to the injected ethereum provider, if it exists and has granted access already
     const triedEager = useEagerConnect();
 
+    useEffect(() => {
+        if (triedEager && !active && !error) {
+            activate(network);
+        }
+    }, [triedEager, active, error, activate]);
+
     // handle logic to connect in reaction to certain events on the injected ethereum provider, if it exists
     useInactiveListener(!triedEager || !!activatingConnector);
 
-    const balance = useGetBalance();
+    // const balance = useGetBalance();
     // const blockNumber = useGetBlockNumber();
 
     return {
         ...context,
-        balance,
+        // balance,
         triedEager,
         activatingConnector,
         setActivatingConnector,

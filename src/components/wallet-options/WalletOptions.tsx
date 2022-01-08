@@ -42,15 +42,22 @@ const WalletOptions: FC = () => {
     ];
 
     const handleActive = (_connector: any) => {
-        if (connector === _connector) {
-            (connector as any).close();
-        } else {
-            setActivatingConnector(_connector);
-            activate(_connector).then(() => {
-                window.localStorage.removeItem("USER_DISCONNECTED_WALLET");
-                globalDispatch({ type: "setWalletOptions", value: false });
-            });
+        if (active) {
+            window.localStorage.clear();
+            deactivate();
+            // (connector as any).close();
         }
+        setTimeout(() => {
+            if (connector === _connector) {
+                (connector as any).close();
+            } else {
+                setActivatingConnector(_connector);
+                activate(_connector).then(() => {
+                    window.localStorage.removeItem("USER_DISCONNECTED_WALLET");
+                    globalDispatch({ type: "setWalletOptions", value: false });
+                });
+            }
+        }, 2000);
     };
     const handleDeActive = (_connector: any) => {
         ReactGAM().trackEvent("click", "wallet option", "deactive");
@@ -94,7 +101,7 @@ const WalletOptions: FC = () => {
                         </button>
                     );
                 })}
-                {(active || error) && <button onClick={handleDeActive}>Deactivate</button>}
+                {(active || error) && account && <button onClick={handleDeActive}>Deactivate</button>}
                 {/* <button onClick={() => switchNetwork(56)}>Switch Network</button> */}
             </div>
             {error && <h4 className="wallet-options-errors">{getErrorMessage(error)}</h4>}

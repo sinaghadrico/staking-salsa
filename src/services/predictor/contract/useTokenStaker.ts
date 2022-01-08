@@ -423,11 +423,11 @@ export const useTokenStaker = (address: string) => {
             totalValueLock !== 0 ? (poolInfo?.rewardTokenCount * 60 * 24 * 365 * 100 * apyPrice) / totalValueLock : 0,
         );
         const tokenContractAddress: any = poolInfo?.stakeTokenAddress;
-        const remainLockTime = await getRemainLockTime(userAddress);
+        const remainLockTime = userAddress ? await getRemainLockTime(userAddress) : 0;
 
-        const userInfo = await getUserInfo(userAddress);
+        const userInfo = userAddress ? await getUserInfo(userAddress) : {};
 
-        const _claimableReward = await claimableReward(userAddress, "0");
+        const _claimableReward = userAddress ? await claimableReward(userAddress, "0") : 0;
         const rewards: any = setDigit(userInfo?.rewardEarned + _claimableReward);
         const stakeAmount = setDigit(userInfo?.stakeAmount);
 
