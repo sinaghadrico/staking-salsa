@@ -18,7 +18,7 @@ export const useTokenStaker = (address: string) => {
         return new Promise((resolve: (response: any) => void, reject) => {
             contractMethod
                 ?.claim()
-                .send({ from: account })
+
                 .then((transaction: ContractTransaction) => {
                     notification.success("claim confirmed");
                     resolve(transaction);
@@ -41,7 +41,7 @@ export const useTokenStaker = (address: string) => {
                     if (_allowance >= _amount) {
                         contractMethod
                             ?.deposit(toTokenValue(amount))
-                            .send({ from: account })
+
                             .then((transactionDeposit: ContractTransaction) => {
                                 notification.success("stake confirmed");
 
@@ -71,7 +71,6 @@ export const useTokenStaker = (address: string) => {
                         .wait(1)
                         .then(() => {
                             notification.success("Approve confirmed");
-
                             resolve(transaction);
                         })
                         .catch((error: any) => {
@@ -90,7 +89,7 @@ export const useTokenStaker = (address: string) => {
         return new Promise((resolve: (response: any) => void, reject) => {
             contractMethod
                 ?.emergencyWithdraw()
-                .send({ from: account })
+
                 .then((transaction: ContractTransaction) => {
                     notification.success("emergencyWithdraw confirmed");
                     resolve(transaction);
@@ -105,7 +104,7 @@ export const useTokenStaker = (address: string) => {
         return new Promise((resolve: (response: any) => void, reject) => {
             contractMethod
                 ?.releaseReward(toTokenValue(amount))
-                .send({ from: account })
+
                 .then((transaction: ContractTransaction) => {
                     notification.success("releaseReward confirmed");
                     resolve(transaction);
@@ -120,7 +119,7 @@ export const useTokenStaker = (address: string) => {
         return new Promise((resolve: (response: any) => void, reject) => {
             contractMethod
                 ?.renounceOwnership()
-                .send({ from: account })
+
                 .then((transaction: ContractTransaction) => {
                     notification.success("renounceOwnership confirmed");
                     resolve(transaction);
@@ -135,7 +134,7 @@ export const useTokenStaker = (address: string) => {
         return new Promise((resolve: (response: any) => void, reject) => {
             contractMethod
                 ?.setCalculationFactor(calculationFactor)
-                .send({ from: account })
+
                 .then((transaction: ContractTransaction) => {
                     notification.success("setCalculationFactor confirmed");
                     resolve(transaction);
@@ -150,7 +149,7 @@ export const useTokenStaker = (address: string) => {
         return new Promise((resolve: (response: any) => void, reject) => {
             contractMethod
                 ?.setpoolUnusedRewardAddress(rewardAddress)
-                .send({ from: account })
+
                 .then((transaction: ContractTransaction) => {
                     notification.success("setpoolUnusedRewardAddress confirmed");
                     resolve(transaction);
@@ -165,7 +164,7 @@ export const useTokenStaker = (address: string) => {
         return new Promise((resolve: (response: any) => void, reject) => {
             contractMethod
                 ?.setPoolRewardTokenCount(rewardTokenCount)
-                .send({ from: account })
+
                 .then((transaction: ContractTransaction) => {
                     notification.success("setPoolRewardTokenCount confirmed");
                     resolve(transaction);
@@ -181,7 +180,7 @@ export const useTokenStaker = (address: string) => {
         return new Promise((resolve: (response: any) => void, reject) => {
             contractMethod
                 ?.start()
-                .send({ from: account })
+
                 .then((transaction: ContractTransaction) => {
                     transaction.wait(1).then(() => {
                         notification.success("start confirmed");
@@ -198,7 +197,7 @@ export const useTokenStaker = (address: string) => {
         return new Promise((resolve: (response: any) => void, reject) => {
             contractMethod
                 ?.transferOwnership(userAddress)
-                .send({ from: account })
+
                 .then((transaction: ContractTransaction) => {
                     notification.success("transferOwnership confirmed");
                     resolve(transaction);
@@ -213,7 +212,7 @@ export const useTokenStaker = (address: string) => {
         return new Promise((resolve: (response: any) => void, reject) => {
             contractMethod
                 ?.withdraw(toTokenValue(amount))
-                .send({ from: account })
+
                 .then((transaction: ContractTransaction) => {
                     notification.success("withdraw confirmed");
                     resolve(transaction);
@@ -231,7 +230,7 @@ export const useTokenStaker = (address: string) => {
         return new Promise((resolve: (response: any) => void, reject) => {
             contractMethod
                 ?.claimableReward(UserAddress, time)
-                .call()
+
                 .then((data: any) => {
                     resolve(parseTokenValue(data));
                 })
@@ -244,7 +243,7 @@ export const useTokenStaker = (address: string) => {
     const getCalculationFactor = () => {
         return contractMethod
             ?.getCalculationFactor()
-            .call()
+
             .then((data: any) => {
                 return {
                     duration: data?.duration,
@@ -261,11 +260,12 @@ export const useTokenStaker = (address: string) => {
     const getPoolTotalLostRewardAmount = () => {
         return contractMethod
             ?.getPoolTotalLostRewardAmount()
-            .call()
+
             .then((data: any) => {
                 return parseTokenValue(data);
             })
             .catch((error: any) => {
+                notification.error(getErrorMessage(error));
                 return 0;
                 // notification.error(getErrorMessage(error));
             });
@@ -273,7 +273,7 @@ export const useTokenStaker = (address: string) => {
     const getPoolUnusedRewardAddress = () => {
         return contractMethod
             ?.getpoolUnusedRewardAddress()
-            .call()
+
             .then((data: any) => {
                 return data;
             })
@@ -285,7 +285,7 @@ export const useTokenStaker = (address: string) => {
     const getPeriodRewardTokenCount = () => {
         return contractMethod
             ?.getPeriodRewardTokenCount()
-            .call()
+
             .then((data: any) => {
                 return parseTokenValue(data);
             })
@@ -297,7 +297,7 @@ export const useTokenStaker = (address: string) => {
     const getPoolTotalStakedSupply = () => {
         return contractMethod
             ?.getPoolTotalStakedSupply()
-            .call()
+
             .then((data: any) => {
                 return parseTokenValue(data);
             })
@@ -309,7 +309,7 @@ export const useTokenStaker = (address: string) => {
     const getPoolTotalRewardSupply = () => {
         return contractMethod
             ?.getPoolTotalRewardSupply()
-            .call()
+
             .then((data: any) => {
                 return data;
             })
@@ -321,7 +321,7 @@ export const useTokenStaker = (address: string) => {
     const getLockPeriod = () => {
         return contractMethod
             ?.lockPeriod()
-            .call()
+
             .then((data: any) => {
                 return data;
             })
@@ -332,7 +332,7 @@ export const useTokenStaker = (address: string) => {
     const getOwner = () => {
         return contractMethod
             ?.owner()
-            .call()
+
             .then((data: any) => {
                 return data;
             })
@@ -343,7 +343,7 @@ export const useTokenStaker = (address: string) => {
     const getPoolInfo = () => {
         return contractMethod
             ?.poolInfo()
-            .call()
+
             .then((data: any) => {
                 return {
                     stakeTokenAddress: data?.stakeToken,
@@ -363,7 +363,7 @@ export const useTokenStaker = (address: string) => {
     const getRemainLockTime = (userAddress: string) => {
         return contractMethod
             ?.remainLockTime(userAddress)
-            .call()
+
             .then((data: any) => {
                 const _remainLockTime = new Date().getTime() + Number(data || 0) * 1000;
 
@@ -388,7 +388,7 @@ export const useTokenStaker = (address: string) => {
     const getUserInfo = (UserAddress: string) => {
         return contractMethod
             ?.userInfo(UserAddress)
-            .call()
+
             .then((data: any) => {
                 return {
                     stakeAmount: parseTokenValue(data?.amount),
@@ -407,7 +407,7 @@ export const useTokenStaker = (address: string) => {
             });
     };
 
-    const getInitialData = async (address: string): Promise<any> => {
+    const getInitialData = async (userAddress: string): Promise<any> => {
         const tvlPrice = 1;
         const apyPrice = 1;
 
@@ -419,13 +419,11 @@ export const useTokenStaker = (address: string) => {
             totalValueLock !== 0 ? (poolInfo?.rewardTokenCount * 60 * 24 * 365 * 100 * apyPrice) / totalValueLock : 0,
         );
         const tokenContractAddress: any = poolInfo?.stakeTokenAddress;
+        const remainLockTime = await getRemainLockTime(userAddress);
 
-        const remainLockTime = await getRemainLockTime(address);
+        const userInfo = await getUserInfo(userAddress);
 
-        const userInfo = await getUserInfo(address);
-
-        const _claimableReward = await claimableReward(address, "0");
-
+        const _claimableReward = await claimableReward(userAddress, "0");
         const rewards: any = setDigit(userInfo?.rewardEarned + _claimableReward);
         const stakeAmount = setDigit(userInfo?.stakeAmount);
 

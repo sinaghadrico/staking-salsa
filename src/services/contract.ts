@@ -2,7 +2,8 @@ import { useWebWallet } from "hooks/use-web-wallet/useWebWallet";
 import { useState, useEffect } from "react";
 import { Signer } from "ethers";
 import { Provider } from "@ethersproject/providers";
-import Web3 from "web3";
+
+import * as ContractETh from "@ethersproject/contracts";
 
 import { contractAddress, networks } from "utils/configs";
 
@@ -71,7 +72,7 @@ export function useContractFromAddress<C>(
     connector: (address: string, signerOrProvider: Signer | Provider) => C,
     address: string,
 ): C | undefined {
-    const { library, chainId, error } = useWebWallet();
+    const { library, chainId, error, account } = useWebWallet();
 
     // contract is a state variable, because it's async
     const [contract, setContract] = useState<C>();
@@ -86,11 +87,15 @@ export function useContractFromAddress<C>(
                 setContract(undefined);
                 return;
             } else {
-                // use provider signer
-                const signer = library.getSigner();
+                if (account) {
+                    // use provider signer
+                    const signer = library.getSigner(account).connectUnchecked();
 
-                // call the factory connector
-                setContract(connector(address, signer));
+                    // call the factory connector
+                    setContract(connector(address, signer));
+                } else {
+                    setContract(undefined);
+                }
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -99,8 +104,7 @@ export function useContractFromAddress<C>(
     return contract;
 }
 export function useContractFromAddressByABI<C>(address: string): C | undefined {
-    const { library, chainId } = useWebWallet();
-    const web3 = new Web3(Web3.givenProvider);
+    const { library, chainId, account } = useWebWallet();
 
     // contract is a state variable, because it's async
     const [contract, setContract] = useState();
@@ -113,6 +117,7 @@ export function useContractFromAddressByABI<C>(address: string): C | undefined {
             setContract(undefined);
             return;
         }
+
         async function loadContract() {
             const chainName = networks[chainId || 97];
 
@@ -121,8 +126,19 @@ export function useContractFromAddressByABI<C>(address: string): C | undefined {
             const tokenABI = networkAbi.abi;
             const tokenAddress = address;
 
-            const tokenInst: any = new web3.eth.Contract(tokenABI, tokenAddress);
-            setContract(tokenInst.methods);
+            const ContractEThContract = ContractETh.Contract;
+
+            if (library && account) {
+                const _contract: any = new ContractEThContract(
+                    tokenAddress,
+                    tokenABI,
+                    library.getSigner(account).connectUnchecked(),
+                );
+
+                setContract(_contract);
+            } else {
+                setContract(undefined);
+            }
         }
         loadContract();
         // eslint-disable-next-line react-hooks/exhaustive-deps
