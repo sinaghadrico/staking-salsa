@@ -129,11 +129,7 @@ export function useContractFromAddressByABI<C>(address: string): C | undefined {
             const ContractEThContract = ContractETh.Contract;
 
             if (library && account) {
-                const _contract: any = new ContractEThContract(
-                    tokenAddress,
-                    tokenABI,
-                    library.getSigner(account).connectUnchecked(),
-                );
+                const _contract: any = new ContractEThContract(tokenAddress, tokenABI, library.getSigner());
 
                 setContract(_contract);
             } else {
@@ -143,6 +139,45 @@ export function useContractFromAddressByABI<C>(address: string): C | undefined {
         loadContract();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [address, library, chainId]);
+
+    return contract;
+}
+export function useContractFromAddressByABIToken<C>(): C | undefined {
+    const { library, chainId, account } = useWebWallet();
+
+    // contract is a state variable, because it's async
+    const [contract, setContract] = useState();
+
+    // use an effect because it's async
+    useEffect(() => {
+        // eslint-disable-next-line no-empty
+        if (!library || !chainId) {
+            // library or chainId not set, reset to undefined
+            setContract(undefined);
+            return;
+        }
+
+        async function loadContract() {
+            const chainName = networks[chainId || 97];
+
+            const networkAbi = await import(`contracts/abi/${chainName}.json`).then((module) => module.default);
+
+            const tokenABI = networkAbi.tokenAbi;
+            const tokenAddress = contractAddress[chainId || 97]?.Token;
+
+            const ContractEThContract = ContractETh.Contract;
+
+            if (library && account) {
+                const _contract: any = new ContractEThContract(tokenAddress, tokenABI, library.getSigner());
+
+                setContract(_contract);
+            } else {
+                setContract(undefined);
+            }
+        }
+        loadContract();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [library, chainId]);
 
     return contract;
 }

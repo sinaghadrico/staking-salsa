@@ -37,14 +37,15 @@ export const useTokenStaker = (address: string) => {
                 .then((allowance: any) => {
                     const _allowance = parseTokenValue(allowance);
                     const _amount = parseTokenValue(toTokenValue(amount));
-
+                    debugger;
                     if (_allowance >= _amount) {
+                        debugger;
                         contractMethod
                             ?.deposit(toTokenValue(amount))
 
                             .then((transactionDeposit: ContractTransaction) => {
                                 notification.success("stake confirmed");
-
+                                debugger;
                                 resolve(transactionDeposit);
                             })
                             .catch((error: any) => {
@@ -66,10 +67,12 @@ export const useTokenStaker = (address: string) => {
         return new Promise((resolve: (response: any) => void, reject) => {
             tokenContract
                 ?.approve(address, toTokenValue(amount))
-                .then((transaction: ContractTransaction) => {
+                .then((transaction: any) => {
+                    debugger;
                     transaction
                         .wait(1)
                         .then(() => {
+                            debugger;
                             notification.success("Approve confirmed");
                             resolve(transaction);
                         })
@@ -79,6 +82,7 @@ export const useTokenStaker = (address: string) => {
                         });
                 })
                 .catch((error: any) => {
+                    debugger;
                     notification.error(getErrorMessage(error));
                     reject(error);
                 });
