@@ -394,12 +394,13 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                                         onChange={handleChange}
                                         autoComplete="off"
                                     />
-                                    <div className="flex-align-center  ml-10" style={{ width: "120px" }}>
+                                    <div className="flex-align-center  ml-10">
                                         <Button
                                             width={ButtonWidth.FIT_PARENT}
                                             onClick={handleApprove}
                                             buttonForm={ButtonForm.SECONDARY}
                                             disabled={mutationApprove.isLoading}
+                                            style={{ width: "100px" }}
                                         >
                                             {mutationApprove.isLoading ? "wait..." : "Approve"}
                                         </Button>
@@ -408,6 +409,8 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
                                             onClick={handleStake}
                                             buttonForm={ButtonForm.SECONDARY}
                                             disabled={mutationStake.isLoading}
+                                            className="ml-10"
+                                            style={{ width: "100px" }}
                                         >
                                             {mutationStake.isLoading ? "wait..." : "Stake"}
                                         </Button>
