@@ -250,7 +250,7 @@ const ClaimDetails = ({ data, initialData = {}, isLoading }: ClaimDetailsProps) 
         mutationClaim?.data ||
         mutationWithdraw?.data ||
         mutationEmergencyWithdraw?.data;
-    const transactionAddress: string = transactionData?.transactionHash;
+    const transactionAddress: string = transactionData?.hash;
     return (
         <>
             <AnimatePresence>
