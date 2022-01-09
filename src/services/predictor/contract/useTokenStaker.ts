@@ -44,9 +44,17 @@ export const useTokenStaker = (address: string) => {
                             ?.deposit(toTokenValue(amount))
 
                             .then((transactionDeposit: ContractTransaction) => {
-                                notification.success("stake confirmed");
-                                debugger;
-                                resolve(transactionDeposit);
+                                transactionDeposit
+                                    .wait(1)
+                                    .then(() => {
+                                        notification.success("stake confirmed");
+                                        debugger;
+                                        resolve(transactionDeposit);
+                                    })
+                                    .catch((error: any) => {
+                                        notification.error(getErrorMessage(error));
+                                        reject(error);
+                                    });
                             })
                             .catch((error: any) => {
                                 notification.error(getErrorMessage(error));
@@ -303,6 +311,7 @@ export const useTokenStaker = (address: string) => {
             ?.getPoolTotalStakedSupply()
 
             .then((data: any) => {
+                debugger;
                 return parseTokenValue(data);
             })
             .catch((error: any) => {

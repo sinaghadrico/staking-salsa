@@ -13,6 +13,7 @@ export const useToken = () => {
         return tokenContract
             ?.balanceOf(account)
             .then((balance: any) => {
+                debugger;
                 return parseTokenValue(balance);
             })
             .catch((error: any) => {
